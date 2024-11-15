@@ -88,7 +88,5 @@ public abstract class Usuario {
         return Objects.hashCode(id);
     }
 
-    public abstract boolean login();
-    public abstract void logout();
     public abstract boolean cambiarContrasenia();
 }
