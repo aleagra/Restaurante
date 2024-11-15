@@ -7,16 +7,6 @@ public class Cocinero extends Usuario{
     }
 
     @Override
-    public boolean login() {
-        return false;
-    }
-
-    @Override
-    public void logout() {
-
-    }
-
-    @Override
     public boolean cambiarContrasenia() {
         return false;
     }
