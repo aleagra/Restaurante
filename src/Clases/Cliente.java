@@ -1,15 +1,21 @@
 package Clases;
 
+import Enums.EstadoReserva;
+import Interfaces.IGestorReserva;
+
+import java.util.ArrayList;
 import java.util.List;
 
-public class Cliente extends Usuario{
+public class Cliente extends Usuario implements IGestorReserva {
     private String telefono;
     private String direccion;
+    private List<Reserva> historialReservas;
 
     public Cliente(String nombre, String apellido, String email, String contrasenia, String telefono, String direccion) {
         super(nombre, apellido, email, contrasenia);
         this.telefono = telefono;
         this.direccion = direccion;
+        this.historialReservas = new ArrayList<>();
     }
 
     public String getTelefono() {
@@ -28,11 +34,20 @@ public class Cliente extends Usuario{
         this.direccion = direccion;
     }
 
+    public List<Reserva> getHistorialReservas() {
+        return historialReservas;
+    }
+
+    public void setHistorialReservas(List<Reserva> historialReservas) {
+        this.historialReservas = historialReservas;
+    }
+
     @Override
     public String toString() {
-        return "Cliente{" + super.toString() +
+        return "Cliente{" + super.toString()+
                 "telefono='" + telefono + '\'' +
                 ", direccion='" + direccion + '\'' +
+                ", historialReservas=" + historialReservas +
                 '}';
     }
 
@@ -41,18 +56,33 @@ public class Cliente extends Usuario{
         return false;
     }
 
-    public void hacerReserva(){
-
-    }
 
     public void hacerPedido(){
 
     }
-
     public String consultarMenu(){
         return null;
     }
 
+    public boolean cancelarReserva(Reserva reserva) {
+        if (historialReservas.contains(reserva)) {
+            reserva.setEstado(EstadoReserva.CANCELADA);
+            return true;
+        }
+        return false;
+    }
 
+    @Override
+    public void agregarReserva(Reserva reserva) {
+        historialReservas.add(reserva);
+    }
 
+    @Override
+    public String obtenerReservas() {
+        StringBuilder reservas = new StringBuilder();
+        for (Reserva reserva : historialReservas){
+            reservas.append(reserva.toString()).append("\n");
+        }
+        return reservas.toString();
+    }
 }
