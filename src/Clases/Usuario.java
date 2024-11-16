@@ -80,12 +80,12 @@ public abstract class Usuario {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Usuario usuario)) return false;
-        return id == usuario.id;
+        return Objects.equals(email, usuario.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hashCode(email);
     }
 
     public abstract boolean cambiarContrasenia();
