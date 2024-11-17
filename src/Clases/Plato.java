@@ -47,5 +47,13 @@ public class Plato {
         this.categoria = categoria;
     }
 
-
+    @Override
+    public String toString() {
+        return "Plato{" +
+                "nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", precio=" + precio +
+                ", categoria=" + categoria +
+                '}';
+    }
 }
