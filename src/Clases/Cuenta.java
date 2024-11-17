@@ -9,13 +9,15 @@ public class Cuenta {
     public double total;
     public double descuento;
     public MetodoPago metodoPago;
+    public Pedido pedido;
 
-    public Cuenta(int idCuenta, Cliente cliente, double total, double descuento) {
+    public Cuenta(int idCuenta, Cliente cliente, double total, double descuento,Pedido pedido) {
         this.idCuenta = contador++;
         this.cliente = cliente;
         this.total = total;
         this.descuento = descuento;
         this.metodoPago = MetodoPago.EFECTIVO;
+        this.pedido = pedido;
     }
 
     public static int getContador() {
@@ -66,6 +68,14 @@ public class Cuenta {
         this.metodoPago = metodoPago;
     }
 
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+
     @Override
     public String toString() {
         return "Cuenta{" +
@@ -74,14 +84,28 @@ public class Cuenta {
                 ", total=" + total +
                 ", descuento=" + descuento +
                 ", metodoPago=" + metodoPago +
+                ", pedido=" + pedido +
                 '}';
     }
 
-    public void aplicarDescuento(){
+    public void aplicarDescuento() {
+        this.total = this.total - (this.total * (this.descuento / 100));
+    }
 
-    };
+    public void calcularTotal() {
+        double totalSinDescuento = 0;
 
-    public void calcularTotal(){
-        
+        if (pedido != null) {
+            for (Plato plato : pedido.getPlatos()) {
+                totalSinDescuento += plato.getPrecio();
+            }
+            for (Bebida bebida : pedido.getBebidas()) {
+                totalSinDescuento += bebida.getPrecio();
+            }
+        }
+        this.total = totalSinDescuento;
+        if (descuento > 0) {
+            aplicarDescuento();
+        }
     }
 }
