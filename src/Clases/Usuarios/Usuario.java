@@ -1,4 +1,4 @@
-package Clases;
+package Clases.Usuarios;
 import java.util.Objects;
 
 public abstract class Usuario {

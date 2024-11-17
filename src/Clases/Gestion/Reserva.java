@@ -1,4 +1,5 @@
-package Clases;
+package Clases.Gestion;
+import Clases.Usuarios.Cliente;
 import Enums.EstadoReserva;
 
 import java.util.Date;

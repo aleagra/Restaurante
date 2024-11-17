@@ -1,4 +1,4 @@
-package Clases;
+package Clases.Usuarios;
 
 public class Camarero {
 

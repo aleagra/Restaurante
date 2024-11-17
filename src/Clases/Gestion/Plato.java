@@ -1,4 +1,4 @@
-package Clases;
+package Clases.Gestion;
 
 import Enums.TipoDePlato;
 

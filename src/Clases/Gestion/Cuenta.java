@@ -1,5 +1,6 @@
-package Clases;
+package Clases.Gestion;
 
+import Clases.Usuarios.Cliente;
 import Enums.MetodoPago;
 
 public class Cuenta {

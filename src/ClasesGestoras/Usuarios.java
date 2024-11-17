@@ -1,5 +1,5 @@
 package ClasesGestoras;
-import Clases.Usuario;
+import Clases.Usuarios.Usuario;
 import Excepciones.AutenticacionException;
 import Excepciones.EmailDuplicadoException;
 import Excepciones.UsuarioNoEncontradoException;

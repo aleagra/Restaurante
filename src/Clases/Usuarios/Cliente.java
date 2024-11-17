@@ -1,5 +1,6 @@
-package Clases;
+package Clases.Usuarios;
 
+import Clases.Gestion.Reserva;
 import Enums.EstadoReserva;
 import Interfaces.IGestorReserva;
 

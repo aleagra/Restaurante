@@ -1,6 +1,5 @@
 package Interfaces;
-import Clases.Reserva;
-import java.util.List;
+import Clases.Gestion.Reserva;
 
 public interface IGestorReserva {
     void agregarReserva(Reserva reserva);
