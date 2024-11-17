@@ -1,5 +1,7 @@
 package Clases;
 
+import Enums.TipoDePlato;
+
 public class Plato {
     private String nombre;
     private String descripcion;

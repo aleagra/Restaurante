@@ -1,5 +1,7 @@
 package Clases;
 
+import Enums.TipoDeBebida;
+
 public class Bebida {
     private String nombre;
     private double precio;

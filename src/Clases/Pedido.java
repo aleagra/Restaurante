@@ -1,5 +1,7 @@
 package Clases;
 
+import Enums.EstadoPedido;
+
 import java.util.ArrayList;
 import java.util.List;
 
