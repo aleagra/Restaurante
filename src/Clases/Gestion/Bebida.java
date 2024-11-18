@@ -13,6 +13,9 @@ public class Bebida {
         this.tipo = tipo;
     }
 
+    public Bebida() {
+    }
+
     public String getNombre() {
         return nombre;
     }
