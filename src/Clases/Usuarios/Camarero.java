@@ -1,7 +1,10 @@
 package Clases.Usuarios;
 
 import Clases.Gestion.Cuenta;
+import Clases.Gestion.Mesa;
 import Clases.Gestion.Pedido;
+import ClasesGestoras.Mesas;
+import Enums.EstadoMesa;
 import Enums.EstadoPedido;
 import Enums.MetodoPago;
 import Excepciones.PedidoExcepcion;
@@ -15,7 +18,10 @@ public class Camarero {
         } else{throw new PedidoExcepcion("El pedido no pudo ser actualizado");}
         }
 
-    public void verMesasDisponibles(){
+    public String verMesasDisponibles(Mesas m){
+       String dispo = " ";
+       dispo = m.mostrarMesasDisponibles();
+       return dispo;
 
     }
 
@@ -50,5 +56,9 @@ public class Camarero {
         cuenta.calcularTotal();
 
         return cuenta;
+    }
+
+    public void eliminarPedido(Pedido pedido) throws PedidoExcepcion {
+
     }
 }
