@@ -27,30 +27,35 @@ public class Administrador extends Usuario{
           System.out.println("1) Si desea agregar un plato");
           System.out.println("2) Si desea agregar una bebida");
           System.out.println("3) Si desea eliminar una comida");
-          System.out.println("3) Si desea eliminar una bebida");
+          System.out.println("4) Si desea eliminar una bebida");
+          System.out.println("0) Si desea salir del menú");
           opcion = sc.nextInt();
+          sc.nextLine();
           switch(opcion){
               case 1:
                   {
                       int opccate=0;
                       Plato pl = new Plato();
                       System.out.println("Ingrese el nombre del plato");
-                      pl.setNombre(sc.next());
+                      pl.setNombre(sc.nextLine());
                       System.out.println("Ingrese la descripcion del plato");
-                      pl.setDescripcion(sc.next());
+                      pl.setDescripcion(sc.nextLine());
                       System.out.println("Ingrese el precio del plato");
                       pl.setPrecio(sc.nextDouble());
+                      sc.nextLine();
                       System.out.println("Que categoria es su plato?");
                       System.out.println("1) Entrante");
-                      System.out.println("1) Principal");
-                      System.out.println("1) Postre");
+                      System.out.println("2) Principal");
+                      System.out.println("3) Postre");
                       opccate = sc.nextInt();
+                      sc.nextLine();
                       switch(opccate){
                           case 1:{pl.setCategoria(TipoDePlato.ENTRANTE); break;}
                           case 2:{pl.setCategoria(TipoDePlato.PRINCIPAL);break;}
                           case 3:{pl.setCategoria(TipoDePlato.POSTRE);break;}
                       }
                       carta.agregarComida(pl);
+                      break;
 
               }
               case 2:{
@@ -62,13 +67,14 @@ public class Administrador extends Usuario{
                   beb.setPrecio(sc.nextDouble());
                   System.out.println("Que categoria es su bebida?");
                   System.out.println("1) Con alcohol");
-                  System.out.println("1) Sin alcohol");
+                  System.out.println("2) Sin alcohol");
                   opccate = sc.nextInt();
                   switch (opccate){
                       case 1:{beb.setTipo(TipoDeBebida.CON_ALCOHOL); break;}
                       case 2:{beb.setTipo(TipoDeBebida.SIN_ALCOHOL); break;}
                   }
                   carta.agregarBebida(beb);
+                  break;
               }
 
               case 3:{
@@ -77,12 +83,14 @@ public class Administrador extends Usuario{
                   System.out.println("Ingrese el nombre del plato que desea elminar: ");
                   plato.setNombre(sc.next());
                   carta.eliminarComida(plato);
+                  break;
               }
               case 4: {
                   Bebida bl = new Bebida();
                   System.out.println("Ingrese el nombre del bebida");
                   bl.setNombre(sc.next());
                   carta.eliminarBebida(bl);
+                  break;
               }
           }
       }while(opcion != 0);
