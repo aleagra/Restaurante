@@ -5,6 +5,7 @@ import Clases.Gestion.Cuenta;
 import Clases.Gestion.Plato;
 import ClasesGestoras.Carta;
 import ClasesGestoras.Reservas;
+import Excepciones.ContraseniaException;
 import Excepciones.DescuentoException;
 
 public class Administrador extends Usuario{
@@ -14,7 +15,15 @@ public class Administrador extends Usuario{
     }
 
     @Override
-    public boolean cambiarContrasenia() {return false;}
+    public String cambiarContrasenia(String contraActual, String contraNueva) {
+        String msj = "Contrasenia cambiada.";
+        if(contraActual.equals(this.contrasenia)){
+            setContrasenia(contraNueva);
+            return msj;
+        }
+        throw new ContraseniaException("La contrasenia no se pudo cambiar.");
+    }
+    }
 
     public boolean gestionarMenu(int opcion , Carta carta, Plato plato, Bebida bebida) {
         switch (opcion) {
@@ -45,4 +54,6 @@ public class Administrador extends Usuario{
     }
 
     public String verReservas(Reservas res){return res.verReservas();}
+
+
 }
