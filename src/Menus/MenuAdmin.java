@@ -27,10 +27,12 @@ public class MenuAdmin {
             sc.nextLine();
             switch(opc){
                 case 1:{
-                    String contraseniaNueva = " ";
-                    System.out.println("Ingrese la contraseña nueva: ");
-                    contraseniaNueva = sc.nextLine();
-                    administrador.cambiarContrasenia();
+                    System.out.println("Cambiando contrasenia...");
+                    System.out.println("Ingrese la contrasenia actual: ");
+                    String contraActual = sc.nextLine();
+                    System.out.println("Ingrese la contrasenia nueva: ");
+                    String contraNueva = sc.nextLine();
+                    administrador.cambiarContrasenia(contraActual, contraNueva);
                 }
                 case 2:{
                     int opcion = 0;
