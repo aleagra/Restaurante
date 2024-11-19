@@ -1,12 +1,11 @@
 package Clases.Usuarios;
 
 import Clases.Gestion.Bebida;
+import Clases.Gestion.Cuenta;
 import Clases.Gestion.Plato;
 import ClasesGestoras.Carta;
-import Enums.TipoDeBebida;
-import Enums.TipoDePlato;
-
-import java.util.Scanner;
+import ClasesGestoras.Reservas;
+import Excepciones.DescuentoException;
 
 public class Administrador extends Usuario{
 
@@ -15,92 +14,35 @@ public class Administrador extends Usuario{
     }
 
     @Override
-    public boolean cambiarContrasenia() {
+    public boolean cambiarContrasenia() {return false;}
+
+    public boolean gestionarMenu(int opcion , Carta carta, Plato plato, Bebida bebida) {
+        switch (opcion) {
+            case 1: // Agregar un plato
+                carta.agregarComida(plato);
+                break;
+            case 2: // Agregar una bebida
+                carta.agregarBebida(bebida);
+                break;
+            case 3: // Eliminar un plato
+                carta.eliminarComida(plato);
+                break;
+            case 4: // Eliminar una bebida
+                carta.eliminarBebida(bebida);
+                break;
+            default:
+                throw new IllegalArgumentException("Opción no válida para gestionar la carta");
+        }
         return false;
     }
 
-    public void gestionarMenu(Carta carta){
-      int opcion = 0;
-      Scanner sc = new Scanner(System.in);
-
-      do{
-          System.out.println("1) Si desea agregar un plato");
-          System.out.println("2) Si desea agregar una bebida");
-          System.out.println("3) Si desea eliminar una comida");
-          System.out.println("4) Si desea eliminar una bebida");
-          System.out.println("0) Si desea salir del menú");
-          opcion = sc.nextInt();
-          sc.nextLine();
-          switch(opcion){
-              case 1:
-                  {
-                      int opccate=0;
-                      Plato pl = new Plato();
-                      System.out.println("Ingrese el nombre del plato");
-                      pl.setNombre(sc.nextLine());
-                      System.out.println("Ingrese la descripcion del plato");
-                      pl.setDescripcion(sc.nextLine());
-                      System.out.println("Ingrese el precio del plato");
-                      pl.setPrecio(sc.nextDouble());
-                      sc.nextLine();
-                      System.out.println("Que categoria es su plato?");
-                      System.out.println("1) Entrante");
-                      System.out.println("2) Principal");
-                      System.out.println("3) Postre");
-                      opccate = sc.nextInt();
-                      sc.nextLine();
-                      switch(opccate){
-                          case 1:{pl.setCategoria(TipoDePlato.ENTRANTE); break;}
-                          case 2:{pl.setCategoria(TipoDePlato.PRINCIPAL);break;}
-                          case 3:{pl.setCategoria(TipoDePlato.POSTRE);break;}
-                      }
-                      carta.agregarComida(pl);
-                      break;
-
-              }
-              case 2:{
-                  int opccate= 0;
-                  Bebida beb = new Bebida();
-                  System.out.println("Ingrese el nombre del bebida");
-                  beb.setNombre(sc.next());
-                  System.out.println("Ingrese el precio de la bebida");
-                  beb.setPrecio(sc.nextDouble());
-                  System.out.println("Que categoria es su bebida?");
-                  System.out.println("1) Con alcohol");
-                  System.out.println("2) Sin alcohol");
-                  opccate = sc.nextInt();
-                  switch (opccate){
-                      case 1:{beb.setTipo(TipoDeBebida.CON_ALCOHOL); break;}
-                      case 2:{beb.setTipo(TipoDeBebida.SIN_ALCOHOL); break;}
-                  }
-                  carta.agregarBebida(beb);
-                  break;
-              }
-
-              case 3:{
-                  String name = " ";
-                  Plato plato = new Plato();
-                  System.out.println("Ingrese el nombre del plato que desea elminar: ");
-                  plato.setNombre(sc.next());
-                  carta.eliminarComida(plato);
-                  break;
-              }
-              case 4: {
-                  Bebida bl = new Bebida();
-                  System.out.println("Ingrese el nombre del bebida");
-                  bl.setNombre(sc.next());
-                  carta.eliminarBebida(bl);
-                  break;
-              }
-          }
-      }while(opcion != 0);
+    public void crearPromocion(int descuento,Cuenta cuenta) throws DescuentoException {
+        if(descuento>0){
+            cuenta.setDescuento(descuento);
+        }else{
+            throw new DescuentoException("El descuento no puede ser negativo");
+        }
     }
 
-    public void crearPromocion(){
-
-    }
-
-    public void verReservas(){
-
-    }
+    public String verReservas(Reservas res){return res.verReservas();}
 }
