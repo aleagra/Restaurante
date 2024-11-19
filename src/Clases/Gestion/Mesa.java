@@ -2,6 +2,8 @@ package Clases.Gestion;
 
 import Enums.EstadoMesa;
 
+import java.util.Objects;
+
 public class Mesa {
     private static int contador=1;
     public int numero;
@@ -45,5 +47,17 @@ public class Mesa {
                 ", capacidad=" + capacidad +
                 ", estadoMesa=" + estadoMesa +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Mesa mesa)) return false;
+        return estadoMesa == mesa.estadoMesa;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(estadoMesa);
     }
 }

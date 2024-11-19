@@ -15,6 +15,9 @@ public class Plato {
         this.categoria = categoria;
     }
 
+    public Plato() {
+    }
+
     public String getNombre() {
         return nombre;
     }

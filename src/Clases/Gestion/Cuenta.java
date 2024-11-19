@@ -12,13 +12,17 @@ public class Cuenta {
     public MetodoPago metodoPago;
     public Pedido pedido;
 
-    public Cuenta(int idCuenta, Cliente cliente, double total, double descuento,Pedido pedido) {
+    public Cuenta(Cliente cliente, double total, double descuento,Pedido pedido) {
         this.idCuenta = contador++;
         this.cliente = cliente;
         this.total = total;
         this.descuento = descuento;
         this.metodoPago = MetodoPago.EFECTIVO;
         this.pedido = pedido;
+    }
+
+    public Cuenta() {
+        this.idCuenta = contador++;
     }
 
     public static int getContador() {
