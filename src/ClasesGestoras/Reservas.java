@@ -48,9 +48,9 @@ public class Reservas {
             throw new ReservasException("La reserva no puede ser nula");
         }
     }
-    public void eliminarReserva(Reserva reserva) throws ReservasException {
-        if(reservas.contains(reserva)){
-            reservas.remove(reserva);
+    public void eliminarReserva(int nroReserva) throws ReservasException {
+        if(nroReserva>0){
+            reservas.remove(nroReserva);
         }else{
             throw new ReservasException("La reserva no existe");
         }
