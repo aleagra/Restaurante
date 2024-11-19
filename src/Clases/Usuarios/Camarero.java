@@ -9,6 +9,7 @@ import Enums.EstadoPedido;
 import Enums.MetodoPago;
 import Excepciones.PedidoExcepcion;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Camarero {
@@ -58,7 +59,25 @@ public class Camarero {
         return cuenta;
     }
 
-    public void eliminarPedido(Pedido pedido) throws PedidoExcepcion {
+    public void eliminarPedidoCompletado(Pedido pedido, List<Pedido> pedidos, Cuenta cuenta, Cliente cliente) throws PedidoExcepcion {
+        if (pedido == null) {
+            throw new PedidoExcepcion("El pedido no puede ser null.");
+        }
 
+        if (pedidos == null || pedidos.isEmpty()) {
+            throw new PedidoExcepcion("No hay pedidos registrados para eliminar.");
+        }
+
+        if (!pedidos.contains(pedido)) {
+            throw new PedidoExcepcion("El pedido no se encuentra en la lista.");
+        }
+
+        Cuenta facturaGenerada = generarFactura(cuenta, cliente, pedido);
+        if (facturaGenerada != null) {
+            pedidos.remove(pedido);
+            System.out.println("El pedido número " + pedido.getNumeroPedido() + " ha sido eliminado de la lista.");
+        } else {
+            throw new PedidoExcepcion("No se pudo generar la factura. El pedido no será eliminado.");
+        }
     }
 }

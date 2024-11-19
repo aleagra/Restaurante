@@ -32,7 +32,11 @@ public class MenuCocinero {
                     break;
                 case 3:
                     System.out.println("Cambiando contrasenia...");
-                    cocinera.cambiarContrasenia("bbb2222");
+                    System.out.println("Ingrese la contrasenia actual: ");
+                    String contraActual = sc.nextLine();
+                    System.out.println("Ingrese la contrasenia nueva: ");
+                    String contraNueva = sc.nextLine();
+                    cocinera.cambiarContrasenia(contraActual, contraNueva);
                     break;
 
                 default: {
