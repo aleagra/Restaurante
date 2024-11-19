@@ -53,4 +53,22 @@ public class Mesas {
         }
         return builder.toString();
     }
+
+    public Mesa asignarMesa(int capacidad) throws MesasException {
+        Mesa mesa = null;
+        for (Mesa m : TodasLasMesas) {
+            if (m.capacidad == capacidad) {
+                m.setEstadoMesa(EstadoMesa.OCUPADA);
+                mesa = m;
+                break;
+            }
+        }
+        if (mesa == null) {
+            throw new MesasException("No hay mesas con esa capacidad disponible");
+        }
+        return mesa;
+    }
+
+
+
 }
