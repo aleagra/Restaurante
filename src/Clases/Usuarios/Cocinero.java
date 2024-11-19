@@ -5,23 +5,34 @@ import ClasesGestoras.Pedidos;
 import Enums.EstadoPedido;
 
 public class Cocinero extends Usuario{
-    Pedidos pedidos;
-
     public Cocinero(String nombre, String apellido, String email, String contrasenia) {
         super(nombre, apellido, email, contrasenia);
-        this.pedidos = new Pedidos();
     }
+
+
+
+
+
 
     @Override
-    public boolean cambiarContrasenia() {
-        return false;
+    public boolean cambiarContrasenia(String contraseña) {
+        setContrasenia(contraseña);
     }
 
-    public String verPedido(){
+    public String verPedido(Pedidos pedidos) {
         return pedidos.mostrarPedidos();
     }
 
-    public int actualizarEstadoPedido(Pedido pedido){
-       return pedido.actualizarEstadoPedido(EstadoPedido.LISTO);
+    public void actualizarEstadoPedido(Pedidos pedidos, int nroPedido, EstadoPedido estado){
+        for(Pedido p: pedidos){
+            if(p.getNumeroPedido() == nroPedido){
+                p.setEstado(estado);
+            }
+        }
     }
+
+
+
+
+
 }
