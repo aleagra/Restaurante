@@ -5,6 +5,7 @@ import Excepciones.BebidaException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Pedido {
     private int numeroPedido;
@@ -52,8 +53,6 @@ public class Pedido {
     }
 
     public void actualizarEstadoPedido(){
-
-
     }
 
     public int actualizarEstadoPedido(EstadoPedido nuevoEstado) {
