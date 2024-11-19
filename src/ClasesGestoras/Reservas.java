@@ -54,7 +54,12 @@ public class Reservas {
         }else{
             throw new ReservasException("La reserva no existe");
         }
-
-
+    }
+    public String verReservas(){
+        StringBuilder builder = new StringBuilder();
+        for(Reserva reserva: reservas){
+            builder.append(reserva.toString());
+        }
+        return builder.toString();
     }
 }
