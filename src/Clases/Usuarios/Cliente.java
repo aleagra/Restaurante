@@ -1,28 +1,16 @@
 package Clases.Usuarios;
 
-import Clases.Gestion.Bebida;
-import Clases.Gestion.Pedido;
-import Clases.Gestion.Plato;
-import Clases.Gestion.Reserva;
-import ClasesGestoras.Pedidos;
-import Enums.EstadoReserva;
-import Interfaces.IGestorReserva;
 
-import java.util.ArrayList;
-import java.util.List;
+import Excepciones.ContraseniaException;
 
-public class Cliente extends Usuario implements IGestorReserva {
+public class Cliente extends Usuario {
     private String telefono;
     private String direccion;
-    private List<Reserva> historialReservas;
-    Pedidos pedidos;
 
     public Cliente(String nombre, String apellido, String email, String contrasenia, String telefono, String direccion) {
         super(nombre, apellido, email, contrasenia);
         this.telefono = telefono;
         this.direccion = direccion;
-        this.historialReservas = new ArrayList<>();
-        this.pedidos = new Pedidos();
     }
 
     public String getTelefono() {
@@ -41,58 +29,24 @@ public class Cliente extends Usuario implements IGestorReserva {
         this.direccion = direccion;
     }
 
-    public List<Reserva> getHistorialReservas() {
-        return historialReservas;
-    }
-
-    public void setHistorialReservas(List<Reserva> historialReservas) {
-        this.historialReservas = historialReservas;
-    }
 
     @Override
     public String toString() {
-        return "Cliente{" + super.toString()+
+        return "Cliente{" + super.toString() +
                 "telefono='" + telefono + '\'' +
                 ", direccion='" + direccion + '\'' +
-                ", historialReservas=" + historialReservas +
                 '}';
     }
 
     @Override
-    public boolean cambiarContrasenia() {
-        return false;
-    }
-
-
-    public String hacerPedido(Pedido pedido){
-        /*recibe un plato y una bebida */
-        return pedidos.agregarPedido(pedido);
-    }
-
-
-    public String consultarMenu(){
-        return null;
-    }
-
-    public boolean cancelarReserva(Reserva reserva) {
-        if (historialReservas.contains(reserva)) {
-            reserva.setEstado(EstadoReserva.CANCELADA);
-            return true;
+    public String cambiarContrasenia(String contraActual, String contraNueva) {
+        String msj = "Contrasenia cambiada.";
+        if(contraActual.equals(this.contrasenia)){
+            setContrasenia(contraNueva);
+            return msj;
         }
-        return false;
+        throw new ContraseniaException("La contrasenia no se pudo cambiar.");
     }
 
-    @Override
-    public void agregarReserva(Reserva reserva) {
-        historialReservas.add(reserva);
-    }
 
-    @Override
-    public String obtenerReservas() {
-        StringBuilder reservas = new StringBuilder();
-        for (Reserva reserva : historialReservas){
-            reservas.append(reserva.toString()).append("\n");
-        }
-        return reservas.toString();
-    }
 }
