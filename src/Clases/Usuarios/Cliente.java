@@ -1,6 +1,10 @@
 package Clases.Usuarios;
 
+import Clases.Gestion.Bebida;
+import Clases.Gestion.Pedido;
+import Clases.Gestion.Plato;
 import Clases.Gestion.Reserva;
+import ClasesGestoras.Pedidos;
 import Enums.EstadoReserva;
 import Interfaces.IGestorReserva;
 
@@ -11,12 +15,14 @@ public class Cliente extends Usuario implements IGestorReserva {
     private String telefono;
     private String direccion;
     private List<Reserva> historialReservas;
+    Pedidos pedidos;
 
     public Cliente(String nombre, String apellido, String email, String contrasenia, String telefono, String direccion) {
         super(nombre, apellido, email, contrasenia);
         this.telefono = telefono;
         this.direccion = direccion;
         this.historialReservas = new ArrayList<>();
+        this.pedidos = new Pedidos();
     }
 
     public String getTelefono() {
@@ -58,9 +64,12 @@ public class Cliente extends Usuario implements IGestorReserva {
     }
 
 
-    public void hacerPedido(){
-
+    public String hacerPedido(Pedido pedido){
+        /*recibe un plato y una bebida */
+        return pedidos.agregarPedido(pedido);
     }
+
+
     public String consultarMenu(){
         return null;
     }
