@@ -40,6 +40,16 @@ public class Reservas {
     }
 
 
+    public String mostrarReservasPorCliente(String email){
+        StringBuilder lista = new StringBuilder();
+        for(Reserva reserva : reservas){
+            if(reserva.getCliente().getDireccion().equalsIgnoreCase(email)){
+                lista.append(reserva).append("\n");
+            }
+        }
+        return lista.toString();
+    }
+
 
     public void aniadirReserva (Reserva reserva) throws ReservasException {
         if(reserva!=null){
