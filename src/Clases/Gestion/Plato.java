@@ -3,12 +3,16 @@ package Clases.Gestion;
 import Enums.TipoDePlato;
 
 public class Plato {
+    public int numero;
     private String nombre;
     private String descripcion;
     private double precio;
     private TipoDePlato categoria;
 
+    private static int contador=1;
+
     public Plato(String nombre, String descripcion, double precio, TipoDePlato categoria) {
+        this.numero = contador++;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
@@ -16,6 +20,10 @@ public class Plato {
     }
 
     public Plato() {
+    }
+
+    public int getNumero() {
+        return numero;
     }
 
     public String getNombre() {
@@ -53,6 +61,7 @@ public class Plato {
     @Override
     public String toString() {
         return "Plato{" +
+                "id= " + numero +
                 "nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", precio=" + precio +

@@ -9,8 +9,7 @@ import java.util.Scanner;
 
 public class MenuCocinero {
 
-    public void mostrarMenuCocinero(Pedidos pedidos, int nroPedido){
-        Scanner sc = new Scanner(System.in);
+    public void mostrarMenuCocinero(Pedidos pedidos, Scanner sc){
         int opcion;
         char seguir = 's';
         Cocinero cocinera = new Cocinero("Sol","Giuria","solgiuria@gmail.com","aaa111");
@@ -28,6 +27,7 @@ public class MenuCocinero {
                     break;
                 case 2:
                     System.out.println("Actualizando el estado del pedido...");
+                    int nroPedido = sc.nextInt();
                     cocinera.actualizarEstadoPedido(pedidos,nroPedido,EstadoPedido.LISTO);
                     break;
                 case 3:

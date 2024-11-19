@@ -16,8 +16,9 @@ public class MenuCamarero {
         this.scanner = new Scanner(System.in);
     }
 
-    public void mostrarMenu(Camarero camarero, Mesas gestionMesas, List<Pedido> pedidos, Pedido pedido, Cuenta cuenta, Cliente cliente) {
+    public void mostrarMenu(Camarero camarero, Mesas gestionMesas, List<Pedido> pedidos, Pedido pedido, Cliente cliente) {
         int opcion;
+
         do {
             System.out.println("------------------MENU CAMARERO------------------");
             System.out.println("1. Registrar pedido");
@@ -41,6 +42,9 @@ public class MenuCamarero {
                     }
                     break;
                 case 3:
+                    Cliente cliente = new Cliente();
+                    Pedido pedido = new Pedido();
+                    Cuenta cuenta = new Cuenta();
                     Cuenta factura = camarero.generarFactura(cuenta, cliente, pedido);
                     camarero.eliminarPedidoCompletado(pedido, pedidos, cuenta, cliente);
                     System.out.println("Factura generada correctamente. Total: $" + factura.getTotal());
