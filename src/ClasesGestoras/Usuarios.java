@@ -21,11 +21,12 @@ public class Usuarios {
         System.out.println("Usuario registrado exitosamente.");
     }
 
-    public void loguearUsuario(String email, String contrasenia) throws AutenticacionException {
+    public String loguearUsuario(String email, String contrasenia) throws AutenticacionException {
+        String msj="";
         for (Usuario usuario : listaUsuarios) {
             if (usuario.getEmail().equals(email) && usuario.getContrasenia().equals(contrasenia)) {
-                System.out.println("Usuario logueado exitosamente");
-                return;
+               msj=usuario.getClass().getSimpleName();
+                return msj;
             }
         }
         throw new AutenticacionException("Email o contraseña incorrectos");
