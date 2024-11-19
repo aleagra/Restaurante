@@ -10,10 +10,13 @@ public class Mesa {
     public int capacidad;
     public EstadoMesa estadoMesa;
 
-    public Mesa(int capacidad, EstadoMesa estadoMesa) {
+    public Mesa(int capacidad) {
         this.numero = contador++;
         this.capacidad = capacidad;
-        this.estadoMesa = estadoMesa;
+        this.estadoMesa = EstadoMesa.LIBRE;
+    }
+    public Mesa(){
+
     }
 
     public int getNumero() {

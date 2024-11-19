@@ -1,6 +1,7 @@
 package ClasesGestoras;
 
 import Clases.Gestion.Pedido;
+import Clases.Gestion.Reserva;
 import Excepciones.PedidoException;
 
 import java.util.ArrayList;
@@ -13,7 +14,6 @@ public class Pedidos {
         this.pedidos = new ArrayList<>();
     }
 
-
     public List<Pedido> getPedidos() {
         return pedidos;
     }
@@ -21,8 +21,8 @@ public class Pedidos {
     public String agregarPedido(Pedido pedido) throws PedidoException{
         String msj= "pedido agregado exitosamente";
         if(pedido != null){
-           pedidos.add(pedido);
-           return msj;
+            pedidos.add(pedido);
+            return msj;
         }
         throw new PedidoException("el pedido no pudo ser agregado");
     }
@@ -33,5 +33,14 @@ public class Pedidos {
             sb.append(p).append("\n");
         }
         return sb.toString();
+    }
+    public String mostrarPedidosPorCliente(String email){
+        StringBuilder lista = new StringBuilder();
+        for(Pedido pedido : pedidos){
+            if(pedido.getCliente().getEmail().equalsIgnoreCase(email)){
+                lista.append(pedido).append("\n");
+            }
+        }
+        return lista.toString();
     }
 }
