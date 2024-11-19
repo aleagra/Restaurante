@@ -1,8 +1,6 @@
 package Clases.Usuarios;
 
-import Clases.Gestion.Cuenta;
-import Clases.Gestion.Mesa;
-import Clases.Gestion.Pedido;
+import Clases.Gestion.*;
 import ClasesGestoras.Mesas;
 import Enums.EstadoMesa;
 import Enums.EstadoPedido;
@@ -79,5 +77,25 @@ public class Camarero {
         } else {
             throw new PedidoExcepcion("No se pudo generar la factura. El pedido no será eliminado.");
         }
+    }
+
+    public Pedido generarPedido(int opcion, Bebida beb, Plato pl,Cliente cl) throws PedidoExcepcion {
+        Pedido pedido = new Pedido(null,cl);
+        do {
+            switch (opcion) {
+                case 1: {
+                    if (pedido.addPlato(pl)) {
+                    }
+                    throw new PedidoExcepcion("No se pudo agregar el plato");
+                }
+                case 2: {
+                    if (pedido.addBebida(beb)) {
+                    }
+                    throw new PedidoExcepcion("No se pudo agregar la bebida");
+                }
+            }
+        }while (opcion != 0);
+
+        return pedido;
     }
 }
