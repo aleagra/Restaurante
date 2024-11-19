@@ -13,6 +13,11 @@ public class Pedidos {
         this.pedidos = new ArrayList<>();
     }
 
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
     public String agregarPedido(Pedido pedido) throws PedidoException{
         String msj= "pedido agregado exitosamente";
         if(pedido != null){
