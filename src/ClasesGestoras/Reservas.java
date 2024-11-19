@@ -2,10 +2,12 @@ package ClasesGestoras;
 
 import Clases.Gestion.Reserva;
 import Excepciones.ReservasException;
+import Interfaces.IMetodosGestores;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Reservas {
+public class Reservas implements IMetodosGestores<Reserva> {
     private ArrayList<Reserva> reservas;
     private static int contador = 1;
     public int nroReserva;
@@ -39,6 +41,21 @@ public class Reservas {
         this.nroReserva = nroReserva;
     }
 
+    /**Hay que pasarle por parametro Reserva.reservas*/
+    @Override
+    public String agregarElemento(List<Reserva> lista, Reserva elemento) throws Exception {
+        return IMetodosGestores.super.agregarElemento(lista, elemento);
+    }
+
+    @Override
+    public String eliminarElemento(List<Reserva> lista, Reserva elemento) throws Exception {
+        return IMetodosGestores.super.eliminarElemento(lista, elemento);
+    }
+
+    @Override
+    public String mostrarElementos(List<Reserva> lista) {
+        return IMetodosGestores.super.mostrarElementos(lista);
+    }
 
     public String mostrarReservasPorCliente(String email){
         StringBuilder lista = new StringBuilder();
@@ -48,28 +65,5 @@ public class Reservas {
             }
         }
         return lista.toString();
-    }
-
-
-    public void aniadirReserva (Reserva reserva) throws ReservasException {
-        if(reserva!=null){
-            this.reservas.add(reserva);
-        }else{
-            throw new ReservasException("La reserva no puede ser nula");
-        }
-    }
-    public void eliminarReserva(int nroReserva) throws ReservasException {
-        if(nroReserva>0){
-            reservas.remove(nroReserva);
-        }else{
-            throw new ReservasException("La reserva no existe");
-        }
-    }
-    public String verReservas(){
-        StringBuilder builder = new StringBuilder();
-        for(Reserva reserva: reservas){
-            builder.append(reserva.toString());
-        }
-        return builder.toString();
     }
 }
