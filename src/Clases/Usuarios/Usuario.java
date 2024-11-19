@@ -88,5 +88,5 @@ public abstract class Usuario {
         return Objects.hashCode(email);
     }
 
-    public abstract boolean cambiarContrasenia();
+    public abstract boolean cambiarContrasenia(String contraseña);
 }
