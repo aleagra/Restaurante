@@ -1,5 +1,6 @@
 package Clases.Gestion;
 
+import Clases.Usuarios.Cliente;
 import Enums.EstadoPedido;
 import Excepciones.BebidaException;
 
@@ -12,12 +13,14 @@ public class Pedido {
     private List<Plato> platos;
     private List<Bebida> bebidas;
     private EstadoPedido estado;
+    private Cliente cliente;
 
-    public Pedido(int numeroPedido, EstadoPedido estado) {
+    public Pedido(int numeroPedido, EstadoPedido estado, Cliente cliente) {
         this.numeroPedido = numeroPedido;
         this.platos = new ArrayList<>();
         this.bebidas = new ArrayList<>();
         this.estado = estado;
+        this.cliente = cliente;
     }
 
     public int getNumeroPedido() {
@@ -50,6 +53,14 @@ public class Pedido {
 
     public void setEstado(EstadoPedido estado) {
         this.estado = estado;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public void actualizarEstadoPedido(){
