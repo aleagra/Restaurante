@@ -8,7 +8,6 @@ public class Cuenta {
     public int idCuenta;
     public Cliente cliente;
     public double total;
-    public double descuento;
     public MetodoPago metodoPago;
     public Pedido pedido;
 
@@ -16,7 +15,6 @@ public class Cuenta {
         this.idCuenta = contador++;
         this.cliente = cliente;
         this.total = total;
-        this.descuento = descuento;
         this.metodoPago = MetodoPago.EFECTIVO;
         this.pedido = pedido;
     }
@@ -57,14 +55,6 @@ public class Cuenta {
         this.total = total;
     }
 
-    public double getDescuento() {
-        return descuento;
-    }
-
-    public void setDescuento(double descuento) {
-        this.descuento = descuento;
-    }
-
     public MetodoPago getMetodoPago() {
         return metodoPago;
     }
@@ -84,59 +74,34 @@ public class Cuenta {
     @Override
     public String toString() {
         return "Cuenta{" +
-                "idCuenta=" + idCuenta +
-                ", cliente=" + cliente +
-                ", total=" + total +
-                ", descuento=" + descuento +
-                ", metodoPago=" + metodoPago +
-                ", pedido=" + pedido +
+                "Numero de pedido=" + idCuenta +
+                ",ID Cliente=" + cliente.getId() +
+                ",Nombre="+  cliente.getNombre()+
+                ",total=" + total +
+                ",MetodoPago=" + metodoPago +
+                ",pedido=" + pedido.getEstado() +
+                ",Bebidas="+ pedido.getBebidas()+
+                ",Platos="+ pedido.getNombresPlatos()+
                 '}';
     }
 
-    public void aplicarDescuento() {
-        this.total = this.total - (this.total * (this.descuento / 100));
-    }
-
-   /* public double calcularTotal() {
-        double totalSinDescuento = 0;
-
-        if (pedido != null) {
-            for (Plato plato : pedido.getPlatos()) {
-                totalSinDescuento += plato.getPrecio();
-            }
-            for (Bebida bebida : pedido.getBebidas()) {
-                totalSinDescuento += bebida.getPrecio();
-            }
-        }
-        this.total = totalSinDescuento;
-        if (descuento > 0) {
-            aplicarDescuento();
-        }
-        return totalSinDescuento;
-    }
-}*/
-
     public double calcularTotal() {
-        double totalSinDescuento = 0;
+        double total = 0;
 
         if (pedido != null) {
             if (pedido.getPlatos() != null) {
                 for (Plato plato : pedido.getPlatos()) {
-                    totalSinDescuento += plato.getPrecio();
+                    total += plato.getPrecio();
                 }
             }
 
             if (pedido.getBebidas() != null) {
                 for (Bebida bebida : pedido.getBebidas()) {
-                    totalSinDescuento += bebida.getPrecio();
+                    total += bebida.getPrecio();
                 }
             }
         }
 
-        this.total = totalSinDescuento;
-        if (descuento > 0) {
-            aplicarDescuento();
-        }
-        return totalSinDescuento;
+        return total;
     }
 }

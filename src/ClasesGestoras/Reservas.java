@@ -43,7 +43,7 @@ public class Reservas {
     public String mostrarReservasPorCliente(String email){
         StringBuilder lista = new StringBuilder();
         for(Reserva reserva : reservas){
-            if(reserva.getCliente().getDireccion().equalsIgnoreCase(email)){
+            if(reserva.getCliente().getEmail().equals(email)){
                 lista.append(reserva).append("\n");
             }
         }
@@ -68,7 +68,7 @@ public class Reservas {
     public String verReservas(){
         StringBuilder builder = new StringBuilder();
         for(Reserva reserva: reservas){
-            builder.append(reserva.toString());
+            builder.append(reserva.toString()).append("\n");
         }
         return builder.toString();
     }

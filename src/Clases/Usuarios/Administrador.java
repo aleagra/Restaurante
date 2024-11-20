@@ -45,13 +45,6 @@ public boolean gestionarMenu(int opcion , Carta carta, Plato plato, Bebida bebid
     return false;
 }
 
-public void crearPromocion(int descuento,Cuenta cuenta) throws DescuentoException {
-    if(descuento>0){
-        cuenta.setDescuento(descuento);
-    }else{
-        throw new DescuentoException("El descuento no puede ser negativo");
-    }
-}
 
 public String verReservas(Reservas res){return res.verReservas();}
 

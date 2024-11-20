@@ -10,33 +10,42 @@ import java.util.Scanner;
 
 public class MenuCliente {
 
-    public void MostrarMenu(Scanner scanner,Mesas mesas,Cliente cliente,Carta carta,Reservas reservas,Pedidos pedidos){
+    public void MostrarMenu(Scanner scanner, Mesas mesas, Cliente cliente, Reservas reservas, Pedidos pedidos, Carta carta){
         int opcion;
         do {
-            System.out.println("1- Hacer una reserva");
-            System.out.println("2- Ver reservas");
-            System.out.println("3- Ver pedidos");
-            System.out.println("4- Ver estado de un pedido");
-            System.out.println("4- Cerrar sesion");
+            System.out.println("1- Ver carta");
+            System.out.println("2- Hacer una reserva");
+            System.out.println("3- Ver reservas");
+            System.out.println("4- Ver pedidos");
+            System.out.println("5- Cerrar sesion");
             opcion= scanner.nextInt();
             scanner.nextLine();
             switch (opcion){
                 case 1:
-                    Mesa mesa=new Mesa();
-                    System.out.println("Creando reserva...");
-                    System.out.println("Cuantas personas son? \n");
+                    System.out.println("BEBIDAS");
+                    System.out.println(carta.mostrarBebidas());
+                    System.out.println("PLATOS");
+                    System.out.println(carta.mostrarComidas());
+                    break;
+                case 2:
+                    Mesa mesa;
+                    System.out.println("Cuantas personas son?");
                     opcion = scanner.nextInt();
                     mesa=mesas.asignarMesa(opcion);
+                    if (mesa != null){
+                        System.out.println("La reserva fue creada correctamente.");
+                    }
                     Reserva reserva = new Reserva(mesa,cliente);
                     reservas.aniadirReserva(reserva);
                     break;
-                case 2:
+                case 3:
                     System.out.println(reservas.mostrarReservasPorCliente(cliente.getEmail()));
                     break;
-                case 3:
+                case 4:
                     System.out.println(pedidos.mostrarPedidosPorCliente(cliente.getEmail()));
                     break;
-                case 4:
+                default:
+                    System.out.println("SESION CERRADA...");
                     break;
             }
         }while (opcion != 5);

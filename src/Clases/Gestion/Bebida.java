@@ -53,10 +53,9 @@ public class Bebida {
 
     @Override
     public String toString() {
-        return "Bebida{" +
-                "nombre='" + nombre + '\'' +
-                ", precio=" + precio +
-                ", tipo=" + tipo +
-                '}';
+        return "Nombre='" + nombre + '\'' +
+                ", Precio=" + precio +
+                ", Tipo=" + tipo
+                ;
     }
 }

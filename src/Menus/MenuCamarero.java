@@ -4,18 +4,15 @@ import Clases.Gestion.Cuenta;
 import Clases.Gestion.Pedido;
 import Clases.Usuarios.Camarero;
 import Clases.Usuarios.Cliente;
-import Clases.Usuarios.Usuario;
 import ClasesGestoras.Carta;
 import ClasesGestoras.Mesas;
 import ClasesGestoras.Pedidos;
 import ClasesGestoras.Usuarios;
 import Enums.MetodoPago;
-
-import java.util.List;
 import java.util.Scanner;
 
 public class MenuCamarero {
-    private Scanner scanner;
+    private final Scanner scanner;
 
     public MenuCamarero() {
         this.scanner = new Scanner(System.in);
@@ -23,7 +20,6 @@ public class MenuCamarero {
 
     public void mostrarMenu(Camarero camarero, Mesas gestionMesas, Pedidos pedidos, Usuarios usuarios, Carta carta) {
         int opcion;
-
         do {
             System.out.println("------------------MENU CAMARERO------------------");
             System.out.println("1. Registrar pedido");
@@ -34,42 +30,23 @@ public class MenuCamarero {
             scanner.nextLine();
             System.out.println("Consulte el id del cliente:");
             int id= scanner.nextInt();
-
             switch (opcion) {
                 case 1:
-                    Pedido pedido = new Pedido();
-
-                    Cliente usuario1= usuarios.buscarPorId(id);
-                    System.out.println(carta.mostrarComidas());
-                    System.out.println(carta.mostrarBebidas());
-                    camarero.generarPedido(carta,usuario1);
+                    Pedido pedido;
+                    Cliente usuario= usuarios.buscarPorId(id);
+                    pedido = camarero.generarPedido(carta,usuario);
+                    System.out.println(pedidos.agregarPedido(pedido));
                     break;
                 case 2:
-                    String mesasDisponibles = camarero.verMesasDisponibles(gestionMesas);
-                    if (mesasDisponibles.isEmpty()) {
-                        System.out.println("No hay mesas disponibles.");
-                    } else {
-                        System.out.println("Mesas disponibles:\n" + mesasDisponibles);
-                    }
+                    System.out.println(camarero.verMesasDisponibles(gestionMesas));
                     break;
                 case 3:
-                    System.out.println("Ingrese numero de orden:");
+                    System.out.println("Ingrese el numero de orden:");
                     int numOrden = scanner.nextInt();
-                    scanner.nextLine();
-                    System.out.println("Consulte la forma de pago: (1- Efectivo 2- Debito 3- Credito)");
-                    int formaPago = scanner.nextInt();
-                    MetodoPago metodoPago = null;
-                    if(formaPago == 1) {
-                    metodoPago = MetodoPago.EFECTIVO;
-                    } else if (formaPago == 2) {
-                        metodoPago = MetodoPago.DEBITO;
-                    } else if (formaPago == 3) {
-                        metodoPago = MetodoPago.CREDITO;
-                    }
+                    MetodoPago metodoPago = camarero.consultarFormaDePago();
                     Cuenta factura = camarero.generarFactura(id,numOrden,pedidos,metodoPago);
                     camarero.eliminarPedidoCompletado(id,numOrden,pedidos);
-                    double total = factura.calcularTotal();
-                    System.out.println("Factura generada correctamente. Total: $" + total);
+                    System.out.println(factura);
                     break;
                 default:
                     System.out.println("Saliendo...");

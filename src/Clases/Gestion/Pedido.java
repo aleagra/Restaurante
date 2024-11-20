@@ -4,10 +4,8 @@ import Clases.Usuarios.Cliente;
 import Enums.EstadoPedido;
 import Excepciones.BebidaException;
 import Excepciones.PlatoException;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Pedido {
     private int numeroPedido;
@@ -70,6 +68,17 @@ public class Pedido {
     public void actualizarEstadoPedido(){
     }
 
+    @Override
+    public String toString() {
+        return "Pedido{" +
+                "numeroPedido=" + numeroPedido +
+                ", platos=" + platos +
+                ", bebidas=" + bebidas +
+                ", estado=" + estado +
+                ", cliente=" + cliente +
+                '}';
+    }
+
     public boolean addBebida(Bebida bebida) throws BebidaException {
         if(bebida!=null){
             this.bebidas.add(bebida);
@@ -92,4 +101,21 @@ public class Pedido {
         }
         return flag;
     }
+
+    public List<String> getNombresPlatos() {
+        List<String> nombresPlatos = new ArrayList<>();
+        for (Plato plato : platos) {
+            nombresPlatos.add(plato.getNombre());
+        }
+        return nombresPlatos;
+    }
+
+    public List<String> getNombresBebidas() {
+        List<String> nombresBebidas = new ArrayList<>();
+        for (Bebida bebida : bebidas) {
+            nombresBebidas.add(bebida.getNombre());
+        }
+        return nombresBebidas;
+    }
+
 }

@@ -67,19 +67,18 @@ public class Main {
         restaurante.getUsuarios().registrarUsuario(cliente3);
         restaurante.getUsuarios().registrarUsuario(cliente4);
 
-        String logueo = restaurante.getUsuarios().loguearUsuario("ana.garcia@mail.c", "password123");
-        System.out.println(logueo);
+        String logueo = restaurante.getUsuarios().loguearUsuario("sofia.lopez@mail.com", "abcd7890");
 
         switch (logueo){
             case "Cliente":
-                menuCliente.MostrarMenu(scanner, restaurante.getMesas(), cliente1, restaurante.getCarta(), restaurante.getReservas(), restaurante.getPedidos());
+                menuCliente.MostrarMenu(scanner, restaurante.getMesas(), cliente1, restaurante.getReservas(), restaurante.getPedidos(),restaurante.getCarta());
                 break;
             case "Administrador":
                 Cuenta cuenta = new Cuenta();
                 menuAdmin.mostrarMenu(administrador,cuenta, restaurante.getCarta(), restaurante.getReservas());
                 break;
             case "Cocinero":
-                menuCocinero.mostrarMenuCocinero(restaurante.getPedidos(), scanner);
+                menuCocinero.mostrarMenuCocinero(restaurante.getPedidos(), scanner,cocinero1);
                 break;
             case "Camarero":
                 menuCamarero.mostrarMenu(camarero,restaurante.getMesas(),restaurante.getPedidos(),restaurante.getUsuarios(),restaurante.getCarta());

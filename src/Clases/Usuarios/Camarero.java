@@ -25,10 +25,39 @@ public class Camarero extends Usuario {
         }
 
     public String verMesasDisponibles(Mesas m){
-       String dispo = " ";
-       dispo = m.mostrarMesasDisponibles();
-       return dispo;
+       String msj = " ";
+       msj = m.mostrarMesasDisponibles();
+       if (m.mostrarMesasDisponibles().isEmpty()){
+          msj="No hay mesas disponibles actualmente";
+       }
+       return msj;
 
+    }
+
+    public MetodoPago consultarFormaDePago() {
+        Scanner scanner = new Scanner(System.in);
+        MetodoPago metodoPago = null;
+
+        while (metodoPago == null) { // Repetir hasta que se elija una opción válida
+            System.out.println("Consulte la forma de pago: (1- Efectivo, 2- Débito, 3- Crédito)");
+            int formaPago = scanner.nextInt();
+
+            switch (formaPago) {
+                case 1:
+                    metodoPago = MetodoPago.EFECTIVO;
+                    break;
+                case 2:
+                    metodoPago = MetodoPago.DEBITO;
+                    break;
+                case 3:
+                    metodoPago = MetodoPago.CREDITO;
+                    break;
+                default:
+                    System.out.println("Opción no válida. Intente de nuevo.");
+            }
+        }
+
+        return metodoPago;
     }
 
     private Pedido buscarPedido(int idCliente, int numPedido, Pedidos pedidos) {
@@ -107,7 +136,6 @@ public class Camarero extends Usuario {
             }
         } while (opcion != 0);
 
-        System.out.println(pedido.getNumeroPedido());
         return pedido;
     }
     @Override

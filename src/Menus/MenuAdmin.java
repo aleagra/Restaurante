@@ -20,7 +20,6 @@ public class MenuAdmin {
             System.out.println("Menu Admin");
             System.out.println("1- Cambiar contrasenia");
             System.out.println("2- Gestionar el menu");
-            System.out.println("3- Crear promocion ");
             System.out.println("4- Visualizar reservas ");
             System.out.println("0- Salir ");
             opc = sc.nextInt();
@@ -145,16 +144,6 @@ public class MenuAdmin {
 
                     }while(opcion!=0);
                 }
-                case 3:{
-                    int dsc = 0;
-                    System.out.println("Ingrese el porcentaje que quiere descontar en las cuentas");
-                    dsc = sc.nextInt();
-                    sc.nextLine();
-                    administrador.crearPromocion(dsc,cuenta);
-                }
-               case 4:{
-                   System.out.println(administrador.verReservas(r));
-               }
             }
         }while(opc != 0);
 

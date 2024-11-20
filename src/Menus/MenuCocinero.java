@@ -9,10 +9,9 @@ import java.util.Scanner;
 
 public class MenuCocinero {
 
-    public void mostrarMenuCocinero(Pedidos pedidos, Scanner sc){
+    public void mostrarMenuCocinero(Pedidos pedidos, Scanner sc,Cocinero cocinera){
         int opcion;
         char seguir = 's';
-        Cocinero cocinera = new Cocinero("Sol","Giuria","solgiuria@gmail.com","aaa111");
 
         do{
             System.out.println("-----------------MENU---------------");
@@ -41,7 +40,6 @@ public class MenuCocinero {
 
                 default: {
                     System.out.println("Número fuera de rango. Intenta de nuevo.");
-                    // No se usa break aca porque queremos que el do-while vuelva a ejecutarse.
                     continue;
                 }
             }

@@ -10,7 +10,6 @@ public class Reserva {
     private final LocalTime hora;
     private final Mesa mesa;
     private final Cliente cliente;
-    private EstadoReserva estado;
 
     // Constructor
     public Reserva(Mesa mesa, Cliente cliente) {
@@ -18,7 +17,6 @@ public class Reserva {
         this.hora = LocalTime.now();
         this.mesa = mesa;
         this.cliente = cliente;
-        this.estado = EstadoReserva.CONFIRMADA;
     }
 
     // Getters y setters
@@ -38,13 +36,6 @@ public class Reserva {
         return cliente;
     }
 
-    public EstadoReserva getEstado() {
-        return estado;
-    }
-
-    public void setEstado(EstadoReserva estado) {
-        this.estado = estado;
-    }
 
     @Override
     public String toString() {
@@ -52,13 +43,8 @@ public class Reserva {
                 "fecha=" + fecha +
                 ", hora=" + hora +
                 ", mesa=" + mesa +
-                ", cliente=" + cliente +
-                ", estado='" + estado + '\'' +
                 '}';
     }
 
-    public void cancelarReserva(){
-        this.estado = EstadoReserva.CANCELADA;
-    }
     
 }

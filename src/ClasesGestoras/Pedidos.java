@@ -18,13 +18,14 @@ public class Pedidos {
         return pedidos;
     }
 
-    public String agregarPedido(Pedido pedido) throws PedidoException{
-        String msj= "pedido agregado exitosamente";
-        if(pedido != null){
+    public String agregarPedido(Pedido pedido) throws PedidoException {
+        String msj = "";
+        if (pedido != null) {
             pedidos.add(pedido);
+            msj=("El pedido fue creado correctamente con el numero de orden" + " " + pedido.getNumeroPedido());
             return msj;
         }
-        throw new PedidoException("el pedido no pudo ser agregado");
+        throw new PedidoException("El pedido no pudo ser agregado");
     }
 
     public String mostrarPedidos(){
