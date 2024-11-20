@@ -32,19 +32,17 @@ public class MenuCamarero {
             System.out.println("4. Salir");
             opcion = scanner.nextInt();
             scanner.nextLine();
+            System.out.println("Consulte el id del cliente:");
+            int id= scanner.nextInt();
 
             switch (opcion) {
                 case 1:
                     Pedido pedido = new Pedido();
-                    System.out.println("Consulte el id del cliente:");
-                    int id= scanner.nextInt();
+
                     Cliente usuario1= usuarios.buscarPorId(id);
-                    int opciones = scanner.nextInt();
-                    System.out.println("Ingrese 1 para agregar una bebida");
-                    System.out.println("Ingrese 2 para agregar una comida");
-                    int numero = scanner.nextInt();
-                    camarero.generarPedido(opciones,numero,carta,usuario1);
-                    System.out.println("Pedido registrado correctamente con estado: " + pedido.getEstado());
+                    System.out.println(carta.mostrarComidas());
+                    System.out.println(carta.mostrarBebidas());
+                    camarero.generarPedido(carta,usuario1);
                     break;
                 case 2:
                     String mesasDisponibles = camarero.verMesasDisponibles(gestionMesas);
@@ -55,11 +53,12 @@ public class MenuCamarero {
                     }
                     break;
                 case 3:
-                    int id= scanner.nextInt();
+                    System.out.println("Ingrese numero de orden:");
                     int numOrden = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Consulte la forma de pago: (1- Efectivo 2- Debito 3- Credito)");
                     int formaPago = scanner.nextInt();
                     MetodoPago metodoPago = null;
-                    System.out.println("Seleccione la forma de pago");
                     if(formaPago == 1) {
                     metodoPago = MetodoPago.EFECTIVO;
                     } else if (formaPago == 2) {

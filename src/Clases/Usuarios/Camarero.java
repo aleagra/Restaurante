@@ -32,12 +32,16 @@ public class Camarero extends Usuario {
     }
 
     private Pedido buscarPedido(int idCliente, int numPedido, Pedidos pedidos) {
+        Pedido pedidoAux = new Pedido();
         for (Pedido pedido : pedidos.getPedidos()) {
             if (pedido.getCliente().getId() == idCliente && pedido.getNumeroPedido() == numPedido) {
-                return pedido;
+                pedidoAux = pedido;
             }
         }
-        throw new RuntimeException("El id del cliente o el número de pedido es incorrecto");
+        if (pedidoAux == null){
+            throw new RuntimeException("El numero de pedido o id de cliente no son correctos");
+        }
+        return pedidoAux;
     }
 
     public Cuenta generarFactura(int idCliente, int numPedido, Pedidos pedidos, MetodoPago metodoPago) {
@@ -55,26 +59,55 @@ public class Camarero extends Usuario {
         pedidos.eliminarPedido(pedidoEncontrado);
     }
 
-    public Pedido generarPedido(int opcion,int numero, Carta carta,Cliente cl) throws PedidoExcepcion {
-        Pedido pedido = new Pedido(EstadoPedido.EN_PREPARACION,cl);
+    public Pedido generarPedido(Carta carta, Cliente cliente) throws PedidoExcepcion {
+        Pedido pedido = new Pedido(EstadoPedido.EN_PREPARACION, cliente);
+        Scanner scanner = new Scanner(System.in);
+        int opcion;
 
         do {
+            System.out.println("Seleccione una opción:");
+            System.out.println("1. Agregar un plato");
+            System.out.println("2. Agregar una bebida");
+            System.out.println("0. Finalizar pedido");
+            opcion = scanner.nextInt();
+
             switch (opcion) {
                 case 1: {
+                    System.out.println("Ingrese el ID del plato:");
+                    int numero = scanner.nextInt();
                     Plato plato = carta.buscarPlatoPorId(numero);
-                    if (pedido.addPlato(plato)) {
+                    if (plato != null) {
+                        pedido.addPlato(plato);
+                        System.out.println("Plato agregado al pedido.");
+                    } else {
+                        System.out.println("Plato no encontrado.");
                     }
-                    throw new PedidoExcepcion("No se pudo agregar el plato");
+                    break;
                 }
                 case 2: {
+                    System.out.println("Ingrese el ID de la bebida:");
+                    int numero = scanner.nextInt();
                     Bebida bebida = carta.buscarBebidaPorId(numero);
-                    if (pedido.addBebida(bebida)) {
+                    if (bebida != null) {
+                        pedido.addBebida(bebida);
+                        System.out.println("Bebida agregada al pedido.");
+                    } else {
+                        System.out.println("Bebida no encontrada.");
                     }
-                    throw new PedidoExcepcion("No se pudo agregar la bebida");
+                    break;
+                }
+                case 0: {
+                    System.out.println("Pedido finalizado.");
+                    break;
+                }
+                default: {
+                    System.out.println("Opción no válida. Intente de nuevo.");
+                    break;
                 }
             }
-        }while (opcion != 0);
+        } while (opcion != 0);
 
+        System.out.println(pedido.getNumeroPedido());
         return pedido;
     }
     @Override
