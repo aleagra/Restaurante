@@ -6,8 +6,11 @@ import ClasesGestoras.Reservas;
 import Excepciones.ContraseniaException;
 import Interfaces.IGestorPedidos;
 import Interfaces.IGestorReserva;
+import Interfaces.IJson;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class Cliente extends Usuario implements IGestorReserva, IGestorPedidos {
+public class Cliente extends Usuario implements IGestorReserva, IGestorPedidos, IJson {
     private String telefono;
     private String direccion;
 
@@ -62,4 +65,38 @@ public class Cliente extends Usuario implements IGestorReserva, IGestorPedidos {
     public String obtenerPedidos(Pedidos pedidos) {
         return pedidos.mostrarPedidosPorCliente(email);
     }
+
+    @Override
+    public JSONObject toJson() throws JSONException {
+        JSONObject json = new JSONObject();
+        try {
+
+            json.put("Nombre",this.nombre);
+            json.put("Apellido",this.apellido);
+            json.put("Email",this.email);
+            json.put("Contrasenia",this.contrasenia);
+            json.put("Telefono",this.telefono);
+            json.put("Direccion",this.direccion);
+
+        }catch (JSONException e){
+            throw new JSONException(e.getMessage());
+        }
+        return json;
+    }
+
+    @Override
+    public void fromJson(JSONObject json) throws JSONException {
+        try{
+            this.nombre = json.getString("Nombre");
+            this.apellido = json.getString("Apellido");
+            this.email = json.getString("Email");
+            this.contrasenia = json.getString("Contrasenia");
+            this.telefono = json.getString("Telefono");
+            this.direccion = json.getString("Direccion");
+
+        }catch (JSONException e){
+            throw new JSONException(e.getMessage());
+        }
+    }
+
 }

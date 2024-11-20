@@ -1,7 +1,11 @@
 package Clases.Usuarios;
+import Interfaces.IJson;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Objects;
 
-public abstract class Usuario {
+public abstract class Usuario implements IJson {
     private static int contador=1;
     public int id;
     public String nombre;
@@ -92,4 +96,33 @@ public abstract class Usuario {
     }
 
     public abstract String cambiarContrasenia(String contraActual, String contraNueva);
+
+    @Override
+    public JSONObject toJson() throws JSONException {
+        JSONObject obj = new JSONObject();
+        try{
+            obj.put("id", id);
+            obj.put("nombre", nombre);
+            obj.put("apellido", apellido);
+            obj.put("email", email);
+            obj.put("contrasenia", contrasenia);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return obj;
+    }
+
+    @Override
+    public void fromJson(JSONObject json) throws JSONException {
+        try{
+            this.id = json.getInt("id");
+            this.nombre = json.getString("nombre");
+            this.apellido = json.getString("apellido");
+            this.email = json.getString("email");
+            this.contrasenia = json.getString("contrasenia");
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+    }
+
 }

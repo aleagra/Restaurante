@@ -1,10 +1,13 @@
 package Clases.Gestion;
 
 import Enums.EstadoMesa;
+import Interfaces.IJson;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Objects;
 
-public class Mesa {
+public class Mesa implements IJson {
     private static int contador=1;
     public int numero;
     public int capacidad;
@@ -63,4 +66,30 @@ public class Mesa {
     public int hashCode() {
         return Objects.hashCode(estadoMesa);
     }
+
+    @Override
+    public JSONObject toJson() throws JSONException {
+        JSONObject json = new JSONObject();
+        try{
+            json.put("numero", numero);
+            json.put("capacidad", capacidad);
+            json.put("estadoMesa", estadoMesa);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return json;
+    }
+
+    @Override
+    public void fromJson(JSONObject json) throws JSONException {
+        try{
+            numero = json.getInt("numero");
+            capacidad = json.getInt("capacidad");
+            estadoMesa = EstadoMesa.valueOf(json.getString("estadoMesa"));
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+    }
+
 }

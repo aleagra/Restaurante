@@ -4,10 +4,15 @@ import Clases.Usuarios.Cliente;
 import Enums.EstadoPedido;
 import Excepciones.BebidaException;
 import Excepciones.PlatoException;
+import Interfaces.IJson;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pedido {
+public class Pedido implements IJson {
     private int numeroPedido;
     private static int contador = 1;
     private List<Plato> platos;
@@ -78,6 +83,69 @@ public class Pedido {
                 ", cliente=" + cliente +
                 '}';
     }
+    @Override
+    public JSONObject toJson() throws JSONException {
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("numeroPedido", numeroPedido);
+
+            JSONArray platosArray = new JSONArray();
+            for (Plato plato : platos) {
+                platosArray.put(plato.toJson());
+            }
+            obj.put("platos", platosArray);
+
+            JSONArray bebidasArray = new JSONArray();
+            for (Bebida bebida : bebidas) {
+                bebidasArray.put(bebida.toJson());
+            }
+            obj.put("bebidas", bebidasArray);
+
+            obj.put("estado", estado);
+
+
+            obj.put("cliente", cliente.toJson());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return obj;
+    }
+
+    @Override
+    public void fromJson(JSONObject json) throws JSONException {
+        try {
+            numeroPedido = json.getInt("numeroPedido");
+
+            // Deserializar platos desde JSONArray
+            platos = new ArrayList<>();
+            JSONArray platosArray = json.getJSONArray("platos");
+            for (int i = 0; i < platosArray.length(); i++) {
+                Plato pl = new Plato();
+                pl.fromJson(platosArray.getJSONObject(i));
+                platos.add(pl);
+            }
+
+
+            bebidas = new ArrayList<>();
+            JSONArray bebidasArray = json.getJSONArray("bebidas");
+            for (int i = 0; i < bebidasArray.length(); i++) {
+                Bebida bebida = new Bebida();
+                bebida.fromJson(bebidasArray.getJSONObject(i));
+                bebidas.add(bebida);
+            }
+
+            estado = EstadoPedido.valueOf(json.getString("estado"));
+
+
+            cliente = new Cliente();
+            cliente.fromJson(json.getJSONObject("cliente"));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public boolean addBebida(Bebida bebida) throws BebidaException {
         if(bebida!=null){

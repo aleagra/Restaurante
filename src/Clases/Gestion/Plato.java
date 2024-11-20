@@ -1,8 +1,11 @@
 package Clases.Gestion;
 
 import Enums.TipoDePlato;
+import Interfaces.IJson;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class Plato {
+public class Plato implements IJson {
     public int numero;
     private String nombre;
     private String descripcion;
@@ -66,4 +69,32 @@ public class Plato {
                 ", Precio=" + precio +
                 ", Categoria=" + categoria ;
     }
+    @Override
+    public JSONObject toJson() throws JSONException {
+        JSONObject json = new JSONObject();
+        try{
+            json.put("id",numero);
+            json.put("nombre",nombre);
+            json.put("descripcion",descripcion);
+            json.put("precio",precio);
+            json.put("categoria",categoria);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return json;
+    }
+
+    @Override
+    public void fromJson(JSONObject json) throws JSONException {
+        try {
+            numero = json.getInt("id");
+            nombre = json.getString("nombre");
+            descripcion = json.getString("descripcion");
+            precio = json.getDouble("precio");
+            categoria = TipoDePlato.valueOf(json.getString("categoria"));
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+    }
+
 }

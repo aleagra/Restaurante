@@ -2,8 +2,11 @@ package Clases.Gestion;
 
 import Clases.Usuarios.Cliente;
 import Enums.MetodoPago;
+import Interfaces.IJson;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class Cuenta {
+public class Cuenta implements IJson {
     private static int contador = 1;
     public int idCuenta;
     public Cliente cliente;
@@ -80,6 +83,37 @@ public class Cuenta {
                 "\nPEDIDO: " + pedido.getEstado() +
                 "\n\nBEBIDAS: "+ pedido.getNombresBebidas()+
                 "\nPLATOS: "+ pedido.getNombresPlatos();
+    }
+    @Override
+    public JSONObject toJson() throws JSONException {
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("IdCuenta", idCuenta);
+            obj.put("Cliente", cliente.toJson());
+            obj.put("Total", total);
+            obj.put("Descuento", descuento);
+            obj.put("Metodo de Pago",metodoPago.name());
+            obj.put("Pedido",pedido.toJson());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return obj;
+
+    }
+
+    @Override
+    public void fromJson(JSONObject json) throws JSONException {
+        try {
+            this.idCuenta = json.getInt("IdCuenta");
+            this.cliente.fromJson(json.getJSONObject("Cliente"));
+            this.total = json.getDouble("Total");
+            this.descuento = json.getDouble("Descuento");
+            this.metodoPago = MetodoPago.valueOf(json.getString("Metodo de Pago"));
+            this.pedido.fromJson(json.getJSONObject("Pedido"));
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public double calcularTotal() {

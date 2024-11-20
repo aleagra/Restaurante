@@ -2,10 +2,14 @@ package ClasesGestoras;
 
 import Clases.Gestion.Reserva;
 import Excepciones.ReservasException;
+import Interfaces.IJson;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Reservas {
+public class Reservas implements IJson {
     private ArrayList<Reserva> reservas;
     private static int contador = 1;
     public int nroReserva;
@@ -37,6 +41,35 @@ public class Reservas {
 
     public void setNroReserva(int nroReserva) {
         this.nroReserva = nroReserva;
+    }
+
+    @Override
+    public JSONObject toJson() throws JSONException {
+        JSONObject obj = new JSONObject();
+        try{
+            JSONArray reservasJson = new JSONArray();
+            for(Reserva m : reservas){
+                reservasJson.put(m.toJson());
+            }
+            obj.put("reservas", reservasJson);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return obj;
+    }
+
+    @Override
+    public void fromJson(JSONObject json) throws JSONException {
+        try {
+            JSONArray reservasArray = json.getJSONArray("reservas");
+            for(int i = 0; i < reservasArray.length(); i++){
+                Reserva rer = new Reserva();
+                rer.fromJson(reservasArray.getJSONObject(i));
+                reservas.add(rer);
+            }
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
     }
 
 

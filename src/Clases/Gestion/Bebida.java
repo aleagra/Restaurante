@@ -1,8 +1,12 @@
 package Clases.Gestion;
 
 import Enums.TipoDeBebida;
+import Interfaces.IJson;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class Bebida {
+
+public class Bebida implements IJson {
     public int numero;
     private String nombre;
     private double precio;
@@ -58,4 +62,30 @@ public class Bebida {
                 ", Tipo=" + tipo
                 ;
     }
+    @Override
+    public JSONObject toJson() throws JSONException {
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("numero", numero);
+            obj.put("nombre", nombre);
+            obj.put("precio", precio);
+            obj.put("tipo", tipo);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return obj;
+    }
+
+    @Override
+    public void fromJson(JSONObject json) throws JSONException {
+        try {
+            this.numero = json.getInt("numero");
+            this.nombre = json.getString("nombre");
+            this.precio = json.getDouble("precio");
+            this.tipo = TipoDeBebida.valueOf(json.getString("tipo"));
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

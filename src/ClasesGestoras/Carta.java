@@ -4,11 +4,15 @@ import Clases.Gestion.Bebida;
 import Clases.Gestion.Plato;
 import Excepciones.BebidaException;
 import Excepciones.PlatoException;
+import Interfaces.IJson;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Carta{
+public class Carta implements IJson {
     private List<Plato> comidas;
     private List<Bebida> bebidas;
 
@@ -85,5 +89,52 @@ public class Carta{
         }
         throw new RuntimeException("El ID de la bebida es incorrecto o no existe");
     }
+    @Override
+    public JSONObject toJson() throws JSONException {
+        JSONObject json = new JSONObject();
+        try {
+
+            JSONArray comidasJsonArray = new JSONArray();
+            for (Plato comida : comidas) {
+                comidasJsonArray.put(comida.toJson());
+            }
+
+
+            JSONArray bebidasJsonArray = new JSONArray();
+            for (Bebida bebida : bebidas) {
+                bebidasJsonArray.put(bebida.toJson());
+            }
+
+
+            json.put("comidas", comidasJsonArray);
+            json.put("bebidas", bebidasJsonArray);
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
+
+    @Override
+    public void fromJson(JSONObject json) throws JSONException {
+        try {
+            JSONArray comidasArray = json.getJSONArray("comidas");
+            for (int i = 0; i < comidasArray.length(); i++) {
+                JSONObject comidaJson = comidasArray.getJSONObject(i);
+                Plato comida = new Plato();
+                comida.fromJson(comidaJson);
+                comidas.add(comida);
+            }
+            JSONArray bebidasArray = json.getJSONArray("bebidas");
+            for (int i = 0; i < bebidasArray.length(); i++) {
+                JSONObject bebidaJson = bebidasArray.getJSONObject(i);
+                Bebida bebida = new Bebida();
+                bebida.fromJson(bebidaJson);
+                bebidas.add(bebida);
+            }
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

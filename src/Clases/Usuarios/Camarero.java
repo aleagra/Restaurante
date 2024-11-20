@@ -9,14 +9,45 @@ import Enums.EstadoPedido;
 import Enums.MetodoPago;
 import Excepciones.ContraseniaException;
 import Excepciones.PedidoExcepcion;
+import Interfaces.IJson;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class Camarero extends Usuario {
+public class Camarero extends Usuario implements IJson {
 
     public Camarero(String nombre, String apellido, String email, String contrasenia) {
         super(nombre, apellido, email, contrasenia);
+    }
+    @Override
+    public JSONObject toJson() throws JSONException {
+        JSONObject json = new JSONObject();
+        try {
+
+            json.put("Nombre",this.nombre);
+            json.put("Apellido",this.apellido);
+            json.put("Email",this.email);
+            json.put("Contrasenia",this.contrasenia);
+
+        }catch (JSONException e){
+            throw new JSONException(e.getMessage());
+        }
+        return json;
+    }
+
+    @Override
+    public void fromJson(JSONObject json) throws JSONException {
+        try{
+            this.nombre = json.getString("Nombre");
+            this.apellido = json.getString("Apellido");
+            this.email = json.getString("Email");
+            this.contrasenia = json.getString("Contrasenia");
+        }catch (JSONException e){
+            throw new JSONException(e.getMessage());
+        }
+
     }
 
     public void registrarPedido(Pedido pedido) throws PedidoExcepcion {

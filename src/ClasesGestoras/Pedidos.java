@@ -3,11 +3,16 @@ package ClasesGestoras;
 import Clases.Gestion.Pedido;
 import Clases.Gestion.Reserva;
 import Excepciones.PedidoException;
+import Interfaces.IJson;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pedidos {
+public class Pedidos implements IJson {
     private List<Pedido> pedidos;
 
     public Pedidos() {
@@ -16,6 +21,35 @@ public class Pedidos {
 
     public List<Pedido> getPedidos() {
         return pedidos;
+    }
+
+    @Override
+    public JSONObject toJson() throws JSONException {
+        JSONObject obj = new JSONObject();
+        try{
+            JSONArray pedidosJsonArray = new JSONArray();
+            for (Pedido pep : pedidos) {
+                pedidosJsonArray.put(pep.toJson());
+            }
+            obj.put("pedidos", pedidosJsonArray);
+        }catch(JSONException e){
+            throw new JSONException(e.getMessage());
+        }
+        return obj;
+    }
+
+    @Override
+    public void fromJson(JSONObject json) throws JSONException {
+        try {
+            JSONArray pedidosArray = json.getJSONArray("pedidos");
+            for(int i = 0; i < pedidosArray.length(); i++){
+                Pedido pedido = new Pedido();
+                pedido.fromJson(pedidosArray.getJSONObject(i));
+                pedidos.add(pedido);
+            }
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
     }
 
     public String agregarPedido(Pedido pedido) throws PedidoException {

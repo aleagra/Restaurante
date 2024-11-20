@@ -4,17 +4,51 @@ import Clases.Usuarios.Usuario;
 import Excepciones.AutenticacionException;
 import Excepciones.EmailDuplicadoException;
 import Excepciones.UsuarioNoEncontradoException;
+import Interfaces.IJson;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class Usuarios {
+public class Usuarios implements IJson {
     Set<Usuario> listaUsuarios;
 
-    public Usuarios() {
+    public Usuarios()  {
         this.listaUsuarios = new HashSet<>();
     }
 
+    @Override
+    public JSONObject toJson() throws JSONException {
+        JSONObject obj = new JSONObject();
+        try{
+            JSONArray usuariosJson = new JSONArray();
+            for(Usuario u : listaUsuarios){
+                usuariosJson.put(u.toJson());
+            }
+            obj.put("usuarios", usuariosJson);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return obj;
+    }
+
+    @Override
+    public void fromJson(JSONObject json) throws JSONException {
+        Usuario u = null;
+        try {
+            JSONArray usuariosJson = json.getJSONArray("usuarios");
+            for (int i = 0; i < usuariosJson.length(); i++) {
+                u.fromJson(usuariosJson.getJSONObject(i));
+                listaUsuarios.add(u);
+            }
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+    }
     public void registrarUsuario(Usuario usuario) throws EmailDuplicadoException {
         if (!listaUsuarios.add(usuario)) {
             throw new EmailDuplicadoException("El usuario con este email ya está registrado.");

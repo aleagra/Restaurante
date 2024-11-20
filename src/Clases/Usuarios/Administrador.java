@@ -8,8 +8,11 @@ import ClasesGestoras.Mesas;
 import ClasesGestoras.Reservas;
 import Excepciones.ContraseniaException;
 import Interfaces.IGestorReserva;
+import Interfaces.IJson;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class Administrador extends Usuario implements IGestorReserva {
+public class Administrador extends Usuario implements IGestorReserva, IJson {
 
     public Administrador(String nombre, String apellido, String email, String contrasenia) {
         super(nombre, apellido, email, contrasenia);
@@ -55,4 +58,34 @@ public boolean gestionarMenu(int opcion , Mesas mesas, Mesa m, Carta carta, Plat
     public String obtenerReservas(Reservas res) {
         return res.verReservas();
     }
+
+    @Override
+    public JSONObject toJson() throws JSONException {
+        JSONObject json = new JSONObject();
+        try {
+
+            json.put("Nombre",this.nombre);
+            json.put("Apellido",this.apellido);
+            json.put("Email",this.email);
+            json.put("Contrasenia",this.contrasenia);
+
+        }catch (JSONException e){
+            throw new JSONException(e.getMessage());
+        }
+        return json;
+    }
+
+    @Override
+    public void fromJson(JSONObject json)throws JSONException {
+
+        try{
+            this.nombre = json.getString("Nombre");
+            this.apellido = json.getString("Apellido");
+            this.email = json.getString("Email");
+            this.contrasenia = json.getString("Contrasenia");
+        }catch (JSONException e){
+            throw new JSONException(e.getMessage());
+        }
+    }
+
 }

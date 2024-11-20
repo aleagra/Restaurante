@@ -3,16 +3,48 @@ package ClasesGestoras;
 import Clases.Gestion.Mesa;
 import Enums.EstadoMesa;
 import Excepciones.MesasException;
+import Interfaces.IJson;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Mesas {
+public class Mesas implements IJson {
     private ArrayList<Mesa> TodasLasMesas;
 
     public Mesas() {
         TodasLasMesas = new ArrayList<>();
     }
 
+    @Override
+    public JSONObject toJson() throws JSONException {
+        JSONObject obj = new JSONObject();
+        try{
+            JSONArray mesasJson = new JSONArray();
+            for(Mesa m : TodasLasMesas){
+                mesasJson.put(m.toJson());
+            }
+            obj.put("mesas", mesasJson);
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+        return obj;
+    }
+
+    @Override
+    public void fromJson(JSONObject json) throws JSONException {
+        try {
+            JSONArray mesasArray = json.getJSONArray("mesas");
+            for(int i = 0; i < mesasArray.length(); i++){
+                Mesa mesa = new Mesa();
+                mesa.fromJson(mesasArray.getJSONObject(i));
+                TodasLasMesas.add(mesa);
+            }
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+    }
 
 
     public String addMesa(Mesa m) throws MesasException {
