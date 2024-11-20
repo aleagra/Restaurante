@@ -53,6 +53,6 @@ public void crearPromocion(int descuento,Cuenta cuenta) throws DescuentoExceptio
     }
 }
 
-public String verReservas(Reservas res){return res.mostrarElementos(res.getReservas());}
+public String verReservas(Reservas res){return res.verReservas();}
 
 }
