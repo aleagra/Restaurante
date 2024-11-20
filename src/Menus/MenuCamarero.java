@@ -4,7 +4,12 @@ import Clases.Gestion.Cuenta;
 import Clases.Gestion.Pedido;
 import Clases.Usuarios.Camarero;
 import Clases.Usuarios.Cliente;
+import Clases.Usuarios.Usuario;
+import ClasesGestoras.Carta;
 import ClasesGestoras.Mesas;
+import ClasesGestoras.Pedidos;
+import ClasesGestoras.Usuarios;
+import Enums.MetodoPago;
 
 import java.util.List;
 import java.util.Scanner;
@@ -16,7 +21,7 @@ public class MenuCamarero {
         this.scanner = new Scanner(System.in);
     }
 
-    public void mostrarMenu(Camarero camarero, Mesas gestionMesas, List<Pedido> pedidos, Pedido pedido, Cliente cliente) {
+    public void mostrarMenu(Camarero camarero, Mesas gestionMesas, Pedidos pedidos, Usuarios usuarios, Carta carta) {
         int opcion;
 
         do {
@@ -30,7 +35,15 @@ public class MenuCamarero {
 
             switch (opcion) {
                 case 1:
-                    camarero.registrarPedido(pedido);
+                    Pedido pedido = new Pedido();
+                    System.out.println("Consulte el id del cliente:");
+                    int id= scanner.nextInt();
+                    Cliente usuario1= usuarios.buscarPorId(id);
+                    int opciones = scanner.nextInt();
+                    System.out.println("Ingrese 1 para agregar una bebida");
+                    System.out.println("Ingrese 2 para agregar una comida");
+                    int numero = scanner.nextInt();
+                    camarero.generarPedido(opciones,numero,carta,usuario1);
                     System.out.println("Pedido registrado correctamente con estado: " + pedido.getEstado());
                     break;
                 case 2:
@@ -42,11 +55,20 @@ public class MenuCamarero {
                     }
                     break;
                 case 3:
-                    Cliente cliente = new Cliente();
-                    Pedido pedido = new Pedido();
-                    Cuenta cuenta = new Cuenta();
-                    Cuenta factura = camarero.generarFactura(cuenta, cliente, pedido);
-                    camarero.eliminarPedidoCompletado(pedido, pedidos, cuenta, cliente);
+                    int id= scanner.nextInt();
+                    int numOrden = scanner.nextInt();
+                    int formaPago = scanner.nextInt();
+                    MetodoPago metodoPago = null;
+                    System.out.println("Seleccione la forma de pago");
+                    if(formaPago == 1) {
+                    metodoPago = MetodoPago.EFECTIVO;
+                    } else if (formaPago == 2) {
+                        metodoPago = MetodoPago.DEBITO;
+                    } else if (formaPago == 3) {
+                        metodoPago = MetodoPago.CREDITO;
+                    }
+                    Cuenta factura = camarero.generarFactura(id,numOrden,pedidos,metodoPago);
+                    camarero.eliminarPedidoCompletado(id,numOrden,pedidos);
                     System.out.println("Factura generada correctamente. Total: $" + factura.getTotal());
                     break;
                 default:

@@ -1,5 +1,7 @@
 package ClasesGestoras;
 
+import Clases.Gestion.Mesa;
+
 public class Restaurante {
     Carta carta;
     Mesas mesas;
@@ -34,6 +36,5 @@ public class Restaurante {
     public Usuarios getUsuarios() {
         return usuarios;
     }
-
 
 }

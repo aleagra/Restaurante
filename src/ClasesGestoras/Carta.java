@@ -64,4 +64,22 @@ public class Carta{
         }
         return msj.toString();
     }
+    public Plato buscarPlatoPorId(int idPlato) {
+        for (Plato plato : comidas) {
+            if (plato.getNumero() == idPlato) {
+                return plato;
+            }
+        }
+        throw new RuntimeException("El ID del plato es incorrecto o no existe");
+    }
+
+    public Bebida buscarBebidaPorId(int idBebida) {
+        for (Bebida bebida : bebidas) {
+            if (bebida.getNumero() == idBebida) {
+                return bebida;
+            }
+        }
+        throw new RuntimeException("El ID de la bebida es incorrecto o no existe");
+    }
+
 }

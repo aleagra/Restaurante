@@ -8,7 +8,7 @@ import Interfaces.IMetodosGestores;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Mesas implements IMetodosGestores <Mesa>{
+public class Mesas implements IMetodosGestores<Mesa>{
     private ArrayList<Mesa> TodasLasMesas;
 
     public Mesas() {

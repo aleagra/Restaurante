@@ -97,7 +97,7 @@ public class Cuenta {
         this.total = this.total - (this.total * (this.descuento / 100));
     }
 
-    public void calcularTotal() {
+    public double calcularTotal() {
         double totalSinDescuento = 0;
 
         if (pedido != null) {
@@ -112,5 +112,6 @@ public class Cuenta {
         if (descuento > 0) {
             aplicarDescuento();
         }
+        return totalSinDescuento;
     }
 }

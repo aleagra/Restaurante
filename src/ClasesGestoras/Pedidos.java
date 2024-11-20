@@ -43,4 +43,12 @@ public class Pedidos {
         }
         return lista.toString();
     }
+    public String eliminarPedido(Pedido pedido) throws PedidoException{
+        String msj = "Pedido eliminado exitosamente.";
+        if(pedido != null){
+            pedidos.remove(pedido);
+            return msj;
+        }
+        throw new PedidoException("El pedido no pudo ser eliminado");
+    }
 }

@@ -44,10 +44,7 @@ public class Main {
         Cliente cliente3 = new Cliente("Sofía", "López", "sofia.lopez@mail.comk", "abcd7890", "Boulevard del Sol 456", "456123789");
         Cliente cliente4 = new Cliente("Carlos", "Pérez", "carlos.perez@mail.coml", "securepass01", "Camino Real 89", "789456123");
 
-        restaurante.getMesas().addMesa(mesa1);
-        restaurante.getMesas().addMesa(mesa2);
-        restaurante.getMesas().addMesa(mesa3);
-        restaurante.getMesas().addMesa(mesa4);
+        restaurante.getMesas().agregarElemento(restaurante.getMesas(),mesa1);
 
         restaurante.getCarta().agregarBebida(bebida1);
         restaurante.getCarta().agregarBebida(bebida2);
@@ -68,7 +65,7 @@ public class Main {
         restaurante.getUsuarios().registrarUsuario(cliente3);
         restaurante.getUsuarios().registrarUsuario(cliente4);
 
-        String logueo = restaurante.getUsuarios().loguearUsuario("sofia.lopez@mail.com", "abcd7890");
+        String logueo = restaurante.getUsuarios().loguearUsuario("ana.garcia@mail.c", "password123");
         System.out.println(logueo);
 
         switch (logueo){
@@ -83,7 +80,7 @@ public class Main {
                 menuCocinero.mostrarMenuCocinero(restaurante.getPedidos(), scanner);
                 break;
             case "Camarero":
-                menuCamarero.mostrarMenu(camarero, restaurante.getMesas(), restaurante.getPedidos().getPedidos(), );
+                menuCamarero.mostrarMenu(camarero,restaurante.getMesas(),restaurante.getPedidos(),restaurante.getUsuarios(),restaurante.getCarta());
                 break;
         }
     }

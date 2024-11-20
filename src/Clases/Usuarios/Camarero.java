@@ -1,16 +1,23 @@
 package Clases.Usuarios;
 
 import Clases.Gestion.*;
+import ClasesGestoras.Carta;
 import ClasesGestoras.Mesas;
+import ClasesGestoras.Pedidos;
 import Enums.EstadoMesa;
 import Enums.EstadoPedido;
 import Enums.MetodoPago;
+import Excepciones.ContraseniaException;
 import Excepciones.PedidoExcepcion;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class Camarero {
+public class Camarero extends Usuario {
+
+    public Camarero(String nombre, String apellido, String email, String contrasenia) {
+        super(nombre, apellido, email, contrasenia);
+    }
 
     public void registrarPedido(Pedido pedido) throws PedidoExcepcion {
         if(pedido!=null){pedido.actualizarEstadoPedido(EstadoPedido.PENDIENTE);
@@ -24,72 +31,44 @@ public class Camarero {
 
     }
 
-    public Cuenta generarFactura(Cuenta cuenta,Cliente cliente,Pedido pedido)  {
-        Scanner sc = new Scanner(System.in);
-        char opc = 's';
-        double dsc;
-        int metodo = 0;
-        cuenta.setCliente(cliente);
-
-        System.out.println("Va a aplicar algun tipo de descuento sobre el total de la cuenta? (s/n)");
-        opc = sc.next().charAt(0);
-        if(opc=='s'||opc=='S'){
-                System.out.println("Ingrese el porcentaje que desea descontar: ");
-                dsc = sc.nextDouble();
-                cuenta.setDescuento(dsc);
+    private Pedido buscarPedido(int idCliente, int numPedido, Pedidos pedidos) {
+        for (Pedido pedido : pedidos.getPedidos()) {
+            if (pedido.getCliente().getId() == idCliente && pedido.getNumeroPedido() == numPedido) {
+                return pedido;
+            }
         }
-        cuenta.setPedido(pedido);
+        throw new RuntimeException("El id del cliente o el número de pedido es incorrecto");
+    }
 
-        System.out.println("Que metodo va a utilizar para pagar? :");
-        System.out.println("1) Efectivo");
-        System.out.println("2) Debito");
-        System.out.println("2) Credito");
-        metodo = sc.nextInt();
-
-        switch (metodo){
-            case 1:{cuenta.setMetodoPago(MetodoPago.EFECTIVO);break;}
-            case 2:{cuenta.setMetodoPago(MetodoPago.DEBITO);break;}
-            case 3: {cuenta.setMetodoPago(MetodoPago.CREDITO); break;}
-        }
-
-        cuenta.calcularTotal();
-
+    public Cuenta generarFactura(int idCliente, int numPedido, Pedidos pedidos, MetodoPago metodoPago) {
+        Pedido pedidoEncontrado = buscarPedido(idCliente, numPedido, pedidos);
+        Cuenta cuenta = new Cuenta();
+        cuenta.setCliente(pedidoEncontrado.getCliente());
+        cuenta.setPedido(pedidoEncontrado);
+        cuenta.setTotal(cuenta.calcularTotal());
+        cuenta.setMetodoPago(metodoPago);
         return cuenta;
     }
 
-    public void eliminarPedidoCompletado(Pedido pedido, List<Pedido> pedidos, Cuenta cuenta, Cliente cliente) throws PedidoExcepcion {
-        if (pedido == null) {
-            throw new PedidoExcepcion("El pedido no puede ser null.");
-        }
-
-        if (pedidos == null || pedidos.isEmpty()) {
-            throw new PedidoExcepcion("No hay pedidos registrados para eliminar.");
-        }
-
-        if (!pedidos.contains(pedido)) {
-            throw new PedidoExcepcion("El pedido no se encuentra en la lista.");
-        }
-
-        Cuenta facturaGenerada = generarFactura(cuenta, cliente, pedido);
-        if (facturaGenerada != null) {
-            pedidos.remove(pedido);
-            System.out.println("El pedido número " + pedido.getNumeroPedido() + " ha sido eliminado de la lista.");
-        } else {
-            throw new PedidoExcepcion("No se pudo generar la factura. El pedido no será eliminado.");
-        }
+    public void eliminarPedidoCompletado(int idCliente, int numPedido, Pedidos pedidos) throws PedidoExcepcion {
+        Pedido pedidoEncontrado = buscarPedido(idCliente, numPedido, pedidos);
+        pedidos.eliminarPedido(pedidoEncontrado);
     }
 
-    public Pedido generarPedido(int opcion, Bebida beb, Plato pl,Cliente cl) throws PedidoExcepcion {
-        Pedido pedido = new Pedido(null,cl);
+    public Pedido generarPedido(int opcion,int numero, Carta carta,Cliente cl) throws PedidoExcepcion {
+        Pedido pedido = new Pedido(EstadoPedido.EN_PREPARACION,cl);
+
         do {
             switch (opcion) {
                 case 1: {
-                    if (pedido.addPlato(pl)) {
+                    Plato plato = carta.buscarPlatoPorId(numero);
+                    if (pedido.addPlato(plato)) {
                     }
                     throw new PedidoExcepcion("No se pudo agregar el plato");
                 }
                 case 2: {
-                    if (pedido.addBebida(beb)) {
+                    Bebida bebida = carta.buscarBebidaPorId(numero);
+                    if (pedido.addBebida(bebida)) {
                     }
                     throw new PedidoExcepcion("No se pudo agregar la bebida");
                 }
@@ -97,5 +76,14 @@ public class Camarero {
         }while (opcion != 0);
 
         return pedido;
+    }
+    @Override
+    public String cambiarContrasenia(String contraActual, String contraNueva) {
+        String msj = "Contrasenia cambiada.";
+        if(contraActual.equals(this.contrasenia)){
+            setContrasenia(contraNueva);
+            return msj;
+        }
+        throw new ContraseniaException("La contrasenia no se pudo cambiar.");
     }
 }

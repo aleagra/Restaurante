@@ -1,4 +1,5 @@
 package ClasesGestoras;
+import Clases.Usuarios.Cliente;
 import Clases.Usuarios.Usuario;
 import Excepciones.AutenticacionException;
 import Excepciones.EmailDuplicadoException;
@@ -66,6 +67,19 @@ public class Usuarios {
         }
 
         return !resultado.isEmpty() ? resultado.toString() : "No se encontraron usuarios de la clase " + nombreClase;
+    }
+
+    public Cliente buscarPorId(int id){
+       Cliente clienteAux = new Cliente();
+        for (Usuario cliente:listaUsuarios){
+            if (cliente.getId() == id && cliente.getClass().getSimpleName().equalsIgnoreCase("cliente")){
+                clienteAux = (Cliente) cliente;
+            }
+        }
+        if (clienteAux == null){
+            throw new RuntimeException("No se encuentra el id");
+        }
+        return clienteAux;
     }
 }
 

@@ -24,7 +24,9 @@ public class Pedido {
         this.estado = estado;
         this.cliente = cliente;
     }
-
+    public  Pedido(){
+        this.numeroPedido = contador++;
+    }
     public int getNumeroPedido() {
         return numeroPedido;
     }

@@ -16,6 +16,9 @@ public abstract class Usuario {
         this.email = email;
         this.contrasenia = contrasenia;
     }
+    public Usuario(){
+
+    }
 
     public static int getContador() {
         return contador;
