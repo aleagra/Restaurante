@@ -12,7 +12,7 @@ public class Cuenta {
     public MetodoPago metodoPago;
     public Pedido pedido;
 
-    public Cuenta(Cliente cliente, double total, double descuento,Pedido pedido) {
+    public Cuenta(Cliente cliente, double total, double descuento, Pedido pedido) {
         this.idCuenta = contador++;
         this.cliente = cliente;
         this.total = total;
@@ -97,7 +97,7 @@ public class Cuenta {
         this.total = this.total - (this.total * (this.descuento / 100));
     }
 
-    public double calcularTotal() {
+   /* public double calcularTotal() {
         double totalSinDescuento = 0;
 
         if (pedido != null) {
@@ -108,6 +108,31 @@ public class Cuenta {
                 totalSinDescuento += bebida.getPrecio();
             }
         }
+        this.total = totalSinDescuento;
+        if (descuento > 0) {
+            aplicarDescuento();
+        }
+        return totalSinDescuento;
+    }
+}*/
+
+    public double calcularTotal() {
+        double totalSinDescuento = 0;
+
+        if (pedido != null) {
+            if (pedido.getPlatos() != null) {
+                for (Plato plato : pedido.getPlatos()) {
+                    totalSinDescuento += plato.getPrecio();
+                }
+            }
+
+            if (pedido.getBebidas() != null) {
+                for (Bebida bebida : pedido.getBebidas()) {
+                    totalSinDescuento += bebida.getPrecio();
+                }
+            }
+        }
+
         this.total = totalSinDescuento;
         if (descuento > 0) {
             aplicarDescuento();

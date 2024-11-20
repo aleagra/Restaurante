@@ -68,7 +68,8 @@ public class MenuCamarero {
                     }
                     Cuenta factura = camarero.generarFactura(id,numOrden,pedidos,metodoPago);
                     camarero.eliminarPedidoCompletado(id,numOrden,pedidos);
-                    System.out.println("Factura generada correctamente. Total: $" + factura.getTotal());
+                    double total = factura.calcularTotal();
+                    System.out.println("Factura generada correctamente. Total: $" + total);
                     break;
                 default:
                     System.out.println("Saliendo...");
