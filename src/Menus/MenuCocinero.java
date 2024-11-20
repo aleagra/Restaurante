@@ -1,6 +1,5 @@
 package Menus;
 
-import Clases.Gestion.Pedido;
 import Clases.Usuarios.Cocinero;
 import ClasesGestoras.Pedidos;
 import Enums.EstadoPedido;
@@ -9,52 +8,44 @@ import java.util.Scanner;
 
 public class MenuCocinero {
 
-    public void mostrarMenuCocinero(Pedidos pedidos, Scanner sc,Cocinero cocinera){
+    public void mostrarMenuCocinero(Pedidos pedidos, Scanner sc, Cocinero cocinera) {
         int opcion;
-        char seguir = 's';
-
-        do{
-            System.out.println("-----------------MENU---------------");
-            opciones();
+        do {
+            System.out.println("\n========== MENU COCINERO ==========");
+            System.out.println("1. Ver pedidos");
+            System.out.println("2. Actualizar estado del pedido");
+            System.out.println("3. Cambiar contraseña");
+            System.out.println("0. Salir");
+            System.out.print("Seleccione una opción: ");
             opcion = sc.nextInt();
-            sc.nextLine();
+            sc.nextLine(); // Consumir salto de línea
 
-            switch(opcion){
+            switch (opcion) {
                 case 1:
-                    System.out.println("Mostrando los pedidos...");
-                    cocinera.verPedido(pedidos);
+                    System.out.println("\n--- Mostrando pedidos ---");
+                    cocinera.obtenerPedidos(pedidos);
                     break;
+
                 case 2:
-                    System.out.println("Actualizando el estado del pedido...");
+                    System.out.println("\n--- Actualizando estado del pedido ---");
+                    System.out.print("Ingrese el número del pedido: ");
                     int nroPedido = sc.nextInt();
-                    cocinera.actualizarEstadoPedido(pedidos,nroPedido,EstadoPedido.LISTO);
+                    cocinera.actualizarEstadoPedido(pedidos, nroPedido, EstadoPedido.LISTO);
                     break;
+
                 case 3:
-                    System.out.println("Cambiando contrasenia...");
-                    System.out.println("Ingrese la contrasenia actual: ");
+                    System.out.println("\n--- Cambiar contraseña ---");
+                    System.out.print("Ingrese la contraseña actual: ");
                     String contraActual = sc.nextLine();
-                    System.out.println("Ingrese la contrasenia nueva: ");
+                    System.out.print("Ingrese la nueva contraseña: ");
                     String contraNueva = sc.nextLine();
-                    cocinera.cambiarContrasenia(contraActual, contraNueva);
+                    System.out.println(cocinera.cambiarContrasenia(contraActual, contraNueva));
                     break;
 
-                default: {
-                    System.out.println("Número fuera de rango. Intenta de nuevo.");
-                    continue;
-                }
+                default:
+                    System.out.println("\n👨‍🍳 Finalizando sesión del cocinero...");
+                    break;
             }
-            System.out.println("Desea continuar? s/n: ");
-            seguir = sc.next().charAt(0);
-
-        }while(seguir=='s');
+        } while (opcion != 0);
     }
-
-
-    public static void opciones(){
-        System.out.println("1-Ver pedidos");
-        System.out.println("2-Actualizar estado del pedido");
-        System.out.println("3- Cambiar contrasenia");
-        System.out.println("4- Salir...");
-    }
-
 }

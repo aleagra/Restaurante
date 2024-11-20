@@ -73,16 +73,13 @@ public class Cuenta {
 
     @Override
     public String toString() {
-        return "Cuenta{" +
-                "Numero de pedido=" + idCuenta +
-                ",ID Cliente=" + cliente.getId() +
-                ",Nombre="+  cliente.getNombre()+
-                ",total=" + total +
-                ",MetodoPago=" + metodoPago +
-                ",pedido=" + pedido.getEstado() +
-                ",Bebidas="+ pedido.getBebidas()+
-                ",Platos="+ pedido.getNombresPlatos()+
-                '}';
+        return "NUMERO DE PEDIDO: " + idCuenta +
+                "\nNOMBRE: "+  cliente.getNombre()+
+                "\nTOTAL: " + total +
+                "\nMETODO DE PAGO: " + metodoPago +
+                "\nPEDIDO: " + pedido.getEstado() +
+                "\n\nBEBIDAS: "+ pedido.getNombresBebidas()+
+                "\nPLATOS: "+ pedido.getNombresPlatos();
     }
 
     public double calcularTotal() {

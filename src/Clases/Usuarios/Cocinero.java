@@ -5,15 +5,12 @@ import ClasesGestoras.Pedidos;
 import Enums.EstadoPedido;
 import Excepciones.ContraseniaException;
 import Excepciones.PedidoException;
+import Interfaces.IGestorPedidos;
 
-public class Cocinero extends Usuario {
+public class Cocinero extends Usuario implements IGestorPedidos {
 
     public Cocinero(String nombre, String apellido, String email, String contrasenia) {
         super(nombre, apellido, email, contrasenia);
-    }
-
-    public String verPedido(Pedidos pedidos) {
-        return pedidos.mostrarPedidos();
     }
 
     public int actualizarEstadoPedido(Pedidos pedidos, int nroPedido, EstadoPedido estado){
@@ -27,11 +24,16 @@ public class Cocinero extends Usuario {
 
     @Override
     public String cambiarContrasenia(String contraActual, String contraNueva) {
-        String msj = "Contrasenia cambiada.";
+        String msj = "Contraseña cambiada.";
         if(contraActual.equals(this.contrasenia)){
             setContrasenia(contraNueva);
             return msj;
         }
-        throw new ContraseniaException("La contrasenia no se pudo cambiar.");
+        throw new ContraseniaException("La contraseña no se pudo cambiar.");
+    }
+
+    @Override
+    public String obtenerPedidos(Pedidos pedidos) {
+        return pedidos.mostrarPedidos();
     }
 }

@@ -33,20 +33,24 @@ public class Carta{
         return msj;
     }
 
-    public String eliminarComida(Plato plato){
-        String msj = "Comida eliminada exitosamente.";
-        if(!comidas.contains(plato)){
-            throw new PlatoException("La comida no se encuentra.");
+    public String eliminarComida(String nombrePlato){
+        for (Plato plato : comidas) {
+            if (plato.getNombre().equalsIgnoreCase(nombrePlato)) {
+                comidas.remove(plato);
+                return "Plato eliminado exitosamente.";
+            }
         }
-        return msj;
+        throw new PlatoException("El plato no se encuentra.");
     }
 
-    public String eliminarBebida(Bebida bebida){
-        String msj = "Bebida eliminada exitosamente.";
-        if(!bebidas.contains(bebida)){
-            throw new BebidaException("La bebida no se encuentra.");
+    public String eliminarBebida(String nombreBebida) {
+        for (Bebida bebida : bebidas) {
+            if (bebida.getNombre().equalsIgnoreCase(nombreBebida)) {
+                bebidas.remove(bebida);
+                return "Bebida eliminada exitosamente.";
+            }
         }
-        return msj;
+        throw new BebidaException("La bebida no se encuentra.");
     }
 
     public String mostrarComidas(){
