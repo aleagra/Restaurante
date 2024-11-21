@@ -1,10 +1,11 @@
 package ClasesGestoras;
 
 import Clases.Gestion.Mesa;
+import Interfaces.IJson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Restaurante {
+public class Restaurante implements IJson {
     Carta carta;
     Mesas mesas;
     Pedidos pedidos;

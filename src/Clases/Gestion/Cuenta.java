@@ -14,7 +14,7 @@ public class Cuenta implements IJson {
     public MetodoPago metodoPago;
     public Pedido pedido;
 
-    public Cuenta(Cliente cliente, double total, double descuento, Pedido pedido) {
+    public Cuenta(Cliente cliente, double total, Pedido pedido) {
         this.idCuenta = contador++;
         this.cliente = cliente;
         this.total = total;
@@ -91,7 +91,6 @@ public class Cuenta implements IJson {
             obj.put("IdCuenta", idCuenta);
             obj.put("Cliente", cliente.toJson());
             obj.put("Total", total);
-            obj.put("Descuento", descuento);
             obj.put("Metodo de Pago",metodoPago.name());
             obj.put("Pedido",pedido.toJson());
 
@@ -108,7 +107,6 @@ public class Cuenta implements IJson {
             this.idCuenta = json.getInt("IdCuenta");
             this.cliente.fromJson(json.getJSONObject("Cliente"));
             this.total = json.getDouble("Total");
-            this.descuento = json.getDouble("Descuento");
             this.metodoPago = MetodoPago.valueOf(json.getString("Metodo de Pago"));
             this.pedido.fromJson(json.getJSONObject("Pedido"));
         }catch (JSONException e) {
