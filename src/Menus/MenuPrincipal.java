@@ -42,7 +42,7 @@ public class MenuPrincipal {
                 new Cliente("Andrés", "Soto", "andres.soto@mail.com", "client789", "Pasaje Azul 789", "3344556677"),
                 new Cliente("Valeria", "Campos", "valeria.campos@mail.com", "client001", "Bulevar Verde 321", "4455667788")
         );
-        usuarios.forEach(restaurante.getUsuarios()::registrarUsuario);
+        usuarios.forEach(restaurante.getUsuarios()::registrarUsuarioHarcodeado);
         System.out.println("Usuarios inicializados y registrados en el sistema.");
     }
 }
