@@ -69,7 +69,7 @@ public class Cliente extends Usuario implements IGestorReserva, IGestorPedidos, 
     public JSONObject toJson() throws JSONException {
         JSONObject json = new JSONObject();
         try {
-
+            json.put("Id",this.id);
             json.put("Nombre",this.nombre);
             json.put("Apellido",this.apellido);
             json.put("Email",this.email);
@@ -86,6 +86,7 @@ public class Cliente extends Usuario implements IGestorReserva, IGestorPedidos, 
     @Override
     public void fromJson(JSONObject json) throws JSONException {
         try{
+            this.id = json.getInt("Id");
             this.nombre = json.getString("Nombre");
             this.apellido = json.getString("Apellido");
             this.email = json.getString("Email");

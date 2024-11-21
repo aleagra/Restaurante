@@ -1,6 +1,7 @@
 package Menus;
 
 import Clases.Gestion.Cuenta;
+import Clases.Gestion.Mesa;
 import Clases.Gestion.Pedido;
 import Clases.Usuarios.Camarero;
 import Clases.Usuarios.Cliente;
@@ -8,7 +9,12 @@ import ClasesGestoras.Carta;
 import ClasesGestoras.Mesas;
 import ClasesGestoras.Pedidos;
 import ClasesGestoras.Usuarios;
+import Enums.EstadoMesa;
 import Enums.MetodoPago;
+import JSONUtiles.JSONUtiles;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Scanner;
 
@@ -46,8 +52,27 @@ public class MenuCamarero {
                         break;
 
                     case 2:
-                        System.out.println("\n--- Mesas disponibles ---");
-                        System.out.println(camarero.verMesasDisponibles(gestionMesas));
+                        try {
+                            JSONArray arregloMesas = new JSONArray(JSONUtiles.leerUnJson("mesas.json"));
+
+                            if (arregloMesas.length() > 0) {
+                                for (int i = 0; i < arregloMesas.length(); i++) {
+                                    JSONObject jsonObject = arregloMesas.getJSONObject(i);
+
+                                    Mesa mesita = new Mesa();
+                                    mesita.fromJson(jsonObject);
+                                    if (mesita.getEstadoMesa().equals(EstadoMesa.LIBRE)) {
+                                        System.out.println("NUMERO:" + mesita.getNumero() + " " + "CAPACIDAD:" + mesita.getCapacidad() + " " + "ESTADO:" + mesita.getEstadoMesa());
+                                    }
+                                }
+                            } else {
+                                System.out.println("No se encontraron mesas en el archivo.");
+                            }
+
+                        } catch (JSONException e) {
+                            System.out.println("No se ha podido leer el archivo.");
+                            e.printStackTrace();
+                        }
                         break;
 
                     case 3:

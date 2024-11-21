@@ -1,4 +1,4 @@
-/*package JSONUtiles;
+package JSONUtiles;
 
 import Clases.Usuarios.Administrador;
 import org.json.JSONArray;
@@ -33,4 +33,4 @@ public class JSONUtiles {
 
         return tokener;
     }
-}*/
+}

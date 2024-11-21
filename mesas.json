@@ -1,0 +1,17 @@
+[
+    {
+        "numero": 1,
+        "estadoMesa": "OCUPADA",
+        "capacidad": 2
+    },
+    {
+        "numero": 2,
+        "estadoMesa": "OCUPADA",
+        "capacidad": 4
+    },
+    {
+        "numero": 3,
+        "estadoMesa": "LIBRE",
+        "capacidad": 6
+    }
+]

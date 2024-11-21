@@ -3,6 +3,7 @@ package Menus;
 import Clases.Gestion.Bebida;
 import Clases.Gestion.Mesa;
 import Clases.Gestion.Plato;
+import Clases.Gestion.Reserva;
 import Clases.Usuarios.Administrador;
 import ClasesGestoras.Carta;
 import ClasesGestoras.Mesas;
@@ -11,6 +12,10 @@ import ClasesGestoras.Usuarios;
 import Enums.TipoDeBebida;
 import Enums.TipoDePlato;
 import Excepciones.MenuException;
+import JSONUtiles.JSONUtiles;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Scanner;
 
@@ -41,7 +46,28 @@ public class MenuAdmin {
                     break;
                 case 2:
                     System.out.println("\n--- Reservas ---");
-                    System.out.println(administrador.obtenerReservas(r));
+                    try {
+                        JSONArray arregloReservas = new JSONArray(JSONUtiles.leerUnJson("reservas.json"));
+
+                        if (arregloReservas.length() > 0) {
+                            for (int i = 0; i < arregloReservas.length(); i++) {
+                                JSONObject jsonObject = arregloReservas.getJSONObject(i);
+
+                                Reserva reserva = new Reserva();
+                                reserva.fromJson(jsonObject);
+                                System.out.println("Fecha: " + reserva.getFecha() + " | " +
+                                        "Mesa Número: " + reserva.getMesa().getNumero() + " | " +
+                                        "Capacidad: " + reserva.getMesa().getCapacidad() + " | " +
+                                        "Cliente: " + reserva.getCliente().getNombre() + " " + reserva.getCliente().getApellido());
+                            }
+                        } else {
+                            System.out.println("No se encontraron reservas en el archivo.");
+                        }
+
+                    } catch (JSONException e) {
+                        System.out.println("No se ha podido leer el archivo.");
+                        e.printStackTrace();
+                    }
                     break;
                 case 3:
                     System.out.println("🍽️ Platos:");
@@ -52,7 +78,25 @@ public class MenuAdmin {
                     System.out.println(c.mostrarBebidas());
                     break;
                 case 5:
-                    System.out.println(mesas.mostrarMesas());
+                    try {
+                        JSONArray arregloMesas = new JSONArray(JSONUtiles.leerUnJson("mesas.json"));
+
+                        if (arregloMesas.length() > 0) {
+                            for (int i = 0; i < arregloMesas.length(); i++) {
+                                JSONObject jsonObject = arregloMesas.getJSONObject(i);
+
+                                Mesa mesita = new Mesa();
+                                mesita.fromJson(jsonObject);
+                                System.out.println("NUMERO:" + mesita.getNumero()+ " " + "CAPACIDAD:" + mesita.getCapacidad() +" " + "ESTADO:" + mesita.getEstadoMesa());
+                            }
+                        } else {
+                            System.out.println("No se encontraron mesas en el archivo.");
+                        }
+
+                    } catch (JSONException e) {
+                        System.out.println("No se ha podido leer el archivo.");
+                        e.printStackTrace();
+                    }
                     break;
                 case 6:
                     System.out.println(usuarios.mostrarUsuarios());

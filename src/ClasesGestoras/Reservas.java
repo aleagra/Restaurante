@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Reservas implements IJson {
+public class Reservas {
     private ArrayList<Reserva> reservas;
     private static int contador = 1;
     public int nroReserva;
@@ -43,22 +43,19 @@ public class Reservas implements IJson {
         this.nroReserva = nroReserva;
     }
 
-    @Override
-    public JSONObject toJson() throws JSONException {
-        JSONObject obj = new JSONObject();
-        try{
-            JSONArray reservasJson = new JSONArray();
-            for(Reserva m : reservas){
+    public  JSONArray toJson() throws JSONException {
+        JSONArray reservasJson = new JSONArray();
+        try {
+            for (Reserva m : reservas) {
                 reservasJson.put(m.toJson());
             }
-            obj.put("reservas", reservasJson);
-        }catch (JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
         }
-        return obj;
+        return reservasJson;  // Devolver el JSONArray
     }
 
-    @Override
+
     public void fromJson(JSONObject json) throws JSONException {
         try {
             JSONArray reservasArray = json.getJSONArray("reservas");

@@ -4,6 +4,7 @@ import Clases.Gestion.Mesa;
 import Enums.EstadoMesa;
 import Excepciones.MesasException;
 import Interfaces.IJson;
+import JSONUtiles.JSONUtiles;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -62,18 +63,39 @@ public class Mesas implements IJson {
 
     public Mesa asignarMesa(int capacidad) throws MesasException {
         Mesa mesa = null;
-        for (Mesa m : mesas) {
-            if (m.capacidad == capacidad) {
-                m.setEstadoMesa(EstadoMesa.OCUPADA);
-                mesa = m;
-                break;
+
+        try {
+            JSONArray arregloMesas = new JSONArray(JSONUtiles.leerUnJson("mesas.json"));
+
+            for (int i = 0; i < arregloMesas.length(); i++) {
+                JSONObject jsonObject = arregloMesas.getJSONObject(i);
+
+                Mesa m = new Mesa(0);
+                m.fromJson(jsonObject);
+
+                if (m.getCapacidad() == capacidad && m.getEstadoMesa() == EstadoMesa.LIBRE) {
+                    m.setEstadoMesa(EstadoMesa.OCUPADA);
+                    JSONObject mesaJsonModificada = m.toJson();
+                    arregloMesas.put(i, mesaJsonModificada);
+                    mesa = m;
+                    break;
+                }
             }
+
+            if (mesa == null) {
+                throw new MesasException("⚠️ No hay mesas con esa capacidad disponible");
+            }
+
+            JSONUtiles.grabarUnJson(arregloMesas, "mesas.json");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            throw new MesasException("⚠️ Error al procesar el archivo de mesas.");
         }
-        if (mesa == null) {
-            throw new MesasException("⚠️ No hay mesas con esa capacidad disponible");
-        }
+
         return mesa;
     }
+
 
     @Override
     public JSONObject toJson() throws JSONException {
