@@ -21,7 +21,6 @@ public class Reserva implements IJson {
     public Reserva() {
     }
 
-    // Getters y setters
     public String getFecha() {
         return fecha;
     }

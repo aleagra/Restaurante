@@ -21,6 +21,14 @@ public class Carta implements IJson {
         this.bebidas = new ArrayList<>();
     }
 
+    public List<Plato> getComidas() {
+        return comidas;
+    }
+
+    public List<Bebida> getBebidas() {
+        return bebidas;
+    }
+
     public String agregarComida(Plato plato){
         String msj = "✅ Plato agregado exitiosamente.";
         if(!comidas.add(plato)){

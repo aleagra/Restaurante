@@ -1,11 +1,10 @@
 package Clases.Usuarios;
-import Interfaces.IJson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Objects;
 
-public class Usuario implements IJson {
+public class Usuario{
     private static int contador=1;
     public int id;
     public String nombre;
@@ -24,20 +23,8 @@ public class Usuario implements IJson {
 
     }
 
-    public static int getContador() {
-        return contador;
-    }
-
-    public static void setContador(int contador) {
-        Usuario.contador = contador;
-    }
-
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNombre() {
@@ -52,16 +39,8 @@ public class Usuario implements IJson {
         return apellido;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getContrasenia() {
@@ -96,32 +75,5 @@ public class Usuario implements IJson {
         return "";
     }
 
-    @Override
-    public JSONObject toJson() throws JSONException {
-        JSONObject obj = new JSONObject();
-        try{
-            obj.put("Id", id);
-            obj.put("Nombre", nombre);
-            obj.put("Apellido", apellido);
-            obj.put("Email", email);
-            obj.put("Contrasenia", contrasenia);
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-        return obj;
-    }
-
-    @Override
-    public void fromJson(JSONObject json) throws JSONException {
-        try{
-            this.id = json.getInt("Id");
-            this.nombre = json.getString("Nombre");
-            this.apellido = json.getString("Apellido");
-            this.email = json.getString("Email");
-            this.contrasenia = json.getString("Contrasenia");
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-    }
 
 }

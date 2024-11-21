@@ -16,56 +16,10 @@ import org.json.JSONObject;
 import java.util.List;
 import java.util.Scanner;
 
-public class Camarero extends Usuario implements IJson {
+public class Camarero extends Usuario {
 
     public Camarero(String nombre, String apellido, String email, String contrasenia) {
         super(nombre, apellido, email, contrasenia);
-    }
-    @Override
-    public JSONObject toJson() throws JSONException {
-        JSONObject json = new JSONObject();
-        try {
-
-            json.put("Nombre",this.nombre);
-            json.put("Apellido",this.apellido);
-            json.put("Email",this.email);
-            json.put("Contrasenia",this.contrasenia);
-
-        }catch (JSONException e){
-            throw new JSONException(e.getMessage());
-        }
-        return json;
-    }
-
-    @Override
-    public void fromJson(JSONObject json) throws JSONException {
-        try{
-            this.nombre = json.getString("Nombre");
-            this.apellido = json.getString("Apellido");
-            this.email = json.getString("Email");
-            this.contrasenia = json.getString("Contrasenia");
-        }catch (JSONException e){
-            throw new JSONException(e.getMessage());
-        }
-
-    }
-
-    @Override
-    public String toString() {
-        return "CAMARERO: " +
-                " ID: " + id +
-                " NOMBRE: " + nombre + '\'' +
-                " APELLIDO: '" + apellido + '\'' +
-                " EMAIL: " + email;
-    }
-
-    public String verMesasDisponibles(Mesas m){
-       String msj = " ";
-       msj = m.mostrarMesasDisponibles();
-       if (m.mostrarMesasDisponibles().isEmpty()){
-          msj="No hay mesas disponibles actualmente";
-       }
-       return msj;
     }
 
     public MetodoPago consultarFormaDePago() {
@@ -180,5 +134,14 @@ public class Camarero extends Usuario implements IJson {
             return msj;
         }
         throw new ContraseniaException("⚠️ La contraseña no se pudo cambiar.");
+    }
+
+    @Override
+    public String toString() {
+        return "CAMARERO: " +
+                " ID: " + id +
+                " NOMBRE: " + nombre + '\'' +
+                " APELLIDO: '" + apellido + '\'' +
+                " EMAIL: " + email;
     }
 }

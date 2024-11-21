@@ -1,11 +1,6 @@
 package ClasesGestoras;
 
-import Clases.Gestion.Mesa;
-import Interfaces.IJson;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-public class Restaurante implements IJson {
+public class Restaurante {
     Carta carta;
     Mesas mesas;
     Pedidos pedidos;
@@ -40,33 +35,6 @@ public class Restaurante implements IJson {
         return usuarios;
     }
 
-    @Override
-    public JSONObject toJson() throws JSONException {
-        JSONObject json = new JSONObject();
-        try{
-            json.put("carta", carta.toJson());
-            json.put("mesas", mesas.toJson());
-            json.put("pedidos", pedidos.toJson());
-            json.put("reservas", reservas.toJson());
-            json.put("usuarios",usuarios.toJson());
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-        return json;
-    }
-
-    @Override
-    public void fromJson(JSONObject json) throws JSONException {
-        try{
-            carta.fromJson(json.getJSONObject("carta"));
-            mesas.fromJson(json.getJSONObject("mesas"));
-            pedidos.fromJson(json.getJSONObject("pedidos"));
-            reservas.fromJson(json.getJSONObject("reservas"));
-            usuarios.fromJson(json.getJSONObject("usuarios"));
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-    }
 
 
 }

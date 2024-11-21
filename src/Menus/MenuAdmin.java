@@ -30,11 +30,10 @@ public class MenuAdmin {
             System.out.println("\n========== MENU ADMINISTRADOR ==========");
             System.out.println("1. Gestionar el menú");
             System.out.println("2. Ver reservas");
-            System.out.println("3. Ver platos");
-            System.out.println("4. Ver bebidas");
-            System.out.println("5. Ver mesas");
-            System.out.println("6. Ver usuarios");
-            System.out.println("7. Cambiar contraseña");
+            System.out.println("3. Ver carta");
+            System.out.println("4. Ver mesas");
+            System.out.println("5. Ver usuarios");
+            System.out.println("6. Cambiar contraseña");
             System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
             opcion = sc.nextInt();
@@ -69,15 +68,11 @@ public class MenuAdmin {
                         e.printStackTrace();
                     }
                     break;
-                case 3:
+                case 3: // VER CARTA
                     System.out.println("🍽️ Platos:");
                     System.out.println(c.mostrarComidas());
                     break;
                 case 4:
-                    System.out.println("🍹 Bebidas:");
-                    System.out.println(c.mostrarBebidas());
-                    break;
-                case 5:
                     try {
                         JSONArray arregloMesas = new JSONArray(JSONUtiles.leerUnJson("mesas.json"));
 
@@ -98,10 +93,10 @@ public class MenuAdmin {
                         e.printStackTrace();
                     }
                     break;
-                case 6:
+                case 5:
                     System.out.println(usuarios.mostrarUsuarios());
                     break;
-                case 7:
+                case 6:
                     System.out.println("\n--- Cambio de contraseña ---");
                     System.out.print("Ingrese la contraseña actual: ");
                     String contraActual = sc.nextLine();

@@ -8,7 +8,6 @@ import JSONUtiles.JSONUtiles;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 public class Mesas implements IJson {
@@ -16,6 +15,10 @@ public class Mesas implements IJson {
 
     public Mesas() {
         mesas = new ArrayList<>();
+    }
+
+    public ArrayList<Mesa> getMesas() {
+        return mesas;
     }
 
     public String addMesa(Mesa m) throws MesasException {
@@ -41,24 +44,6 @@ public class Mesas implements IJson {
             throw new MesasException("⚠️ La mesa no se pudo eliminar.");
         }
         return msj;
-    }
-
-    public String mostrarMesas(){
-        StringBuilder builder = new StringBuilder();
-        for (Mesa m : mesas) {
-            builder.append(m.toString());
-        }
-        return builder.toString();
-    }
-
-    public String mostrarMesasDisponibles(){
-        StringBuilder builder = new StringBuilder();
-        for (Mesa m : mesas) {
-            if(m.getEstadoMesa().equals(EstadoMesa.LIBRE)){
-                builder.append(m);
-            }
-        }
-        return builder.toString();
     }
 
     public Mesa asignarMesa(int capacidad) throws MesasException {
@@ -96,7 +81,6 @@ public class Mesas implements IJson {
         return mesa;
     }
 
-
     @Override
     public JSONObject toJson() throws JSONException {
         JSONObject obj = new JSONObject();
@@ -126,7 +110,4 @@ public class Mesas implements IJson {
             e.printStackTrace();
         }
     }
-
-
-
 }

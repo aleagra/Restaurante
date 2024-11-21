@@ -1,13 +1,11 @@
 package Clases.Gestion;
-
 import Enums.EstadoMesa;
 import Interfaces.IJson;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.Objects;
 
-public class Mesa implements IJson {
+public class Mesa implements IJson<Mesa> {
     private static int contador=1;
     public int numero;
     public int capacidad;
