@@ -22,6 +22,10 @@ public class Camarero extends Usuario {
         super(nombre, apellido, email, contrasenia);
     }
 
+    public Camarero(){
+
+    }
+
     public MetodoPago consultarFormaDePago() {
         Scanner scanner = new Scanner(System.in);
         MetodoPago metodoPago = null;

@@ -43,16 +43,16 @@
             "nombre": "Coca-Cola"
         },
         {
+            "precio": 10,
+            "tipo": "CON_ALCOHOL",
+            "numero": 3,
+            "nombre": "Vino Tinto"
+        },
+        {
             "precio": 4,
             "tipo": "SIN_ALCOHOL",
             "numero": 4,
             "nombre": "Café Expreso"
-        },
-        {
-            "precio": 10,
-            "tipo": "SIN_ALCOHOL",
-            "numero": 0,
-            "nombre": "Vino Tinto"
         }
     ]
 }]

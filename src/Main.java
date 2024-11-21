@@ -109,22 +109,52 @@ public class Main {
         restaurante.getUsuarios().registrarUsuario(cliente3);
         restaurante.getUsuarios().registrarUsuario(cliente4);
 
-        String logueo = restaurante.getUsuarios().loguearUsuario("lucia.gomez@mail.com", "admin456");
-        Mesa mesa = new Mesa();
+        String email = "pedro.fernandez@mail.com";
+        String contra = "cam123";
 
-        switch (logueo){
-            case "Cliente":
-                menuCliente.mostrarMenu(scanner, restaurante.getMesas(), cliente1, restaurante.getReservas(), restaurante.getPedidos(),restaurante.getCarta(),reservas);
+        String logueo = restaurante.getUsuarios().loguearUsuario(email, contra);
+        Usuario usuario = restaurante.getUsuarios().buscarPorEmail(email);
+
+        switch (logueo) {
+            case "Cliente": {
+                if (usuario instanceof Cliente cliente) {
+                    menuCliente.mostrarMenu(scanner, restaurante.getMesas(), cliente,
+                            restaurante.getReservas(), restaurante.getPedidos(), restaurante.getCarta(), reservas);
+                } else {
+                    System.out.println("Error: Usuario no coincide con el rol Cliente.");
+                }
                 break;
-            case "Administrador":
-                menuAdmin.mostrarMenu(administrador, restaurante.getCarta(), restaurante.getReservas(), restaurante.getMesas(), mesa, restaurante.getUsuarios());
+            }
+            case "Administrador": {
+                if (usuario instanceof Administrador admin) {
+                    menuAdmin.mostrarMenu(admin, restaurante.getCarta(), restaurante.getReservas(),
+                            restaurante.getMesas(), new Mesa(), restaurante.getUsuarios());
+                } else {
+                    System.out.println("Error: Usuario no coincide con el rol Administrador.");
+                }
                 break;
-            case "Cocinero":
-                menuCocinero.mostrarMenuCocinero(restaurante.getPedidos(), scanner,cocinero1);
+            }
+            case "Cocinero": {
+                if (usuario instanceof Cocinero cocinero) {
+                    menuCocinero.mostrarMenuCocinero(restaurante.getPedidos(), scanner, cocinero);
+                } else {
+                    System.out.println("Error: Usuario no coincide con el rol Cocinero.");
+                }
                 break;
-            case "Camarero":
-                menuCamarero.mostrarMenu(camarero,restaurante.getMesas(),restaurante.getPedidos(),restaurante.getUsuarios(),restaurante.getCarta());
+            }
+            case "Camarero": {
+                if (usuario instanceof Camarero camareroAux) {
+                    menuCamarero.mostrarMenu(camareroAux, restaurante.getMesas(),
+                            restaurante.getPedidos(), restaurante.getUsuarios(), restaurante.getCarta());
+                } else {
+                    System.out.println("Error: Usuario no coincide con el rol Camarero.");
+                }
+                break;
+            }
+            default:
+                System.out.println("Error: Rol desconocido o credenciales incorrectas.");
                 break;
         }
+
     }
 }

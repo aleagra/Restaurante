@@ -18,7 +18,7 @@ public class MenuCocinero {
             System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
             opcion = sc.nextInt();
-            sc.nextLine(); // Consumir salto de línea
+            sc.nextLine();
 
             switch (opcion) {
                 case 1:

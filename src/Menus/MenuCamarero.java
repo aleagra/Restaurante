@@ -39,12 +39,11 @@ public class MenuCamarero {
             opcion = scanner.nextInt();
             scanner.nextLine();
 
-                System.out.print("\nConsulte el ID del cliente: ");
-                int id = scanner.nextInt();
-                scanner.nextLine();
-
                 switch (opcion) {
                     case 1:
+                        System.out.print("\nConsulte el ID del cliente: ");
+                        int id = scanner.nextInt();
+                        scanner.nextLine();
                         System.out.println("\n--- Registrando pedido ---");
                         Cliente usuario = usuarios.buscarPorId(id);
                         Pedido pedido = camarero.generarPedido(carta, usuario);
@@ -52,34 +51,16 @@ public class MenuCamarero {
                         break;
 
                     case 2:
-                        try {
-                            JSONArray arregloMesas = new JSONArray(JSONUtiles.leerUnJson("mesas.json"));
-
-                            if (arregloMesas.length() > 0) {
-                                for (int i = 0; i < arregloMesas.length(); i++) {
-                                    JSONObject jsonObject = arregloMesas.getJSONObject(i);
-
-                                    Mesa mesita = new Mesa();
-                                    mesita.fromJson(jsonObject);
-                                    if (mesita.getEstadoMesa().equals(EstadoMesa.LIBRE)) {
-                                        System.out.println("NUMERO:" + mesita.getNumero() + " " + "CAPACIDAD:" + mesita.getCapacidad() + " " + "ESTADO:" + mesita.getEstadoMesa());
-                                    }
-                                }
-                            } else {
-                                System.out.println("No se encontraron mesas en el archivo.");
-                            }
-
-                        } catch (JSONException e) {
-                            System.out.println("No se ha podido leer el archivo.");
-                            e.printStackTrace();
-                        }
+                        mostrarMesasDisponibles("mesas.json");
                         break;
-
                     case 3:
+                        System.out.print("\nConsulte el ID del cliente: ");
+                        id = scanner.nextInt();
+                        scanner.nextLine();
                         System.out.println("\n--- Generando factura ---");
                         System.out.print("Ingrese el número de orden: ");
                         int numOrden = scanner.nextInt();
-                        scanner.nextLine(); // Consumir salto de línea
+                        scanner.nextLine();
 
                         MetodoPago metodoPago = camarero.consultarFormaDePago();
                         Cuenta factura = camarero.generarFactura(id, numOrden, pedidos, metodoPago);
@@ -100,6 +81,38 @@ public class MenuCamarero {
                 }
 
         } while (opcion != 0);
+    }
+
+    public static void mostrarMesasDisponibles(String rutaArchivoJson) {
+        try {
+            JSONArray arregloMesas = new JSONArray(JSONUtiles.leerUnJson(rutaArchivoJson));
+
+            if (arregloMesas.length() > 0) {
+                System.out.println("\n--- Mesas Disponibles ---");
+
+                for (int i = 0; i < arregloMesas.length(); i++) {
+                    JSONObject jsonObject = arregloMesas.getJSONObject(i);
+
+                    Mesa mesa = new Mesa();
+                    mesa.fromJson(jsonObject);
+
+                    if (mesa.getEstadoMesa().equals(EstadoMesa.LIBRE)) {
+                        mostrarDetallesMesa(mesa);
+                    }
+                }
+            } else {
+                System.out.println("No se encontraron mesas en el archivo.");
+            }
+        } catch (JSONException e) {
+            System.out.println("No se ha podido leer el archivo.");
+            e.printStackTrace();
+        }
+    }
+
+    private static void mostrarDetallesMesa(Mesa mesa) {
+        System.out.println("NUMERO: " + mesa.getNumero() +
+                " | CAPACIDAD: " + mesa.getCapacidad() +
+                " | ESTADO: " + mesa.getEstadoMesa());
     }
 }
 

@@ -47,8 +47,7 @@ public class MenuAdmin {
                     mostrarTodasLasReservas("reservas.json");
                     break;
                 case 3: 
-                    System.out.println("🍽️ Platos:");
-                    System.out.println(c.mostrarComidas());
+                    MenuCliente.mostrarCartaDesdeJson("carta.json");
                     break;
                 case 4:
                     mostrarTodasLasMesas("mesas.json");
