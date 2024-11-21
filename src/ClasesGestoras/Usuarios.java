@@ -62,6 +62,19 @@ public class Usuarios {
         }
         return clienteAux;
     }
+
+    public Usuario buscarPorEmail(String email){
+        Usuario usuario = new Usuario();
+        for (Usuario u : listaUsuarios){
+            if (u.getEmail().equals(email)){
+                usuario = u;
+            }
+        }
+        if (usuario == null){
+            throw new RuntimeException("No se encuentra el email");
+        }
+        return usuario;
+    }
 }
 
 

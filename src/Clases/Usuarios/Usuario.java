@@ -6,11 +6,11 @@ import java.util.Objects;
 
 public class Usuario{
     private static int contador=1;
-    protected int id;
-    protected String nombre;
-    protected String apellido;
-    protected String email;
-    protected String contrasenia;
+    public int id;
+    public String nombre;
+    public String apellido;
+    public String email;
+    public String contrasenia;
 
     public Usuario(String nombre, String apellido, String email, String contrasenia) {
         this.id = contador++;
@@ -49,6 +49,10 @@ public class Usuario{
 
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override

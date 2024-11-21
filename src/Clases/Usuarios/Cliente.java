@@ -10,7 +10,7 @@ import Interfaces.IJson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Cliente extends Usuario implements IGestorReserva, IGestorPedidos, IJson<Cliente> {
+public class Cliente extends Usuario implements IGestorReserva, IGestorPedidos, IJson<Cliente>{
     private String telefono;
     private String direccion;
 
@@ -42,12 +42,12 @@ public class Cliente extends Usuario implements IGestorReserva, IGestorPedidos, 
     @Override
     public String obtenerReservas(Reservas res) {
         return res.mostrarReservasPorCliente(email);
-    } // PASAR A JSON
+    }
 
     @Override
     public String obtenerPedidos(Pedidos pedidos) {
         return pedidos.mostrarPedidosPorCliente(email);
-    } // PASAR A JSON
+    }
 
     @Override
     public JSONObject toJson() throws JSONException {
@@ -82,5 +82,6 @@ public class Cliente extends Usuario implements IGestorReserva, IGestorPedidos, 
             throw new JSONException(e.getMessage());
         }
     }
+
 
 }
