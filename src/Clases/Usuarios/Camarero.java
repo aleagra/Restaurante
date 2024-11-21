@@ -9,6 +9,7 @@ import Enums.EstadoPedido;
 import Enums.MetodoPago;
 import Excepciones.ContraseniaException;
 import Excepciones.PedidoExcepcion;
+import Excepciones.UsuarioNoEncontradoException;
 import Interfaces.IJson;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -65,8 +66,13 @@ public class Camarero extends Usuario {
         return pedidoAux;
     }
 
-    public Cuenta generarFactura(int idCliente, int numPedido, Pedidos pedidos, MetodoPago metodoPago) {
+    public Cuenta generarFactura(int idCliente, int numPedido, Pedidos pedidos, MetodoPago metodoPago) throws UsuarioNoEncontradoException {
         Pedido pedidoEncontrado = buscarPedido(idCliente, numPedido, pedidos);
+
+        if (pedidoEncontrado == null || pedidoEncontrado.getCliente() == null) {
+            throw new UsuarioNoEncontradoException("No se encontró un cliente con el ID especificado o el cliente es nulo.");
+        }
+
         Cuenta cuenta = new Cuenta();
         cuenta.setCliente(pedidoEncontrado.getCliente());
         cuenta.setPedido(pedidoEncontrado);

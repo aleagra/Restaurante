@@ -23,7 +23,6 @@ public class Usuarios {
         if (!listaUsuarios.add(usuario)) {
             throw new EmailDuplicadoException("El usuario con este email ya está registrado.");
         }
-        System.out.println("Usuario registrado exitosamente.");
     }
 
     public String loguearUsuario(String email, String contrasenia) throws AutenticacionException {

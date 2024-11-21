@@ -21,10 +21,9 @@ import java.util.Scanner;
 
 public class MenuAdmin {
 
-    public void mostrarMenu(Administrador administrador, Carta c, Reservas r, Mesas mesas, Mesa mesa, Usuarios usuarios) throws MenuException {
+    public void mostrarMenu(Scanner sc,Administrador administrador, Carta c, Mesas mesas, Mesa mesa, Usuarios usuarios) throws MenuException {
         int opcion;
 
-        Scanner sc = new Scanner(System.in);
 
         do {
             System.out.println("\n========== MENU ADMINISTRADOR ==========");

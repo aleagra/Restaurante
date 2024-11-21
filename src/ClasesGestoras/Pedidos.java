@@ -42,9 +42,12 @@ public class Pedidos {
     public String mostrarPedidosPorCliente(String email){
         StringBuilder lista = new StringBuilder();
         for(Pedido pedido : pedidos){
-            if(pedido.getCliente().getEmail().equalsIgnoreCase(email)){
+            if(pedido.getCliente().getEmail().equalsIgnoreCase(email)) {
                 lista.append(pedido).append("\n");
             }
+        }
+        if (lista.isEmpty()){
+            lista.append("No se encontraron pedidos para el cliente especificado.");
         }
         return lista.toString();
     }

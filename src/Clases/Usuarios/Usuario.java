@@ -1,7 +1,4 @@
 package Clases.Usuarios;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.Objects;
 
 public class Usuario{

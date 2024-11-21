@@ -19,13 +19,8 @@ import org.json.JSONObject;
 import java.util.Scanner;
 
 public class MenuCamarero {
-    private final Scanner scanner;
 
-    public MenuCamarero() {
-        this.scanner = new Scanner(System.in);
-    }
-
-    public void mostrarMenu(Camarero camarero, Mesas gestionMesas, Pedidos pedidos, Usuarios usuarios, Carta carta) {
+    public void mostrarMenu(Scanner scanner,Camarero camarero, Pedidos pedidos, Usuarios usuarios, Carta carta) {
         int opcion;
 
         do {

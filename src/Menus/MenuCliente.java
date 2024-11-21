@@ -9,7 +9,6 @@ import ClasesGestoras.Carta;
 import ClasesGestoras.Mesas;
 import ClasesGestoras.Pedidos;
 import ClasesGestoras.Reservas;
-import Enums.EstadoMesa;
 import JSONUtiles.JSONUtiles;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,7 +18,7 @@ import java.util.Scanner;
 
 public class MenuCliente {
 
-    public void mostrarMenu(Scanner scanner, Mesas mesas, Cliente cliente, Reservas reservas, Pedidos pedidos, Carta carta, JSONArray jsonReservas) {
+    public void mostrarMenu(Scanner scanner, Mesas mesas, Cliente cliente, Reservas reservas, Pedidos pedidos, JSONArray jsonReservas) {
         int opcion;
 
         do {
