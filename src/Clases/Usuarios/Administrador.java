@@ -18,40 +18,48 @@ public class Administrador extends Usuario implements IGestorReserva, IJson {
         super(nombre, apellido, email, contrasenia);
     }
 
-public boolean gestionarMenu(int opcion , Mesas mesas, Mesa m, Carta carta, Plato plato, Bebida bebida, String nombre) {
+    @Override
+    public String toString() {
+        return "ADMINISTRADOR: " +
+                " ID: " + id +
+                " NOMBRE: " + nombre + '\'' +
+                " APELLIDO: " + apellido + '\'' +
+                " EMAIL: " + email;
+    }
+
+    public void gestionarMenu(int opcion , Mesas mesas, Mesa m, int nroMesa, Carta carta, Plato plato, Bebida bebida, String nombre) {
     switch (opcion) {
         case 1:
-            carta.agregarComida(plato);
+            System.out.println(carta.agregarComida(plato));
             break;
         case 2:
-            carta.agregarBebida(bebida);
+            System.out.println(carta.agregarBebida(bebida));
             break;
         case 3:
-            carta.eliminarComida(nombre);
+            System.out.println(carta.eliminarComida(nombre));
             break;
         case 4:
-            carta.eliminarBebida(nombre);
+            System.out.println(carta.eliminarBebida(nombre));
             break;
         case 5:
-            mesas.addMesa(m);
+            System.out.println(mesas.addMesa(m));
             break;
         case 6:
-            mesas.deleteMesa(m);
+            System.out.println(mesas.deleteMesa(nroMesa));
             break;
         default:
             throw new IllegalArgumentException("Opción no válida para gestionar la carta");
     }
-    return true;
 }
 
     @Override
     public String cambiarContrasenia(String contraActual, String contraNueva) {
-        String msj = "Contraseña cambiada.";
+        String msj = "✅ Contraseña cambiada.";
         if(contraActual.equals(this.contrasenia)){
             setContrasenia(contraNueva);
             return msj;
         }
-        throw new ContraseniaException("La contraseña no se pudo cambiar.");
+        throw new ContraseniaException("⚠️ La contraseña no se pudo cambiar.");
     }
 
     @Override

@@ -152,14 +152,14 @@ public class Pedido implements IJson {
             this.bebidas.add(bebida);
             return true;
         }
-        throw new BebidaException("La bebida no existe");
+        throw new BebidaException("⚠️ La bebida no existe");
     }
     public boolean addPlato(Plato pl) throws PlatoException {
         if(pl!=null){
             this.platos.add(pl);
             return true;
         }
-        throw new PlatoException("El plato no existe");
+        throw new PlatoException("⚠️ El plato no existe");
     }
     public int actualizarEstadoPedido(EstadoPedido nuevoEstado) {
         int flag = 0;

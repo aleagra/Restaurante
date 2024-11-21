@@ -74,13 +74,10 @@ public abstract class Usuario implements IJson {
 
     @Override
     public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", email='" + email + '\'' +
-                ", contrasenia='" + contrasenia + '\'' +
-                '}';
+        return "ID: " + id +
+                " NOMBRE: '" + nombre + '\'' +
+                " APELLIDO: '" + apellido + '\'' +
+                " EMAIL: '" + email + '\'';
     }
 
     @Override

@@ -22,17 +22,17 @@ public class Carta implements IJson {
     }
 
     public String agregarComida(Plato plato){
-        String msj = "Plato agregado exitiosamente.";
+        String msj = "✅ Plato agregado exitiosamente.";
         if(!comidas.add(plato)){
-            throw new PlatoException("El plato ya existe.");
+            throw new PlatoException("⚠️ El plato ya existe.");
         }
         return msj;
     }
 
     public String agregarBebida(Bebida bebida){
-        String msj = "Bebida agregada exitosamente.";
+        String msj = "✅ Bebida agregada exitosamente.";
         if(!bebidas.add(bebida)){
-            throw new BebidaException("La bebida ya existe.");
+            throw new BebidaException("⚠️ La bebida ya existe.");
         }
         return msj;
     }
@@ -41,20 +41,20 @@ public class Carta implements IJson {
         for (Plato plato : comidas) {
             if (plato.getNombre().equalsIgnoreCase(nombrePlato)) {
                 comidas.remove(plato);
-                return "Plato eliminado exitosamente.";
+                return "✅ Plato eliminado correctamente.";
             }
         }
-        throw new PlatoException("El plato no se encuentra.");
+        throw new PlatoException("⚠️ El plato no pudo ser eliminado.");
     }
 
     public String eliminarBebida(String nombreBebida) {
         for (Bebida bebida : bebidas) {
             if (bebida.getNombre().equalsIgnoreCase(nombreBebida)) {
                 bebidas.remove(bebida);
-                return "Bebida eliminada exitosamente.";
+                return "✅ Bebida eliminada correctamente.";
             }
         }
-        throw new BebidaException("La bebida no se encuentra.");
+        throw new BebidaException("⚠️ La bebida no pudo ser eliminada.");
     }
 
     public String mostrarComidas(){
@@ -78,7 +78,7 @@ public class Carta implements IJson {
                 return plato;
             }
         }
-        throw new RuntimeException("El ID del plato es incorrecto o no existe");
+        throw new RuntimeException("⚠️ El ID del plato es incorrecto o no existe");
     }
 
     public Bebida buscarBebidaPorId(int idBebida) {
@@ -87,7 +87,7 @@ public class Carta implements IJson {
                 return bebida;
             }
         }
-        throw new RuntimeException("El ID de la bebida es incorrecto o no existe");
+        throw new RuntimeException("⚠️ El ID de la bebida es incorrecto o no existe");
     }
     @Override
     public JSONObject toJson() throws JSONException {

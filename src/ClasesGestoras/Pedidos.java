@@ -56,10 +56,10 @@ public class Pedidos implements IJson {
         String msj = "";
         if (pedido != null) {
             pedidos.add(pedido);
-            msj=("El pedido fue creado correctamente con el numero de orden" + " " + pedido.getNumeroPedido());
+            msj=("✅ El pedido fue creado correctamente con el numero de orden" + " " + pedido.getNumeroPedido());
             return msj;
         }
-        throw new PedidoException("El pedido no pudo ser agregado");
+        throw new PedidoException("⚠️ El pedido no pudo ser agregado");
     }
 
     public String mostrarPedidos(){
@@ -79,11 +79,11 @@ public class Pedidos implements IJson {
         return lista.toString();
     }
     public String eliminarPedido(Pedido pedido) throws PedidoException{
-        String msj = "Pedido eliminado exitosamente.";
+        String msj = "✅ Pedido eliminado exitosamente.";
         if(pedido != null){
             pedidos.remove(pedido);
             return msj;
         }
-        throw new PedidoException("El pedido no pudo ser eliminado");
+        throw new PedidoException("⚠️ El pedido no pudo ser eliminado");
     }
 }

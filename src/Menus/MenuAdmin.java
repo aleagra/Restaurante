@@ -1,11 +1,13 @@
 package Menus;
 
 import Clases.Gestion.Bebida;
+import Clases.Gestion.Mesa;
 import Clases.Gestion.Plato;
 import Clases.Usuarios.Administrador;
 import ClasesGestoras.Carta;
 import ClasesGestoras.Mesas;
 import ClasesGestoras.Reservas;
+import ClasesGestoras.Usuarios;
 import Enums.TipoDeBebida;
 import Enums.TipoDePlato;
 import Excepciones.MenuException;
@@ -14,7 +16,7 @@ import java.util.Scanner;
 
 public class MenuAdmin {
 
-    public void mostrarMenu(Administrador administrador, Carta c, Reservas r) throws MenuException {
+    public void mostrarMenu(Administrador administrador, Carta c, Reservas r, Mesas mesas, Mesa mesa, Usuarios usuarios) throws MenuException {
         int opcion;
 
         Scanner sc = new Scanner(System.in);
@@ -25,7 +27,9 @@ public class MenuAdmin {
             System.out.println("2. Ver reservas");
             System.out.println("3. Ver platos");
             System.out.println("4. Ver bebidas");
-            System.out.println("5. Cambiar contraseña");
+            System.out.println("5. Ver mesas");
+            System.out.println("6. Ver usuarios");
+            System.out.println("7. Cambiar contraseña");
             System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
             opcion = sc.nextInt();
@@ -33,7 +37,7 @@ public class MenuAdmin {
 
             switch (opcion) {
                 case 1:
-                    gestionMenu(administrador, sc, c);
+                    gestionMenu(administrador, sc, c, mesas, mesa);
                     break;
                 case 2:
                     System.out.println("\n--- Reservas ---");
@@ -48,6 +52,12 @@ public class MenuAdmin {
                     System.out.println(c.mostrarBebidas());
                     break;
                 case 5:
+                    System.out.println(mesas.mostrarMesas());
+                    break;
+                case 6:
+                    System.out.println(usuarios.mostrarUsuarios());
+                    break;
+                case 7:
                     System.out.println("\n--- Cambio de contraseña ---");
                     System.out.print("Ingrese la contraseña actual: ");
                     String contraActual = sc.nextLine();
@@ -55,19 +65,14 @@ public class MenuAdmin {
                     String contraNueva = sc.nextLine();
                     System.out.println(administrador.cambiarContrasenia(contraActual, contraNueva));
                     break;
-
-                case 0:
-                    System.out.println("\n👋 Finalizando sesión del administrador...");
-                    break;
-
                 default:
-                    System.out.println("\n⚠️ Opción inválida. Por favor, intente nuevamente.");
+                    System.out.println("\n👋 Finalizando sesión del administrador...");
                     break;
             }
         } while (opcion != 0);
     }
 
-    public void gestionMenu(Administrador administrador, Scanner sc, Carta c) {
+    public void gestionMenu(Administrador administrador, Scanner sc, Carta c, Mesas mesas, Mesa mesa) {
         int opcion;
 
         do {
@@ -102,17 +107,20 @@ public class MenuAdmin {
                     sc.nextLine();
 
                     switch (categoria) {
-                        case 1 -> pl.setCategoria(TipoDePlato.ENTRANTE);
-                        case 2 -> pl.setCategoria(TipoDePlato.PRINCIPAL);
-                        case 3 -> pl.setCategoria(TipoDePlato.POSTRE);
-                        default -> System.out.println("⚠️ Categoría inválida. Selección por defecto: 'Principal'.");
+                        case 1:
+                            pl.setCategoria(TipoDePlato.ENTRANTE);
+                            break;
+                        case 2:
+                            pl.setCategoria(TipoDePlato.PRINCIPAL);
+                            break;
+                        case 3:
+                            pl.setCategoria(TipoDePlato.POSTRE);
+                            break;
+                        default:
+                            System.out.println("⚠️ Categoría inválida. Selección por defecto: 'Principal'.");
+                            break;
                     }
-
-                    if (administrador.gestionarMenu(1, c, pl, null, null)) {
-                        System.out.println("✅ Plato agregado correctamente.");
-                    } else {
-                        throw new MenuException("⚠️ El plato no pudo ser agregado.");
-                    }
+                    administrador.gestionarMenu(1,mesas, mesa,0, c, pl, null, null);
                     break;
 
                 case 2:
@@ -130,16 +138,17 @@ public class MenuAdmin {
                     sc.nextLine();
 
                     switch (tipoBebida) {
-                        case 1 -> beb.setTipo(TipoDeBebida.CON_ALCOHOL);
-                        case 2 -> beb.setTipo(TipoDeBebida.SIN_ALCOHOL);
-                        default -> System.out.println("⚠️ Tipo inválido. Selección por defecto: 'Sin alcohol'.");
+                        case 1:
+                            beb.setTipo(TipoDeBebida.CON_ALCOHOL);
+                            break;
+                        case 2:
+                            beb.setTipo(TipoDeBebida.SIN_ALCOHOL);
+                            break;
+                        default:
+                            System.out.println("⚠️ Tipo inválido. Selección por defecto: 'Sin alcohol'.");
+                            break;
                     }
-
-                    if (administrador.gestionarMenu(2, c, null, beb, null)) {
-                        System.out.println("✅ Bebida agregada exitosamente.");
-                    } else {
-                        throw new MenuException("⚠️ La bebida no pudo ser agregada.");
-                    }
+                   administrador.gestionarMenu(2,mesas, mesa,0, c, null, beb, null);
                     break;
 
                 case 3:
@@ -148,32 +157,28 @@ public class MenuAdmin {
                     String nombrePlato = sc.nextLine();
                     Plato plato = new Plato();
                     plato.setNombre(nombrePlato);
-
-                    if (administrador.gestionarMenu(3, c, plato, null, nombrePlato)) {
-                        System.out.println("✅ Plato eliminado correctamente.");
-                    } else {
-                        throw new MenuException("⚠️ El plato no pudo ser eliminado.");
-                    }
+                    administrador.gestionarMenu(3, mesas, mesa,0, c, plato, null, nombrePlato);
                     break;
-
                 case 4:
                     System.out.println("\n--- Eliminar una bebida ---");
                     System.out.print("Ingrese el nombre de la bebida a eliminar: ");
                     String nombreBebida = sc.nextLine();
                     Bebida bebida = new Bebida();
                     bebida.setNombre(nombreBebida);
-
-                    if (administrador.gestionarMenu(4, c, null, bebida, nombreBebida)) {
-                        System.out.println("✅ Bebida eliminada correctamente.");
-                    } else {
-                        throw new MenuException("⚠️ La bebida no pudo ser eliminada.");
-                    }
+                   administrador.gestionarMenu(4, mesas, mesa,0, c, null, bebida, nombreBebida);
                     break;
                 case 5:
-
+                    Mesa m = new Mesa();
+                    System.out.println("Ingrese la cantidad de personas: ");
+                    int cant = sc.nextInt();
+                    m.setCapacidad(cant);
+                    administrador.gestionarMenu(5, mesas, m,0, c, null, null, null);
                     break;
                 case 6:
-
+                    System.out.println("Ingrese el nro de la mesa: ");
+                    int nroMesa = sc.nextInt();
+                    sc.nextLine();
+                    administrador.gestionarMenu(6, mesas, mesa, nroMesa, c, null, null, null);
                     break;
                 default:
                     System.out.println("\n🔙 Volviendo al menú principal...");

@@ -40,20 +40,19 @@ public class Cliente extends Usuario implements IGestorReserva, IGestorPedidos, 
 
     @Override
     public String toString() {
-        return "Cliente{" + super.toString() +
-                "telefono='" + telefono + '\'' +
-                ", direccion='" + direccion + '\'' +
-                '}';
+        return "CLIENTE: " + super.toString() +
+                " TELEFONO: " + telefono + '\'' +
+                " DIRECCION: "  + direccion;
     }
 
     @Override
     public String cambiarContrasenia(String contraActual, String contraNueva) {
-        String msj = "Contraseña cambiada.";
+        String msj = "✅ Contraseña cambiada.";
         if(contraActual.equals(this.contrasenia)){
             setContrasenia(contraNueva);
             return msj;
         }
-        throw new ContraseniaException("La contraseña no se pudo cambiar.");
+        throw new ContraseniaException("⚠️ La contraseña no se pudo cambiar.");
     }
 
     @Override

@@ -74,8 +74,7 @@ public class Main {
                 menuCliente.mostrarMenu(scanner, restaurante.getMesas(), cliente1, restaurante.getReservas(), restaurante.getPedidos(),restaurante.getCarta());
                 break;
             case "Administrador":
-                Cuenta cuenta = new Cuenta();
-                menuAdmin.mostrarMenu(administrador,cuenta, restaurante.getCarta(), restaurante.getReservas());
+                menuAdmin.mostrarMenu(administrador, restaurante.getCarta(), restaurante.getReservas(), restaurante.getMesas(), mesa1, restaurante.getUsuarios());
                 break;
             case "Cocinero":
                 menuCocinero.mostrarMenuCocinero(restaurante.getPedidos(), scanner,cocinero1);

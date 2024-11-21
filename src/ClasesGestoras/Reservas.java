@@ -88,14 +88,14 @@ public class Reservas implements IJson {
         if(reserva!=null){
             this.reservas.add(reserva);
         }else{
-            throw new ReservasException("La reserva no puede ser nula");
+            throw new ReservasException("⚠️ La reserva no puede ser nula");
         }
     }
     public void eliminarReserva(int nroReserva) throws ReservasException {
         if(nroReserva>0){
             reservas.remove(nroReserva);
         }else{
-            throw new ReservasException("La reserva no existe");
+            throw new ReservasException("⚠️ La reserva no existe");
         }
     }
     public String verReservas(){

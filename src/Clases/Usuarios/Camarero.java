@@ -50,10 +50,14 @@ public class Camarero extends Usuario implements IJson {
 
     }
 
-    public void registrarPedido(Pedido pedido) throws PedidoExcepcion {
-        if(pedido!=null){pedido.actualizarEstadoPedido(EstadoPedido.PENDIENTE);
-        } else{throw new PedidoExcepcion("El pedido no pudo ser actualizado");}
-        }
+    @Override
+    public String toString() {
+        return "CAMARERO: " +
+                " ID: " + id +
+                " NOMBRE: " + nombre + '\'' +
+                " APELLIDO: '" + apellido + '\'' +
+                " EMAIL: " + email;
+    }
 
     public String verMesasDisponibles(Mesas m){
        String msj = " ";
@@ -62,7 +66,6 @@ public class Camarero extends Usuario implements IJson {
           msj="No hay mesas disponibles actualmente";
        }
        return msj;
-
     }
 
     public MetodoPago consultarFormaDePago() {
@@ -171,11 +174,11 @@ public class Camarero extends Usuario implements IJson {
     }
     @Override
     public String cambiarContrasenia(String contraActual, String contraNueva) {
-        String msj = "Contraseña cambiada.";
+        String msj = "✅ Contraseña cambiada.";
         if(contraActual.equals(this.contrasenia)){
             setContrasenia(contraNueva);
             return msj;
         }
-        throw new ContraseniaException("La contraseña no se pudo cambiar.");
+        throw new ContraseniaException("⚠️ La contraseña no se pudo cambiar.");
     }
 }

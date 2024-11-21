@@ -19,7 +19,8 @@ public class Mesa implements IJson {
         this.estadoMesa = EstadoMesa.LIBRE;
     }
     public Mesa(){
-
+        this.numero = contador++;
+        this.estadoMesa = EstadoMesa.LIBRE;
     }
 
     public int getNumero() {

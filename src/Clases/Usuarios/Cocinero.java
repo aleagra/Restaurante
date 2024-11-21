@@ -26,13 +26,22 @@ public class Cocinero extends Usuario implements IGestorPedidos, IJson {
     }
 
     @Override
+    public String toString() {
+        return "COCINERO: " +
+                "ID: " + id +
+                " NOMBRE: " + nombre + '\'' +
+                " APELLIDO: '" + apellido + '\'' +
+                " EMAIL: " + email + '\'';
+    }
+
+    @Override
     public String cambiarContrasenia(String contraActual, String contraNueva) {
-        String msj = "Contraseña cambiada.";
+        String msj = "✅ Contraseña cambiada.";
         if(contraActual.equals(this.contrasenia)){
             setContrasenia(contraNueva);
             return msj;
         }
-        throw new ContraseniaException("La contraseña no se pudo cambiar.");
+        throw new ContraseniaException("⚠️ La contraseña no se pudo cambiar.");
     }
 
     @Override
