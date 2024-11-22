@@ -96,10 +96,10 @@ public class MenuCamarero {
                     }
                 }
             } else {
-                System.out.println("No se encontraron mesas en el archivo.");
+                System.out.println("⚠️ No se encontraron mesas en el archivo.");
             }
         } catch (JSONException e) {
-            System.out.println("No se ha podido leer el archivo.");
+            System.out.println("⚠️ No se ha podido leer el archivo.");
             e.printStackTrace();
         }
     }

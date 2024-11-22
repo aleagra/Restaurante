@@ -36,7 +36,7 @@ public class Usuarios {
         // Comprobar si el email ya está registrado
         for(Usuario usuario: listaUsuarios) {
             if(usuario.getEmail().equals(email)) {
-                throw new IllegalArgumentException("El email ya está registrado: " + email);
+                throw new IllegalArgumentException("⚠️ El email ya está registrado: " + email);
             }
         }
 
@@ -54,7 +54,7 @@ public class Usuarios {
 
             case 3:
                 if (direccion == null || telefono == null) {
-                    throw new IllegalArgumentException("Para crear un cliente, se requiere dirección y teléfono.");
+                    throw new IllegalArgumentException("⚠️ Para crear un cliente, se requiere dirección y teléfono.");
                 }
                 nuevoUsuario = new Cliente(nombre, apellido, email, contrasena, direccion, telefono);
                 break;
@@ -62,7 +62,7 @@ public class Usuarios {
                 nuevoUsuario = new Camarero(nombre,apellido,email,contrasena);
                 break;
             default:
-                throw new IllegalArgumentException("Tipo de usuario no válido: " );
+                throw new IllegalArgumentException("⚠️ Tipo de usuario no válido: " );
         }
 
         restaurante.getUsuarios().getListaUsuarios().add(nuevoUsuario);
@@ -71,19 +71,25 @@ public class Usuarios {
     }
 
     public String loguearUsuario(String email, String contrasenia) throws AutenticacionException {
-        String msj="";
-        for (Usuario usuario : listaUsuarios) {
-            if (usuario.getEmail().equals(email) && usuario.getContrasenia().equals(contrasenia)) {
-               msj=usuario.getClass().getSimpleName();
-                return msj;
+        String msj = "";
+        try {
+            for (Usuario usuario : listaUsuarios) {
+                if (usuario.getEmail().equals(email) && usuario.getContrasenia().equals(contrasenia)) {
+                    msj = usuario.getClass().getSimpleName();
+                    return msj;
+                }
             }
+            throw new AutenticacionException("⚠️ Email o contraseña incorrectos");
+        } catch (AutenticacionException e) {
+            System.out.println(e.getMessage());
+            msj = "⚠️ Autenticación fallida";
         }
-        throw new AutenticacionException("Email o contraseña incorrectos");
+        return msj;
     }
 
     public String mostrarUsuarios() {
         if (listaUsuarios.isEmpty()) {
-            return "No hay usuarios registrados.";
+            return "⚠️ No hay usuarios registrados.";
         }
 
         StringBuilder resultado = new StringBuilder();
@@ -102,7 +108,7 @@ public class Usuarios {
             }
         }
         if (clienteAux == null){
-            throw new RuntimeException("No se encuentra el id");
+            throw new RuntimeException("⚠️ No se encuentra el id");
         }
         return clienteAux;
     }
@@ -115,7 +121,7 @@ public class Usuarios {
             }
         }
         if (usuario == null){
-            throw new RuntimeException("No se encuentra el email");
+            throw new RuntimeException("⚠️ No se encuentra el email");
         }
         return usuario;
     }

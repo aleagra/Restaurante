@@ -1,36 +1,17 @@
-[
-    {
-        "fecha": "2024-11-21",
-        "cliente": {
-            "Nombre": "Jorge",
-            "Contrasenia": "client123",
-            "Email": "jorge.diaz@mail.com",
-            "Telefono": "Av. Libertad 123",
-            "Apellido": "Díaz",
-            "Direccion": "1122334455",
-            "Id": 5
-        },
-        "mesa": {
-            "numero": 1,
-            "estadoMesa": "OCUPADA",
-            "capacidad": 2
-        }
+[{
+    "fecha": "2024-11-22",
+    "cliente": {
+        "Nombre": "a",
+        "Contrasenia": "a",
+        "Email": "a",
+        "Telefono": "a",
+        "Apellido": "a",
+        "Direccion": "1",
+        "Id": 9
     },
-    {
-        "fecha": "2024-11-21",
-        "cliente": {
-            "Nombre": "Jorge",
-            "Contrasenia": "client123",
-            "Email": "jorge.diaz@mail.com",
-            "Telefono": "Av. Libertad 123",
-            "Apellido": "Díaz",
-            "Direccion": "1122334455",
-            "Id": 5
-        },
-        "mesa": {
-            "numero": 2,
-            "estadoMesa": "OCUPADA",
-            "capacidad": 4
-        }
+    "mesa": {
+        "numero": 2,
+        "estadoMesa": "OCUPADA",
+        "capacidad": 1
     }
-]
+}]

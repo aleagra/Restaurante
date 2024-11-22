@@ -16,11 +16,26 @@
     },
     {
         "numero": 2,
-        "estadoMesa": "LIBRE",
+        "estadoMesa": "OCUPADA",
         "capacidad": 4
     },
     {
         "numero": 2,
+        "estadoMesa": "OCUPADA",
+        "capacidad": 1
+    },
+    {
+        "numero": 7,
+        "estadoMesa": "LIBRE",
+        "capacidad": 7
+    },
+    {
+        "numero": 7,
+        "estadoMesa": "LIBRE",
+        "capacidad": 7
+    },
+    {
+        "numero": 8,
         "estadoMesa": "LIBRE",
         "capacidad": 1
     }

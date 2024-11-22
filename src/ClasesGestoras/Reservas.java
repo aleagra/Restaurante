@@ -55,15 +55,19 @@ public class Reservas {
         return lista.toString();
     }
 
-    public void aniadirReserva (Reserva reserva) throws ReservasException { //METODO TOJSON
-        if(reserva!=null){
-            this.reservas.add(reserva);
-        }else{
-            throw new ReservasException("⚠️ La reserva no puede ser nula");
+    public void aniadirReserva(Reserva reserva) throws ReservasException {
+        try {
+            if (reserva != null) {
+                this.reservas.add(reserva);
+            } else {
+                throw new ReservasException("⚠️ La reserva no puede ser nula");
+            }
+        } catch (ReservasException e) {
+            System.out.println(e.getMessage());
         }
     }
 
-    public String verReservas(){ // METODO TO JSON
+    public String verReservas(){
         StringBuilder builder = new StringBuilder();
         for(Reserva reserva: reservas){
             builder.append(reserva.toString()).append("\n");

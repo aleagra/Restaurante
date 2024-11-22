@@ -34,7 +34,7 @@ public class Administrador extends Usuario implements IGestorReserva {
 
             JSONUtiles.grabarUnJson(jsonContent, fileName);
         } catch (JSONException e) {
-            System.out.println("Error al actualizar el archivo JSON: " + fileName);
+            System.out.println("⚠️ Error al actualizar el archivo JSON: " + fileName);
             e.printStackTrace();
         }
     }
@@ -66,7 +66,7 @@ public class Administrador extends Usuario implements IGestorReserva {
             actualizarJson("mesas.json", mesas);
             break;
         default:
-            throw new IllegalArgumentException("Opción no válida para gestionar la carta");
+            throw new IllegalArgumentException("⚠️ Opción no válida para gestionar la carta");
     }
 }
     @Override

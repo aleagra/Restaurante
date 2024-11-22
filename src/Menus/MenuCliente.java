@@ -138,13 +138,13 @@ public class MenuCliente {
                 }
 
                 if (!reservasEncontradas) {
-                    System.out.println("No se encontraron reservas para el cliente especificado.");
+                    System.out.println("⚠️ No se encontraron reservas para el cliente especificado.");
                 }
             } else {
-                System.out.println("No se encontraron reservas en el archivo.");
+                System.out.println("⚠️ No se encontraron reservas en el archivo.");
             }
         } catch (JSONException e) {
-            System.out.println("No se ha podido leer el archivo.");
+            System.out.println("⚠️ No se ha podido leer el archivo.");
             e.printStackTrace();
         }
     }

@@ -26,7 +26,6 @@ public class Main {
 
             switch (opcion) {
                 case 1:
-
                     System.out.println("Ingrese el tipo de usuario");
                     System.out.println("1-Administrador");
                     System.out.println("2-Cocinero");
@@ -57,7 +56,6 @@ public class Main {
                     }
                     break;
                 case 2:
-
                     System.out.println("Ingrese su email: ");
                     email = scanner.nextLine();
                     System.out.println("Ingrese su contrasenia: ");
@@ -71,7 +69,7 @@ public class Main {
                                 menuPrincipal.getMenuCliente().mostrarMenu(scanner, restaurante.getMesas(), cliente,
                                         restaurante.getReservas(), restaurante.getPedidos(), reservas);
                             } else {
-                                System.out.println("Error: Usuario no coincide con el rol Cliente.");
+                                System.out.println("⚠️ Error: Usuario no coincide con el rol Cliente.");
                             }
                             break;
                         }
@@ -80,7 +78,7 @@ public class Main {
                                 menuPrincipal.getMenuAdmin().mostrarMenu(scanner, admin, restaurante.getCarta(),
                                         restaurante.getMesas(), new Mesa(), restaurante.getUsuarios());
                             } else {
-                                System.out.println("Error: Usuario no coincide con el rol Administrador.");
+                                System.out.println("⚠️ Error: Usuario no coincide con el rol Administrador.");
                             }
                             break;
                         }
@@ -88,7 +86,7 @@ public class Main {
                             if (usuario instanceof Cocinero cocinero) {
                                 menuPrincipal.getMenuCocinero().mostrarMenuCocinero(restaurante.getPedidos(), scanner, cocinero);
                             } else {
-                                System.out.println("Error: Usuario no coincide con el rol Cocinero.");
+                                System.out.println("⚠️ Error: Usuario no coincide con el rol Cocinero.");
                             }
                             break;
                         }
@@ -97,15 +95,16 @@ public class Main {
                                 menuPrincipal.getMenuCamarero().mostrarMenu(scanner, camareroAux,
                                         restaurante.getPedidos(), restaurante.getUsuarios(), restaurante.getCarta());
                             } else {
-                                System.out.println("Error: Usuario no coincide con el rol Camarero.");
+                                System.out.println("⚠️ Error: Usuario no coincide con el rol Camarero.");
                             }
                             break;
                         }
                         default:
-                            System.out.println("Error: Rol desconocido o credenciales incorrectas.");
                             break;
                     }
-
+                default:
+                    System.out.println("Saliendo...");
+                    break;
             }
         }while (opcion != 0);
     }

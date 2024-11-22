@@ -24,12 +24,18 @@ public class Pedidos {
 
     public String agregarPedido(Pedido pedido) throws PedidoException {
         String msj = "";
-        if (pedido != null) {
-            pedidos.add(pedido);
-            msj=("✅ El pedido fue creado correctamente con el numero de orden" + " " + pedido.getNumeroPedido());
-            return msj;
+        try {
+            if (pedido != null) {
+                pedidos.add(pedido);
+                msj = "✅ El pedido fue creado correctamente con el número de orden " + pedido.getNumeroPedido();
+            } else {
+                throw new PedidoException("⚠️ El pedido no pudo ser agregado");
+            }
+        } catch (PedidoException e) {
+            System.out.println(e.getMessage());
+            msj = "⚠️ No se pudo agregar el pedido.";
         }
-        throw new PedidoException("⚠️ El pedido no pudo ser agregado");
+        return msj;
     }
 
     public String mostrarPedidos(){
@@ -47,7 +53,7 @@ public class Pedidos {
             }
         }
         if (lista.isEmpty()){
-            lista.append("No se encontraron pedidos para el cliente especificado.");
+            lista.append("⚠️ No se encontraron pedidos para el cliente especificado.");
         }
         return lista.toString();
     }
