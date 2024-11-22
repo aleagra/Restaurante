@@ -34,7 +34,7 @@ public class MenuPrincipal {
     public static void inicializarRestaurante(Restaurante restaurante) {
         List<Usuario> usuarios = List.of(
                 new Camarero("Pedro", "Fernández", "pedro.fernandez@mail.com", "cam123"),
-                new Administrador("Lucía", "Gómez", "lucia.gomez@mail.com", "admin456"),
+                new Administrador("Lucía", "Gómez", "a", "a"),
                 new Cocinero("Marcos", "Rivas", "marcos.rivas@mail.com", "cook789"),
                 new Cocinero("Elena", "Suárez", "elena.suarez@mail.com", "chef001"),
                 new Cliente("Jorge", "Díaz", "jorge.diaz@mail.com", "client123", "Av. Libertad 123", "1122334455"),

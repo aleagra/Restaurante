@@ -1,60 +1,46 @@
-[
-    {
-        "comidas": [
-            {
-                "descripcion": "Lechuga, crutones, queso parmesano y aderezo César",
-                "precio": 8.5,
-                "categoria": "ENTRANTE",
-                "id": 1,
-                "nombre": "Ensalada César"
-            },
-            {
-                "descripcion": "Carne de res con guarnición de papas",
-                "precio": 15,
-                "categoria": "ENTRANTE",
-                "id": 2,
-                "nombre": "Bife de chorizo"
-            },
-            {
-                "descripcion": "Postre clásico con base de manzana caramelizada",
-                "precio": 5,
-                "categoria": "POSTRE",
-                "id": 3,
-                "nombre": "Tarta de manzana"
-            },
-            {
-                "descripcion": "Sopa caliente con tomates frescos y hierbas",
-                "precio": 6,
-                "categoria": "PRINCIPAL",
-                "id": 4,
-                "nombre": "Sopa de tomate"
-            }
-        ],
-        "bebidas": [
-            {
-                "precio": 2,
-                "tipo": "SIN_ALCOHOL",
-                "numero": 1,
-                "nombre": "Agua Mineral"
-            },
-            {
-                "precio": 3,
-                "tipo": "SIN_ALCOHOL",
-                "numero": 2,
-                "nombre": "Coca-Cola"
-            },
-            {
-                "precio": 10,
-                "tipo": "CON_ALCOHOL",
-                "numero": 3,
-                "nombre": "Vino Tinto"
-            },
-            {
-                "precio": 4,
-                "tipo": "SIN_ALCOHOL",
-                "numero": 4,
-                "nombre": "Café Expreso"
-            }
-        ]
-    }
-]
+{
+    "comidas": [
+        {
+            "descripcion": "Lechuga, crutones, queso parmesano y aderezo César",
+            "precio": 8.5,
+            "categoria": "ENTRANTE",
+            "id": 1,
+            "nombre": "Ensalada César"
+        },
+        {
+            "descripcion": "Carne de res con guarnición de papas",
+            "precio": 15,
+            "categoria": "ENTRANTE",
+            "id": 2,
+            "nombre": "Bife de chorizo"
+        },
+        {
+            "descripcion": "Postre clásico con base de manzana caramelizada",
+            "precio": 5,
+            "categoria": "POSTRE",
+            "id": 3,
+            "nombre": "Tarta de manzana"
+        },
+        {
+            "descripcion": "Sopa caliente con tomates frescos y hierbas",
+            "precio": 6,
+            "categoria": "PRINCIPAL",
+            "id": 4,
+            "nombre": "Sopa de tomate"
+        }
+    ],
+    "bebidas": [
+        {
+            "precio": 3,
+            "tipo": "SIN_ALCOHOL",
+            "numero": 2,
+            "nombre": "Coca-Cola"
+        },
+        {
+            "precio": 10,
+            "tipo": "CON_ALCOHOL",
+            "numero": 3,
+            "nombre": "Vino Tinto"
+        }
+    ]
+}

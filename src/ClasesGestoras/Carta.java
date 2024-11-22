@@ -2,6 +2,7 @@ package ClasesGestoras;
 
 import Clases.Gestion.Bebida;
 import Clases.Gestion.Plato;
+import Clases.Gestion.Reserva;
 import Excepciones.BebidaException;
 import Excepciones.PlatoException;
 import Interfaces.IJson;
@@ -13,7 +14,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Carta implements IJson {
+public class Carta {
     private List<Plato> comidas;
     private List<Bebida> bebidas;
 
@@ -30,40 +31,104 @@ public class Carta implements IJson {
         return bebidas;
     }
 
-    public String agregarComida(Plato plato){
-        String msj = "✅ Plato agregado exitiosamente.";
-        if(!comidas.add(plato)){
-            throw new PlatoException("⚠️ El plato ya existe.");
+    public Carta cargarCarta() {
+        Carta carta = null;
+        try {
+            JSONObject jsonObject = new JSONObject(JSONUtiles.leerUnJson("carta.json"));
+
+            carta = new Carta();
+
+            JSONArray comidasArray = jsonObject.getJSONArray("comidas");
+            for (int i = 0; i < comidasArray.length(); i++) {
+                JSONObject comidaJson = comidasArray.getJSONObject(i);
+                Plato plato = new Plato();
+                plato.fromJson(comidaJson);
+                carta.getComidas().add(plato);
+            }
+
+            JSONArray bebidasArray = jsonObject.getJSONArray("bebidas");
+            for (int i = 0; i < bebidasArray.length(); i++) {
+                JSONObject bebidaJson = bebidasArray.getJSONObject(i);
+                Bebida bebida = new Bebida();
+                bebida.fromJson(bebidaJson);
+                carta.getBebidas().add(bebida);
+            }
+
+        } catch (JSONException e) {
+            System.out.println("Error al leer el archivo JSON de la carta.");
+            e.printStackTrace();
         }
-        return msj;
+        return carta;
     }
 
-    public String agregarBebida(Bebida bebida){
-        String msj = "✅ Bebida agregada exitosamente.";
-        if(!bebidas.add(bebida)){
-            throw new BebidaException("⚠️ La bebida ya existe.");
+
+    public String agregarComida(Plato plato) {
+        Carta carta = cargarCarta();
+        if (plato != null) {
+            carta.getComidas().add(plato);
+            try {
+                JSONUtiles. grabarUnJsonObject(carta.toJson(), "carta.json");
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return "⚠️ Error al guardar los cambios en carta.json.";
+            }
+            return "✅ Plato agregado correctamente.";
+        } else {
+            return "⚠️ El plato no es válido.";
         }
-        return msj;
     }
 
-    public String eliminarComida(String nombrePlato){
-        for (Plato plato : comidas) {
+    public String agregarBebida(Bebida bebida) {
+        Carta carta = cargarCarta();
+        if (bebida != null) {
+            carta.getBebidas().add(bebida);
+            try {
+                JSONUtiles. grabarUnJsonObject(carta.toJson(), "carta.json");
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return "⚠️ Error al guardar los cambios en carta.json.";
+            }
+            return "✅ Bebida agregada correctamente.";
+        } else {
+            return "⚠️ La bebida no es válida.";
+        }
+    }
+
+    public String eliminarComida(String nombrePlato) {
+        Carta carta = cargarCarta();
+        for (Plato plato : carta.getComidas()) {
             if (plato.getNombre().equalsIgnoreCase(nombrePlato)) {
-                comidas.remove(plato);
-                return "✅ Plato eliminado correctamente.";
+                carta.getComidas().remove(plato);
+                try {
+                    JSONUtiles.grabarUnJsonObject(carta.toJson(), "carta.json");
+                    return "✅ Plato eliminado correctamente.";
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return "⚠️ Error al guardar los cambios en carta.json.";
+                }
             }
         }
-        throw new PlatoException("⚠️ El plato no pudo ser eliminado.");
+
+        return "⚠️ El plato no pudo ser eliminado. No existe en la carta.";
     }
 
     public String eliminarBebida(String nombreBebida) {
-        for (Bebida bebida : bebidas) {
+        Carta carta = cargarCarta();
+        for (Bebida bebida : carta.getBebidas()) {
             if (bebida.getNombre().equalsIgnoreCase(nombreBebida)) {
-                bebidas.remove(bebida);
-                return "✅ Bebida eliminada correctamente.";
+                carta.getBebidas().remove(bebida);
+
+                try {
+                    JSONUtiles.grabarUnJsonObject(carta.toJson(), "carta.json");
+                    return "✅ Bebida eliminada correctamente.";
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return "⚠️ Error al guardar los cambios en carta.json.";
+                }
             }
         }
-        throw new BebidaException("⚠️ La bebida no pudo ser eliminada.");
+
+        return "⚠️ La bebida no pudo ser eliminada. No existe en la carta.";
     }
 
     public String mostrarComidas(){
@@ -135,7 +200,6 @@ public class Carta implements IJson {
         }
     }
 
-    @Override
     public JSONObject toJson() throws JSONException {
         JSONObject json = new JSONObject();
         try {
@@ -160,7 +224,7 @@ public class Carta implements IJson {
         return json;
     }
 
-    @Override
+
     public void fromJson(JSONObject json) throws JSONException {
         try {
             JSONArray comidasArray = json.getJSONArray("comidas");

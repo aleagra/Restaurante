@@ -1,70 +1,10 @@
-[
-    {
-        "fecha": "2024-11-22",
-        "cliente": {
-            "Nombre": "a",
-            "Contrasenia": "a",
-            "Email": "a",
-            "Telefono": "a",
-            "Apellido": "a",
-            "Direccion": "1",
-            "Id": 9
-        },
-        "mesa": {
-            "numero": 2,
-            "estadoMesa": "OCUPADA",
-            "capacidad": 1
-        }
-    },
-    {
-        "fecha": "2024-11-22",
-        "cliente": {
-            "Nombre": "Valeria",
-            "Contrasenia": "client001",
-            "Email": "valeria.campos@mail.com",
-            "Telefono": "Bulevar Verde 321",
-            "Apellido": "Campos",
-            "Direccion": "4455667788",
-            "Id": 8
-        },
-        "mesa": {
-            "numero": 1,
-            "estadoMesa": "OCUPADA",
-            "capacidad": 4
-        }
-    },
-    {
-        "fecha": "2024-11-22",
-        "cliente": {
-            "Nombre": "Valeria",
-            "Contrasenia": "client001",
-            "Email": "valeria.campos@mail.com",
-            "Telefono": "Bulevar Verde 321",
-            "Apellido": "Campos",
-            "Direccion": "4455667788",
-            "Id": 8
-        },
-        "mesa": {
-            "numero": 2,
-            "estadoMesa": "OCUPADA",
-            "capacidad": 6
-        }
-    },
-    {
-        "fecha": "2024-11-22",
-        "cliente": {
-            "Nombre": "Andrés",
-            "Contrasenia": "client789",
-            "Email": "andres.soto@mail.com",
-            "Telefono": "Pasaje Azul 789",
-            "Apellido": "Soto",
-            "Direccion": "3344556677",
-            "Id": 7
-        },
-        "mesa": {
-            "numero": 4,
-            "estadoMesa": "OCUPADA",
-            "capacidad": 8
-        }
-    }
-]
+[{
+    "comidas": [{
+        "descripcion": "a",
+        "precio": 2,
+        "categoria": "ENTRANTE",
+        "id": 0,
+        "nombre": "a"
+    }],
+    "bebidas": []
+}]

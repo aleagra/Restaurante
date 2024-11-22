@@ -43,19 +43,15 @@ public class Administrador extends Usuario implements IGestorReserva {
         switch (opcion) {
         case 1:
             System.out.println(carta.agregarComida(plato));
-            actualizarJson("carta.json", carta);
             break;
         case 2:
             System.out.println(carta.agregarBebida(bebida));
-            actualizarJson("carta.json", carta);
             break;
         case 3:
             System.out.println(carta.eliminarComida(nombre));
-            actualizarJson("carta.json", carta);
             break;
         case 4:
             System.out.println(carta.eliminarBebida(nombre));
-            actualizarJson("carta.json", carta);
             break;
         case 5:
             System.out.println(mesas.addMesa(m));

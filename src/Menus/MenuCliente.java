@@ -74,34 +74,30 @@ public class MenuCliente {
 
     public static void mostrarCartaDesdeJson(String rutaArchivoJson) {
         try {
-            JSONArray arregloCarta = new JSONArray(JSONUtiles.leerUnJson(rutaArchivoJson));
+            JSONObject cartaJson = new JSONObject(JSONUtiles.leerUnJson(rutaArchivoJson));
 
-            if (arregloCarta.length() > 0) {
-                for (int i = 0; i < arregloCarta.length(); i++) {
-                    JSONObject jsonObject = arregloCarta.getJSONObject(i);
+            // Crear una instancia de Carta
+            Carta carta = new Carta();
 
-                    Carta carta1 = new Carta();
-                    carta1.fromJson(jsonObject);
+            carta.fromJson(cartaJson);
 
-                    System.out.println("---- CARTA ----");
+            System.out.println("---- CARTA ----");
 
-                    System.out.println("COMIDAS:");
-                    for (Plato comida : carta1.getComidas()) {
-                        System.out.println("Nombre: " + comida.getNombre() + " | Precio: " + comida.getPrecio() +
-                                " | Descripción: " + comida.getDescripcion() + " | Categoría: " + comida.getCategoria());
-                    }
-
-                    System.out.println("BEBIDAS:");
-                    for (Bebida bebida : carta1.getBebidas()) {
-                        System.out.println("Nombre: " + bebida.getNombre() + " | Precio: " + bebida.getPrecio() +
-                                " | Tipo de bebida: " + bebida.getTipo());
-                    }
-
-                    System.out.println("-----------------\n");
-                }
-            } else {
-                System.out.println("No se encontraron elementos en la carta.");
+            System.out.println("COMIDAS:");
+            // Imprimir las comidas
+            for (Plato comida : carta.getComidas()) {
+                System.out.println("Nombre: " + comida.getNombre() + " | Precio: " + comida.getPrecio() +
+                        " | Descripción: " + comida.getDescripcion() + " | Categoría: " + comida.getCategoria());
             }
+
+            System.out.println("BEBIDAS:");
+            // Imprimir las bebidas
+            for (Bebida bebida : carta.getBebidas()) {
+                System.out.println("Nombre: " + bebida.getNombre() + " | Precio: " + bebida.getPrecio() +
+                        " | Tipo de bebida: " + bebida.getTipo());
+            }
+
+            System.out.println("-----------------\n");
 
         } catch (JSONException e) {
             System.out.println("No se ha podido leer el archivo de la carta.");

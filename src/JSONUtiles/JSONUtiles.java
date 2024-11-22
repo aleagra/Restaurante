@@ -34,4 +34,16 @@ public class JSONUtiles {
         return tokener;
     }
 
+    public static void grabarUnJsonObject(JSONObject jsonObject, String archivo) {
+        try {
+            FileWriter file = new FileWriter(archivo);
+
+            file.write(jsonObject.toString(4));
+
+            file.close();
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
