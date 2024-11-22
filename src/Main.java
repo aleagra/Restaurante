@@ -3,19 +3,18 @@ import Clases.Usuarios.*;
 import ClasesGestoras.Restaurante;
 import Menus.*;
 import org.json.JSONArray;
+import org.json.JSONException;
 import java.util.Scanner;
-
 import static Menus.MenuPrincipal.inicializarRestaurante;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws JSONException {
         Restaurante restaurante = new Restaurante();
         Scanner scanner = new Scanner(System.in);
         MenuPrincipal menuPrincipal = new MenuPrincipal();
         JSONArray reservas = new JSONArray();
         int opcion = 0;
         inicializarRestaurante(restaurante);
-
 
         do {
             System.out.println("MENU");
@@ -56,8 +55,6 @@ public class Main {
                         System.out.println(restaurante.getUsuarios().registrarUsuario(restaurante, nombre, apellido, email, contra, null, null, opcion2));
 
                     }
-
-
                     break;
                 case 2:
 
@@ -108,7 +105,6 @@ public class Main {
                             System.out.println("Error: Rol desconocido o credenciales incorrectas.");
                             break;
                     }
-
 
             }
         }while (opcion != 0);

@@ -5,6 +5,7 @@ import Clases.Gestion.Plato;
 import Excepciones.BebidaException;
 import Excepciones.PlatoException;
 import Interfaces.IJson;
+import JSONUtiles.JSONUtiles;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -80,23 +81,60 @@ public class Carta implements IJson {
         }
         return msj.toString();
     }
-    public Plato buscarPlatoPorId(int idPlato) {
-        for (Plato plato : comidas) {
-            if (plato.getNumero() == idPlato) {
-                return plato;
+
+    public static Plato buscarComidaPorIdEnCarta(String rutaArchivoJson, int idComida) {
+        try {
+            JSONArray arregloCarta = new JSONArray(JSONUtiles.leerUnJson(rutaArchivoJson));
+
+            if (arregloCarta.length() > 0) {
+                JSONObject cartaJson = arregloCarta.getJSONObject(0);
+                JSONArray comidasArray = cartaJson.getJSONArray("comidas");
+
+                for (int i = 0; i < comidasArray.length(); i++) {
+                    JSONObject comidaJson = comidasArray.getJSONObject(i);
+
+                    if (comidaJson.getInt("id") == idComida) {
+                        Plato comida = new Plato();
+                        comida.fromJson(comidaJson);
+                        return comida;
+                    }
+                }
             }
+
+            throw new RuntimeException("⚠️ La comida con ID " + idComida + " no se encontró en la carta.");
+        } catch (JSONException e) {
+            e.printStackTrace();
+            throw new RuntimeException("⚠️ Error al procesar el JSON.", e);
         }
-        throw new RuntimeException("⚠️ El ID del plato es incorrecto o no existe");
     }
 
-    public Bebida buscarBebidaPorId(int idBebida) {
-        for (Bebida bebida : bebidas) {
-            if (bebida.getNumero() == idBebida) {
-                return bebida;
+
+    public static Bebida buscarBebidaPorIdEnCarta(String rutaArchivoJson, int idBebida) {
+        try {
+            JSONArray arregloCarta = new JSONArray(JSONUtiles.leerUnJson(rutaArchivoJson));
+
+            if (arregloCarta.length() > 0) {
+                JSONObject cartaJson = arregloCarta.getJSONObject(0);
+                JSONArray bebidasArray = cartaJson.getJSONArray("bebidas");
+
+                for (int i = 0; i < bebidasArray.length(); i++) {
+                    JSONObject bebidaJson = bebidasArray.getJSONObject(i);
+
+
+                    if (bebidaJson.getInt("numero") == idBebida) {
+                        Bebida bebida = new Bebida();
+                        bebida.fromJson(bebidaJson);
+                        return bebida;
+                    }
+                }
             }
+            throw new RuntimeException("⚠️ La bebida con ID " + idBebida + " no se encontró en la carta.");
+        } catch (JSONException e) {
+            e.printStackTrace();
+            throw new RuntimeException("⚠️ Error al procesar el JSON.", e);
         }
-        throw new RuntimeException("⚠️ El ID de la bebida es incorrecto o no existe");
     }
+
     @Override
     public JSONObject toJson() throws JSONException {
         JSONObject json = new JSONObject();

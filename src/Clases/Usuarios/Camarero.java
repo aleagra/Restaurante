@@ -102,7 +102,7 @@ public class Camarero extends Usuario {
                 case 1: {
                     System.out.println("Ingrese el ID del plato:");
                     int numero = scanner.nextInt();
-                    Plato plato = carta.buscarPlatoPorId(numero);
+                    Plato plato = Carta.buscarComidaPorIdEnCarta("carta.json",numero);
                     if (plato != null) {
                         pedido.addPlato(plato);
                         System.out.println("Plato agregado al pedido.");
@@ -114,7 +114,7 @@ public class Camarero extends Usuario {
                 case 2: {
                     System.out.println("Ingrese el ID de la bebida:");
                     int numero = scanner.nextInt();
-                    Bebida bebida = carta.buscarBebidaPorId(numero);
+                    Bebida bebida = Carta.buscarBebidaPorIdEnCarta("carta.json",numero);
                     if (bebida != null) {
                         pedido.addBebida(bebida);
                         System.out.println("Bebida agregada al pedido.");

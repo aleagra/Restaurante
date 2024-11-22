@@ -11,6 +11,7 @@ import Interfaces.IGestorReserva;
 import JSONUtiles.JSONUtiles;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Administrador extends Usuario implements IGestorReserva {
 
@@ -20,22 +21,25 @@ public class Administrador extends Usuario implements IGestorReserva {
 
     private void actualizarJson(String fileName, Object data) {
         try {
-            JSONArray jsonArray = new JSONArray();
+
+            JSONArray jsonContent = new JSONArray(JSONUtiles.leerUnJson(fileName));
+
             if (data instanceof Carta) {
-                jsonArray.put(((Carta) data).toJson());
+                jsonContent.put(((Carta) data).toJson());
             } else if (data instanceof Mesas) {
                 for (Mesa mesa : ((Mesas) data).getMesas()) {
-                    jsonArray.put(mesa.toJson());
+                    jsonContent.put(mesa.toJson());
                 }
             }
-            JSONUtiles.grabarUnJson(jsonArray, fileName);
+
+            JSONUtiles.grabarUnJson(jsonContent, fileName);
         } catch (JSONException e) {
             System.out.println("Error al actualizar el archivo JSON: " + fileName);
             e.printStackTrace();
         }
     }
 
-    public void gestionarMenu(int opcion , Mesas mesas, Mesa m, int nroMesa, Carta carta, Plato plato, Bebida bebida, String nombre) {
+    public void gestionarMenu(int opcion , Mesas mesas, Mesa m, int nroMesa, Carta carta, Plato plato, Bebida bebida, String nombre) throws JSONException {
         switch (opcion) {
         case 1:
             System.out.println(carta.agregarComida(plato));
@@ -58,7 +62,7 @@ public class Administrador extends Usuario implements IGestorReserva {
             actualizarJson("mesas.json", mesas);
             break;
         case 6:
-            System.out.println(mesas.deleteMesa(nroMesa));
+            System.out.println(mesas.deleteMesa(nroMesa,"mesas.json"));
             actualizarJson("mesas.json", mesas);
             break;
         default:

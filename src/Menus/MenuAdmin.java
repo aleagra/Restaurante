@@ -21,9 +21,8 @@ import java.util.Scanner;
 
 public class MenuAdmin {
 
-    public void mostrarMenu(Scanner sc,Administrador administrador, Carta c, Mesas mesas, Mesa mesa, Usuarios usuarios) throws MenuException {
+    public void mostrarMenu(Scanner sc,Administrador administrador, Carta c, Mesas mesas, Mesa mesa, Usuarios usuarios) throws MenuException, JSONException {
         int opcion;
-
 
         do {
             System.out.println("\n========== MENU ADMINISTRADOR ==========");
@@ -69,7 +68,7 @@ public class MenuAdmin {
         } while (opcion != 0);
     }
 
-    public void gestionMenu(Administrador administrador, Scanner sc, Carta c, Mesas mesas, Mesa mesa) {
+    public void gestionMenu(Administrador administrador, Scanner sc, Carta c, Mesas mesas, Mesa mesa) throws JSONException {
         int opcion;
 
         do {
