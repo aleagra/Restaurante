@@ -18,26 +18,6 @@ public class Administrador extends Usuario implements IGestorReserva {
         super(nombre, apellido, email, contrasenia);
     }
 
-    private void actualizarJson(String fileName, Object data) {
-        try {
-
-            JSONArray jsonContent = new JSONArray(JSONUtiles.leerUnJson(fileName));
-
-            if (data instanceof Carta) {
-                jsonContent.put(((Carta) data).toJson());
-            } else if (data instanceof Mesas) {
-                for (Mesa mesa : ((Mesas) data).getMesas()) {
-                    jsonContent.put(mesa.toJson());
-                }
-            }
-
-            JSONUtiles.grabarUnJson(jsonContent, fileName);
-        } catch (JSONException e) {
-            System.out.println("⚠️ Error al actualizar el archivo JSON: " + fileName);
-            e.printStackTrace();
-        }
-    }
-
     public void gestionarMenu(int opcion , Mesas mesas, Mesa m, int nroMesa, Carta carta, Plato plato, Bebida bebida, String nombre) throws JSONException {
         switch (opcion) {
         case 1:

@@ -146,22 +146,6 @@ public class Carta {
         return "⚠️ La bebida no pudo ser eliminada. No existe en la carta.";
     }
 
-    public String mostrarComidas(){
-        StringBuilder msj= new StringBuilder();
-        for(Plato p : comidas){
-            msj.append(p).append("\n");
-        }
-        return msj.toString();
-    }
-
-    public String mostrarBebidas(){
-        StringBuilder msj = new StringBuilder();
-        for(Bebida b : bebidas){
-            msj.append(b).append("\n");
-        }
-        return msj.toString();
-    }
-
     public static Plato buscarComidaPorIdEnCarta(String rutaArchivoJson, int idComida) {
         try {
             JSONObject arregloCarta = new JSONObject(JSONUtiles.leerUnJson(rutaArchivoJson));
@@ -187,7 +171,6 @@ public class Carta {
             return null;
         }
     }
-
 
 
     public static Bebida buscarBebidaPorIdEnCarta(String rutaArchivoJson, int idBebida) {
@@ -231,7 +214,6 @@ public class Carta {
             for (Bebida bebida : bebidas) {
                 bebidasJsonArray.put(bebida.toJson());
             }
-
 
             json.put("comidas", comidasJsonArray);
             json.put("bebidas", bebidasJsonArray);

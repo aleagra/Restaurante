@@ -44,6 +44,4 @@ public class Cocinero extends Usuario implements IGestorPedidos{
         return pedidos.mostrarPedidos();
     }
 
-
-
 }

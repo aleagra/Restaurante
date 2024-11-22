@@ -75,7 +75,6 @@ public class Usuarios {
         return msj;
     }
 
-
     public String loguearUsuario(String email, String contrasenia) throws AutenticacionException {
         String msj = "";
         try {
