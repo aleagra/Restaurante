@@ -1,27 +1,102 @@
 [
     {
-        "numero": 2,
+        "numero": 1,
         "estadoMesa": "OCUPADA",
         "capacidad": 4
     },
     {
+        "numero": 2,
+        "estadoMesa": "OCUPADA",
+        "capacidad": 6
+    },
+    {
         "numero": 3,
         "estadoMesa": "LIBRE",
-        "capacidad": 6
+        "capacidad": 2
     },
     {
-        "numero": 2,
+        "numero": 4,
+        "estadoMesa": "OCUPADA",
+        "capacidad": 8
+    },
+    {
+        "numero": 5,
         "estadoMesa": "LIBRE",
-        "capacidad": 6
+        "capacidad": 10
     },
     {
-        "numero": 2,
+        "numero": 6,
         "estadoMesa": "LIBRE",
         "capacidad": 4
     },
     {
-        "numero": 2,
+        "numero": 7,
         "estadoMesa": "LIBRE",
-        "capacidad": 1
+        "capacidad": 5
+    },
+    {
+        "numero": 8,
+        "estadoMesa": "LIBRE",
+        "capacidad": 3
+    },
+    {
+        "numero": 9,
+        "estadoMesa": "LIBRE",
+        "capacidad": 6
+    },
+    {
+        "numero": 10,
+        "estadoMesa": "LIBRE",
+        "capacidad": 7
+    },
+    {
+        "numero": 11,
+        "estadoMesa": "LIBRE",
+        "capacidad": 2
+    },
+    {
+        "numero": 12,
+        "estadoMesa": "LIBRE",
+        "capacidad": 4
+    },
+    {
+        "numero": 13,
+        "estadoMesa": "LIBRE",
+        "capacidad": 3
+    },
+    {
+        "numero": 14,
+        "estadoMesa": "LIBRE",
+        "capacidad": 5
+    },
+    {
+        "numero": 15,
+        "estadoMesa": "LIBRE",
+        "capacidad": 6
+    },
+    {
+        "numero": 16,
+        "estadoMesa": "LIBRE",
+        "capacidad": 8
+    },
+    {
+        "numero": 17,
+        "estadoMesa": "LIBRE",
+        "capacidad": 4
+    },
+    {
+        "numero": 18,
+        "estadoMesa": "LIBRE",
+        "capacidad": 7
+    },
+    {
+        "numero": 19,
+        "estadoMesa": "LIBRE",
+        "capacidad": 2
+    },
+    {
+        "numero": 20,
+        "estadoMesa": "LIBRE",
+        "capacidad": 10
     }
 ]

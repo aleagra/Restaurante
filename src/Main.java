@@ -93,7 +93,7 @@ public class Main {
                         case "Camarero": {
                             if (usuario instanceof Camarero camareroAux) {
                                 menuPrincipal.getMenuCamarero().mostrarMenu(scanner, camareroAux,
-                                        restaurante.getPedidos(), restaurante.getUsuarios(), restaurante.getCarta());
+                                        restaurante.getPedidos(), restaurante.getUsuarios());
                             } else {
                                 System.out.println("⚠️ Error: Usuario no coincide con el rol Camarero.");
                             }

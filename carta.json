@@ -56,48 +56,5 @@
                 "nombre": "Café Expreso"
             }
         ]
-    },
-    {
-        "comidas": [{
-            "descripcion": "lala",
-            "precio": 34000,
-            "categoria": "PRINCIPAL",
-            "id": 0,
-            "nombre": "juri"
-        }],
-        "bebidas": []
-    },
-    {
-        "comidas": [
-            {
-                "descripcion": "lala",
-                "precio": 34000,
-                "categoria": "PRINCIPAL",
-                "id": 0,
-                "nombre": "juri"
-            },
-            {
-                "descripcion": "e",
-                "precio": -23,
-                "categoria": "POSTRE",
-                "id": 0,
-                "nombre": "aa"
-            }
-        ],
-        "bebidas": []
-    },
-    {
-        "comidas": [{
-            "descripcion": "Carne de res con guarnición de papas",
-            "precio": 15,
-            "categoria": "ENTRANTE",
-            "id": 0,
-            "nombre": "Bife de chorizo"
-        }],
-        "bebidas": []
-    },
-    {
-        "comidas": [],
-        "bebidas": []
     }
 ]

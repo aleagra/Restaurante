@@ -39,7 +39,7 @@ public class MenuPrincipal {
                 new Cocinero("Elena", "Suárez", "elena.suarez@mail.com", "chef001"),
                 new Cliente("Jorge", "Díaz", "jorge.diaz@mail.com", "client123", "Av. Libertad 123", "1122334455"),
                 new Cliente("Claudia", "Vega", "claudia.vega@mail.com", "client456", "Calle Primavera 456", "2233445566"),
-                new Cliente("Andrés", "Soto", "andres.soto@mail.com", "client789", "Pasaje Azul 789", "3344556677"),
+                new Cliente("Andrés", "Soto", "andres.soto@mail.com", "", "Pasaje Azul 789", "3344556677"),
                 new Cliente("Valeria", "Campos", "valeria.campos@mail.com", "client001", "Bulevar Verde 321", "4455667788")
         );
         usuarios.forEach(restaurante.getUsuarios()::registrarUsuarioHarcodeado);

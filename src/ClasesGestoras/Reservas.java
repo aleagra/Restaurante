@@ -2,12 +2,13 @@ package ClasesGestoras;
 
 import Clases.Gestion.Reserva;
 import Excepciones.ReservasException;
-import Interfaces.IJson;
+import JSONUtiles.JSONUtiles;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Reservas {
     private ArrayList<Reserva> reservas;
@@ -55,12 +56,37 @@ public class Reservas {
         return lista.toString();
     }
 
-    public void aniadirReserva (Reserva reserva) throws ReservasException { //METODO TOJSON
-        if(reserva!=null){
-            this.reservas.add(reserva);
-        }else{
-            throw new ReservasException("⚠️ La reserva no puede ser nula");
+    public List<Reserva> cargarReservas() {
+        List<Reserva> reservas = new ArrayList<>();
+        try {
+            JSONArray jsonArray = new JSONArray(JSONUtiles.leerUnJson("reservas.json"));
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                Reserva reserva = new Reserva();
+                reserva.fromJson(jsonObject);
+
+                reservas.add(reserva);
+            }
+        } catch (JSONException e) {
+            System.out.println("Error al leer el archivo JSON de reservas.");
+            e.printStackTrace();
         }
+        return reservas;
+    }
+
+    public void agregarReserva(Reserva reserva) throws JSONException {
+        if (reserva == null) {
+            throw new ReservasException("⚠️ La reserva no puede ser nula.");
+        }
+
+        List<Reserva> reservas = cargarReservas();
+        reservas.add(reserva);
+        JSONArray jsonArray = new JSONArray();
+        for (Reserva r : reservas) {
+            jsonArray.put(r.toJson());
+        }
+        JSONUtiles.grabarUnJson(jsonArray,"reservas.json");
     }
 
     public String verReservas(){ // METODO TO JSON

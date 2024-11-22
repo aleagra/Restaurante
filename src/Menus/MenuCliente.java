@@ -44,7 +44,7 @@ public class MenuCliente {
                     Mesa mesa = mesas.asignarMesa(personas);
                     if (mesa != null) {
                         Reserva reserva = new Reserva(mesa, cliente);
-                        System.out.println(reservas.agregarReserva(reserva));
+                        reservas.agregarReserva(reserva);
                     } else {
                         System.out.println("❌ No hay mesas disponibles para esa cantidad de personas.");
                     }
