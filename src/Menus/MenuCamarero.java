@@ -20,7 +20,7 @@ import java.util.Scanner;
 
 public class MenuCamarero {
 
-    public void mostrarMenu(Scanner scanner,Camarero camarero, Pedidos pedidos, Usuarios usuarios, Carta carta) {
+    public void mostrarMenu(Scanner scanner,Camarero camarero, Pedidos pedidos, Usuarios usuarios) {
         int opcion;
 
         do {
@@ -41,7 +41,7 @@ public class MenuCamarero {
                         scanner.nextLine();
                         System.out.println("\n--- Registrando pedido ---");
                         Cliente usuario = usuarios.buscarPorId(id);
-                        Pedido pedido = camarero.generarPedido(carta, usuario);
+                        Pedido pedido = camarero.generarPedido(usuario);
                         System.out.println(pedidos.agregarPedido(pedido));
                         break;
 
@@ -58,9 +58,14 @@ public class MenuCamarero {
                         scanner.nextLine();
 
                         MetodoPago metodoPago = camarero.consultarFormaDePago();
-                        Cuenta factura = camarero.generarFactura(id, numOrden, pedidos, metodoPago);
-                        camarero.eliminarPedidoCompletado(id, numOrden, pedidos);
-                        System.out.println(factura);
+
+                       Cuenta factura = camarero.generarFactura(id, numOrden, pedidos, metodoPago);
+                        if (factura == null) {
+                            System.out.println("❌ No hay ningun pedido asociado a ese cliente.");
+                        }else {
+                            camarero.eliminarPedidoCompletado(id, numOrden, pedidos);
+                            System.out.println(factura);
+                        }
                         break;
                     case 4:
                         System.out.println("\n--- Cambio de contraseña ---");

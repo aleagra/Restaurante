@@ -66,13 +66,12 @@ public class Camarero extends Usuario {
         return pedidoAux;
     }
 
-    public Cuenta generarFactura(int idCliente, int numPedido, Pedidos pedidos, MetodoPago metodoPago) throws UsuarioNoEncontradoException {
+    public Cuenta generarFactura(int idCliente, int numPedido, Pedidos pedidos, MetodoPago metodoPago) {
         Pedido pedidoEncontrado = buscarPedido(idCliente, numPedido, pedidos);
 
-        if (pedidoEncontrado == null || pedidoEncontrado.getCliente() == null) {
-            throw new UsuarioNoEncontradoException("No se encontró un cliente con el ID especificado o el cliente es nulo.");
+        if (pedidoEncontrado.getCliente() == null) {
+           return null;
         }
-
         Cuenta cuenta = new Cuenta();
         cuenta.setCliente(pedidoEncontrado.getCliente());
         cuenta.setPedido(pedidoEncontrado);
@@ -86,7 +85,7 @@ public class Camarero extends Usuario {
         pedidos.eliminarPedido(pedidoEncontrado);
     }
 
-    public Pedido generarPedido(Carta carta, Cliente cliente) throws PedidoExcepcion {
+    public Pedido generarPedido(Cliente cliente) throws PedidoExcepcion {
         Pedido pedido = new Pedido(EstadoPedido.EN_PREPARACION, cliente);
         Scanner scanner = new Scanner(System.in);
         int opcion;

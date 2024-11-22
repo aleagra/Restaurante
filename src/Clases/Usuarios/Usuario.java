@@ -55,9 +55,9 @@ public class Usuario{
     @Override
     public String toString() {
         return "ID: " + id +
-                " NOMBRE: '" + nombre + '\'' +
-                " APELLIDO: '" + apellido + '\'' +
-                " EMAIL: '" + email + '\'';
+                " NOMBRE: " + nombre + "\n" +
+                " APELLIDO: " + apellido + "\n" +
+                " EMAIL: " + email + "\n";
     }
 
     @Override

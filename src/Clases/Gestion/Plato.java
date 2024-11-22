@@ -64,10 +64,10 @@ public class Plato implements IJson {
     @Override
     public String toString() {
         return
-                "Nombre='" + nombre + '\'' +
-                ", Descripcion='" + descripcion + '\'' +
-                ", Precio=" + precio +
-                ", Categoria=" + categoria ;
+                "NOMBRE: " + nombre + " " +
+                "DESCRIPCION: " + descripcion + " " +
+                "PRECIO: " + precio + " " +
+                "CATEGORIA: " + categoria ;
     }
     @Override
     public JSONObject toJson() throws JSONException {

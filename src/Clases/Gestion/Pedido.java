@@ -91,13 +91,11 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido{" +
-                "numeroPedido=" + numeroPedido +
-                ", platos=" + platos +
-                ", bebidas=" + bebidas +
-                ", estado=" + estado +
-                ", cliente=" + cliente +
-                '}';
+        return
+                "NUMERO DE PEDIDO: " + numeroPedido + " " +
+                ",PLATOS: " + platos + " " +
+                ",BEBIDAS: " + bebidas + " " +
+                ",ESTADO: " + estado  ;
     }
 
 }

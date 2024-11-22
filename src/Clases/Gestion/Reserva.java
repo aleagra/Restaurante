@@ -35,10 +35,9 @@ public class Reserva implements IJson {
 
     @Override
     public String toString() {
-        return "Reserva{" +
-                "fecha=" + fecha +
-                ", mesa=" + mesa +
-                '}';
+        return "RESERVA" +
+                "FECHA: " + fecha +
+                "MESA: " + mesa ;
     }
 
     @Override

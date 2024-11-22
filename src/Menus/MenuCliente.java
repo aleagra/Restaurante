@@ -18,7 +18,7 @@ import java.util.Scanner;
 
 public class MenuCliente {
 
-    public void mostrarMenu(Scanner scanner, Mesas mesas, Cliente cliente, Reservas reservas, Pedidos pedidos, JSONArray jsonReservas) {
+    public void mostrarMenu(Scanner scanner, Mesas mesas, Cliente cliente, Reservas reservas, Pedidos pedidos, JSONArray jsonReservas) throws JSONException {
         int opcion;
 
         do {
@@ -43,15 +43,8 @@ public class MenuCliente {
                     int personas = scanner.nextInt();
                     Mesa mesa = mesas.asignarMesa(personas);
                     if (mesa != null) {
-                        System.out.println("✔️ La reserva fue creada correctamente.");
                         Reserva reserva = new Reserva(mesa, cliente);
-                        reservas.aniadirReserva(reserva);
-                        try {
-                            jsonReservas.put(reserva.toJson());
-                            JSONUtiles.grabarUnJson(reservas.toJson(), "reservas.json");
-                        }catch (JSONException e){
-                            e.printStackTrace();
-                        }
+                        System.out.println(reservas.agregarReserva(reserva));
                     } else {
                         System.out.println("❌ No hay mesas disponibles para esa cantidad de personas.");
                     }

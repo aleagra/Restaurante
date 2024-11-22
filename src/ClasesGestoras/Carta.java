@@ -30,14 +30,10 @@ public class Carta implements IJson {
         return bebidas;
     }
 
-    public String agregarComida(Plato plato) {
-        String msj = "✅ Plato agregado exitosamente.";
-        try {
-            if (!comidas.add(plato)) {
-                throw new PlatoException("⚠️ El plato ya existe.");
-            }
-        } catch (PlatoException e) {
-            msj = e.getMessage();
+    public String agregarComida(Plato plato){
+        String msj = "✅ Plato agregado exitiosamente.";
+        if(!comidas.add(plato)){
+            throw new PlatoException("⚠️ El plato ya existe.");
         }
         return msj;
     }
@@ -87,7 +83,6 @@ public class Carta implements IJson {
     }
 
     public static Plato buscarComidaPorIdEnCarta(String rutaArchivoJson, int idComida) {
-        Plato comida = null;
         try {
             JSONArray arregloCarta = new JSONArray(JSONUtiles.leerUnJson(rutaArchivoJson));
 
@@ -99,22 +94,22 @@ public class Carta implements IJson {
                     JSONObject comidaJson = comidasArray.getJSONObject(i);
 
                     if (comidaJson.getInt("id") == idComida) {
-                        comida = new Plato();
+                        Plato comida = new Plato();
                         comida.fromJson(comidaJson);
                         return comida;
                     }
                 }
             }
-            System.out.println("⚠️ La comida con ID " + idComida + " no se encontró en la carta.");
+
+            throw new RuntimeException("⚠️ La comida con ID " + idComida + " no se encontró en la carta.");
         } catch (JSONException e) {
-            System.out.println("⚠️ Error al procesar el JSON: " + e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException("⚠️ Error al procesar el JSON.", e);
         }
-        return comida;
     }
 
 
     public static Bebida buscarBebidaPorIdEnCarta(String rutaArchivoJson, int idBebida) {
-        Bebida bebida = null;
         try {
             JSONArray arregloCarta = new JSONArray(JSONUtiles.leerUnJson(rutaArchivoJson));
 
@@ -125,20 +120,20 @@ public class Carta implements IJson {
                 for (int i = 0; i < bebidasArray.length(); i++) {
                     JSONObject bebidaJson = bebidasArray.getJSONObject(i);
 
+
                     if (bebidaJson.getInt("numero") == idBebida) {
-                        bebida = new Bebida();
+                        Bebida bebida = new Bebida();
                         bebida.fromJson(bebidaJson);
                         return bebida;
                     }
                 }
             }
-            System.out.println("⚠️ La bebida con ID " + idBebida + " no se encontró en la carta.");
+            throw new RuntimeException("⚠️ La bebida con ID " + idBebida + " no se encontró en la carta.");
         } catch (JSONException e) {
-            System.out.println("⚠️ Error al procesar el JSON: " + e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException("⚠️ Error al procesar el JSON.", e);
         }
-        return bebida;
     }
-
 
     @Override
     public JSONObject toJson() throws JSONException {

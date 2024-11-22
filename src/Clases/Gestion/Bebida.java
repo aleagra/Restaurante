@@ -57,10 +57,9 @@ public class Bebida implements IJson<Bebida> {
 
     @Override
     public String toString() {
-        return "Nombre='" + nombre + '\'' +
-                ", Precio=" + precio +
-                ", Tipo=" + tipo
-                ;
+        return "NOMBRE:" + nombre +
+                "PRECIO: " + precio +
+                "TIPO: " + tipo;
     }
     @Override
     public JSONObject toJson() throws JSONException {
