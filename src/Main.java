@@ -34,32 +34,36 @@ public class Main {
                     int opcion2 = scanner.nextInt();
                     scanner.nextLine();
 
-                    System.out.println("Ingrese su email: ");
-                    String email = scanner.nextLine();
-                    System.out.println("Ingrese su contrasenia: ");
-                    String contra = scanner.nextLine();
-                    System.out.println("Ingrese su nombre: ");
-                    String nombre = scanner.nextLine();
-                    System.out.println("Ingrese su apellido: ");
-                    String apellido = scanner.nextLine();
-                    if (opcion2 == 3) {
-                        System.out.println("Ingrese su numero de telefono: ");
-                        String telefono = scanner.nextLine();
+                    if(opcion2 == 1 || opcion2 == 2 || opcion2 == 3 ||opcion2 == 4){
+                        System.out.println("Ingrese su email: ");
+                        String email = scanner.nextLine();
+                        System.out.println("Ingrese su contrasenia: ");
+                        String contra = scanner.nextLine();
+                        System.out.println("Ingrese su nombre: ");
+                        String nombre = scanner.nextLine();
+                        System.out.println("Ingrese su apellido: ");
+                        String apellido = scanner.nextLine();
 
-                        System.out.println("Ingrese su direccion: ");
-                        String direccion = scanner.nextLine();
+                        if (opcion2 == 3) {
+                            System.out.println("Ingrese su numero de telefono: ");
+                            String telefono = scanner.nextLine();
 
-                        System.out.println(restaurante.getUsuarios().registrarUsuario(restaurante, nombre, apellido, email, contra, direccion, telefono, opcion2));
-                    } else {
-                        System.out.println(restaurante.getUsuarios().registrarUsuario(restaurante, nombre, apellido, email, contra, null, null, opcion2));
+                            System.out.println("Ingrese su direccion: ");
+                            String direccion = scanner.nextLine();
 
+                            System.out.println(restaurante.getUsuarios().registrarUsuario(restaurante, nombre, apellido, email, contra, direccion, telefono, opcion2));
+                        }else if(opcion2 == 1 || opcion2 == 2 || opcion2 == 4){
+                            System.out.println(restaurante.getUsuarios().registrarUsuario(restaurante, nombre, apellido, email, contra, null, null, opcion2));
+                        }
+                    }else {
+                        System.out.println("⚠️ Ingrese un número válido.");
                     }
                     break;
                 case 2:
                     System.out.println("Ingrese su email: ");
-                    email = scanner.nextLine();
+                    String email = scanner.nextLine();
                     System.out.println("Ingrese su contrasenia: ");
-                    contra = scanner.nextLine();
+                    String contra = scanner.nextLine();
                     String logueo = restaurante.getUsuarios().loguearUsuario(email, contra);
                     Usuario usuario = restaurante.getUsuarios().buscarPorEmail(email);
 
@@ -102,8 +106,7 @@ public class Main {
                         default:
                             break;
                     }
-                default:
-                    System.out.println("Saliendo...");
+                case 0:
                     break;
             }
         }while (opcion != 0);
