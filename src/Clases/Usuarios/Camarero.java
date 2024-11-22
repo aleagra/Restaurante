@@ -104,7 +104,7 @@ public class Camarero extends Usuario {
                     Plato plato = Carta.buscarComidaPorIdEnCarta("carta.json",numero);
                     if (plato != null) {
                         pedido.addPlato(plato);
-                        System.out.println("Plato agregado al pedido.");
+                        System.out.println("✅ Plato agregado al pedido.");
                     } else {
                         System.out.println("Plato no encontrado.");
                     }
@@ -116,7 +116,7 @@ public class Camarero extends Usuario {
                     Bebida bebida = Carta.buscarBebidaPorIdEnCarta("carta.json",numero);
                     if (bebida != null) {
                         pedido.addBebida(bebida);
-                        System.out.println("Bebida agregada al pedido.");
+                        System.out.println("✅ Bebida agregada al pedido.");
                     } else {
                         System.out.println("Bebida no encontrada.");
                     }
@@ -134,15 +134,6 @@ public class Camarero extends Usuario {
         } while (opcion != 0);
 
         return pedido;
-    }
-    @Override
-    public String cambiarContrasenia(String contraActual, String contraNueva) {
-        String msj = "✅ Contraseña cambiada.";
-        if(contraActual.equals(this.contrasenia)){
-            setContrasenia(contraNueva);
-            return msj;
-        }
-        throw new ContraseniaException("⚠️ La contraseña no se pudo cambiar.");
     }
 
     @Override

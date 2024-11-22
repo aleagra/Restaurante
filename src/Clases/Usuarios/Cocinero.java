@@ -16,13 +16,18 @@ public class Cocinero extends Usuario implements IGestorPedidos{
         super(nombre, apellido, email, contrasenia);
     }
 
-    public int actualizarEstadoPedido(Pedidos pedidos, int nroPedido, EstadoPedido estado){
-        for(Pedido p: pedidos.getPedidos()){
-            if(p.getNumeroPedido() == nroPedido){
-                return p.actualizarEstadoPedido(estado);
+    public int actualizarEstadoPedido(Pedidos pedidos, int nroPedido, EstadoPedido estado) {
+        try {
+            for (Pedido p : pedidos.getPedidos()) {
+                if (p.getNumeroPedido() == nroPedido) {
+                    return p.actualizarEstadoPedido(estado);
+                }
             }
+            throw new PedidoException("No se encontró ningún pedido con ese número.");
+        } catch (PedidoException e) {
+            System.out.println(e.getMessage());
+            return -1;
         }
-        throw new PedidoException("No se encontro ningun pedido con eso nro!");
     }
 
     @Override
@@ -32,16 +37,6 @@ public class Cocinero extends Usuario implements IGestorPedidos{
                 " NOMBRE: " + nombre + '\'' +
                 " APELLIDO: '" + apellido + '\'' +
                 " EMAIL: " + email + '\'';
-    }
-
-    @Override
-    public String cambiarContrasenia(String contraActual, String contraNueva) {
-        String msj = "✅ Contraseña cambiada.";
-        if(contraActual.equals(this.contrasenia)){
-            setContrasenia(contraNueva);
-            return msj;
-        }
-        throw new ContraseniaException("⚠️ La contraseña no se pudo cambiar.");
     }
 
     @Override

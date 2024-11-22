@@ -11,7 +11,6 @@ import Interfaces.IGestorReserva;
 import JSONUtiles.JSONUtiles;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 public class Administrador extends Usuario implements IGestorReserva {
 
@@ -55,11 +54,9 @@ public class Administrador extends Usuario implements IGestorReserva {
             break;
         case 5:
             System.out.println(mesas.addMesa(m));
-            actualizarJson("mesas.json", mesas);
             break;
         case 6:
-            System.out.println(mesas.deleteMesa(nroMesa,"mesas.json"));
-            actualizarJson("mesas.json", mesas);
+            System.out.println(mesas.deleteMesa(nroMesa));
             break;
         default:
             throw new IllegalArgumentException("⚠️ Opción no válida para gestionar la carta");
@@ -72,16 +69,6 @@ public class Administrador extends Usuario implements IGestorReserva {
                 " NOMBRE: " + nombre + '\'' +
                 " APELLIDO: " + apellido + '\'' +
                 " EMAIL: " + email;
-    }
-
-    @Override
-    public String cambiarContrasenia(String contraActual, String contraNueva) {
-        String msj = "✅ Contraseña cambiada.";
-        if(contraActual.equals(this.contrasenia)){
-            setContrasenia(contraNueva);
-            return msj;
-        }
-        throw new ContraseniaException("⚠️ La contraseña no se pudo cambiar.");
     }
 
     @Override

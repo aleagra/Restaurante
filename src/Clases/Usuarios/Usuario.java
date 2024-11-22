@@ -1,4 +1,6 @@
 package Clases.Usuarios;
+import Excepciones.ContraseniaException;
+
 import java.util.Objects;
 
 public class Usuario{
@@ -54,10 +56,10 @@ public class Usuario{
 
     @Override
     public String toString() {
-        return "ID: " + id +
-                " NOMBRE: " + nombre + "\n" +
-                " APELLIDO: " + apellido + "\n" +
-                " EMAIL: " + email + "\n";
+        return "ID: " + id + " " +
+                " NOMBRE: " + nombre + " " +
+                " APELLIDO: " + apellido + " " +
+                " EMAIL: " + email;
     }
 
     @Override
@@ -72,9 +74,18 @@ public class Usuario{
         return Objects.hashCode(email);
     }
 
-    public  String cambiarContrasenia(String contraActual, String contraNueva){
-        return "";
+    public String cambiarContrasenia(String contraActual, String contraNueva) {
+        try {
+            if (!contraActual.equals(this.contrasenia)) {
+                throw new ContraseniaException("⚠️ La contraseña actual no es correcta.");
+            }
+            if (contraActual.equals(contraNueva)) {
+                throw new ContraseniaException("⚠️ La nueva contraseña no puede ser igual a la actual.");
+            }
+            setContrasenia(contraNueva);
+            return "✅ Contraseña cambiada.";
+        } catch (ContraseniaException e) {
+            return e.getMessage();
+        }
     }
-
-
 }

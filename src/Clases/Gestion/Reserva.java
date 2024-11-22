@@ -11,7 +11,6 @@ public class Reserva implements IJson {
     private Mesa mesa;
     private Cliente cliente;
 
-    // Constructor
     public Reserva(Mesa mesa, Cliente cliente) {
         this.fecha = LocalDate.now().toString();
         this.mesa = mesa;

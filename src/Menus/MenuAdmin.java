@@ -51,6 +51,7 @@ public class MenuAdmin {
                     mostrarTodasLasMesas("mesas.json");
                     break;
                 case 5:
+                    System.out.println("\n------ USUARIOS ------");
                     System.out.println(usuarios.mostrarUsuarios());
                     break;
                 case 6:

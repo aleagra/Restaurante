@@ -9,8 +9,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import javax.swing.text.Utilities;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Mesas implements IJson {
     private ArrayList<Mesa> mesas;
@@ -23,44 +23,68 @@ public class Mesas implements IJson {
         return mesas;
     }
 
-    public String addMesa(Mesa m) throws MesasException, JSONException {
-        String msj = "✅ La mesa se añadió con éxito!";
-        if(m!= null){
-            mesas.add(m);
-        }else{
-            throw new MesasException("⚠️ La mesa no puede ser null");
-        }
+    public List<Mesa> cargarMesas() {
+        List<Mesa> mesas = new ArrayList<>();
+        try {
+            JSONArray jsonArray = new JSONArray(JSONUtiles.leerUnJson("mesas.json"));
 
-        return msj;
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                Mesa mesa = new Mesa();
+                mesa.fromJson(jsonObject);
+
+                mesas.add(mesa);
+            }
+        } catch (JSONException e) {
+            System.out.println("Error al leer el archivo JSON de mesas.");
+            e.printStackTrace();
+        }
+        return mesas;
     }
 
-    public String deleteMesa(int nroMesa, String fileName) throws MesasException {
-        String msj = "";
-
-        try {
-            JSONArray jsonContent = new JSONArray(JSONUtiles.leerUnJson(fileName));
-
-            for (int i = 0; i < jsonContent.length(); i++) {
-                JSONObject jsonObject = jsonContent.getJSONObject(i);
-
-
-                if (jsonObject.getInt("numero") == nroMesa) {
-                    jsonContent.remove(i);
-                    JSONUtiles.grabarUnJson(jsonContent, fileName);
-                    msj = "✅ Mesa con ID " + nroMesa + " eliminada correctamente.";
-                    return msj;
-                }
-            }
-
-            msj = "⚠️ La mesa con ID " + nroMesa + " no existe.";
-        } catch (JSONException e) {
-            throw new MesasException("⚠️ Error al procesar el JSON.");
+    public String addMesa(Mesa mesa) throws JSONException {
+        if (mesa == null) {
+            throw new MesasException("⚠️ La mesa no puede ser nula.");
         }
 
-        if (msj.isEmpty()) {
-            throw new MesasException("⚠️ La mesa no se pudo eliminar.");
+        List<Mesa> mesas = cargarMesas();
+
+        int nuevoId = mesas.stream()
+                .mapToInt(Mesa::getNumero)
+                .max()
+                .orElse(0) + 1;
+        mesa.setNumero(nuevoId);
+
+        mesas.add(mesa);
+
+        JSONArray jsonArray = new JSONArray();
+        for (Mesa m : mesas) {
+            jsonArray.put(m.toJson());
         }
-        return msj;
+
+        JSONUtiles.grabarUnJson(jsonArray, "mesas.json");
+
+        return "Mesa agregada con éxito. ID asignado: " + nuevoId;
+    }
+
+
+    public String deleteMesa(int numeroMesa) throws JSONException {
+        List<Mesa> mesas = cargarMesas();
+
+        boolean eliminado = mesas.removeIf(m -> m.getNumero() == numeroMesa);
+
+        if (!eliminado) {
+            throw new MesasException("⚠️ No se encontró una mesa con el número: " + numeroMesa);
+        }
+
+        JSONArray jsonArray = new JSONArray();
+        for (Mesa m : mesas) {
+            jsonArray.put(m.toJson());
+        }
+
+        JSONUtiles.grabarUnJson(jsonArray, "mesas.json");
+
+        return "✅ Mesa con número " + numeroMesa + " eliminada con éxito.";
     }
 
     public Mesa asignarMesa(int capacidad) throws MesasException {

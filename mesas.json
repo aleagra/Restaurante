@@ -1,10 +1,5 @@
 [
     {
-        "numero": 1,
-        "estadoMesa": "OCUPADA",
-        "capacidad": 4
-    },
-    {
         "numero": 2,
         "estadoMesa": "OCUPADA",
         "capacidad": 6
@@ -13,11 +8,6 @@
         "numero": 3,
         "estadoMesa": "LIBRE",
         "capacidad": 2
-    },
-    {
-        "numero": 4,
-        "estadoMesa": "OCUPADA",
-        "capacidad": 8
     },
     {
         "numero": 5,
@@ -98,5 +88,25 @@
         "numero": 20,
         "estadoMesa": "LIBRE",
         "capacidad": 10
+    },
+    {
+        "numero": 21,
+        "estadoMesa": "LIBRE",
+        "capacidad": 12
+    },
+    {
+        "numero": 22,
+        "estadoMesa": "LIBRE",
+        "capacidad": 30
+    },
+    {
+        "numero": 23,
+        "estadoMesa": "LIBRE",
+        "capacidad": 23
+    },
+    {
+        "numero": 24,
+        "estadoMesa": "LIBRE",
+        "capacidad": 8
     }
 ]

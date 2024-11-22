@@ -75,32 +75,24 @@ public class MenuCliente {
     public static void mostrarCartaDesdeJson(String rutaArchivoJson) {
         try {
             JSONObject cartaJson = new JSONObject(JSONUtiles.leerUnJson(rutaArchivoJson));
-
-            // Crear una instancia de Carta
             Carta carta = new Carta();
-
             carta.fromJson(cartaJson);
-
-            System.out.println("---- CARTA ----");
-
-            System.out.println("COMIDAS:");
-            // Imprimir las comidas
+            System.out.println("\n---- CARTA ----");
+            System.out.println("🍽️COMIDAS:");
             for (Plato comida : carta.getComidas()) {
                 System.out.println("Nombre: " + comida.getNombre() + " | Precio: " + comida.getPrecio() +
                         " | Descripción: " + comida.getDescripcion() + " | Categoría: " + comida.getCategoria());
             }
 
-            System.out.println("BEBIDAS:");
-            // Imprimir las bebidas
+            System.out.println("\n🥤BEBIDAS:");
             for (Bebida bebida : carta.getBebidas()) {
                 System.out.println("Nombre: " + bebida.getNombre() + " | Precio: " + bebida.getPrecio() +
                         " | Tipo de bebida: " + bebida.getTipo());
             }
-
             System.out.println("-----------------\n");
 
         } catch (JSONException e) {
-            System.out.println("No se ha podido leer el archivo de la carta.");
+            System.out.println("⚠️  No se ha podido leer el archivo de la carta.");
             e.printStackTrace();
         }
     }

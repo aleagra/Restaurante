@@ -30,16 +30,6 @@ public class Cliente extends Usuario implements IGestorReserva, IGestorPedidos, 
     }
 
     @Override
-    public String cambiarContrasenia(String contraActual, String contraNueva) {
-        String msj = "✅ Contraseña cambiada.";
-        if(contraActual.equals(this.contrasenia)){
-            setContrasenia(contraNueva);
-            return msj;
-        }
-        throw new ContraseniaException("⚠️ La contraseña no se pudo cambiar.");
-    }
-
-    @Override
     public String obtenerReservas(Reservas res) {
         return res.mostrarReservasPorCliente(email);
     }

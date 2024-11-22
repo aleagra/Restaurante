@@ -23,14 +23,17 @@ public class MenuCocinero {
             switch (opcion) {
                 case 1:
                     System.out.println("\n--- Mostrando pedidos ---");
-                    cocinera.obtenerPedidos(pedidos);
+                    System.out.println(cocinera.obtenerPedidos(pedidos));
                     break;
 
                 case 2:
                     System.out.println("\n--- Actualizando estado del pedido ---");
                     System.out.print("Ingrese el número del pedido: ");
                     int nroPedido = sc.nextInt();
-                    cocinera.actualizarEstadoPedido(pedidos, nroPedido, EstadoPedido.LISTO);
+                    int pedido = cocinera.actualizarEstadoPedido(pedidos, nroPedido, EstadoPedido.LISTO);
+                    if(pedido != -1){
+                        System.out.println("✅El pedido " + nroPedido + " fue actualizado correctamente.");
+                    }
                     break;
 
                 case 3:
