@@ -1,5 +1,4 @@
 package Clases.Gestion;
-
 import Enums.TipoDePlato;
 import Interfaces.IJson;
 import org.json.JSONException;

@@ -3,13 +3,12 @@ import Clases.Usuarios.Cliente;
 import Enums.EstadoPedido;
 import Excepciones.BebidaException;
 import Excepciones.PlatoException;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Pedido {
-    private int numeroPedido;
     private static int contador = 1;
+    private int numeroPedido;
     private List<Plato> platos;
     private List<Bebida> bebidas;
     private EstadoPedido estado;

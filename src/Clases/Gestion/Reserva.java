@@ -1,5 +1,4 @@
 package Clases.Gestion;
-
 import Clases.Usuarios.Cliente;
 import Interfaces.IJson;
 import org.json.JSONException;
@@ -40,7 +39,7 @@ public class Reserva implements IJson {
     }
 
     @Override
-    public JSONObject toJson() throws JSONException {
+    public JSONObject toJson(){
         JSONObject obj = new JSONObject();
         try {
             obj.put("fecha", fecha);

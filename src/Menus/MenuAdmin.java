@@ -1,22 +1,15 @@
 package Menus;
-
 import Clases.Gestion.Bebida;
 import Clases.Gestion.Mesa;
 import Clases.Gestion.Plato;
-import Clases.Gestion.Reserva;
 import Clases.Usuarios.Administrador;
 import ClasesGestoras.Carta;
 import ClasesGestoras.Mesas;
-import ClasesGestoras.Reservas;
 import ClasesGestoras.Usuarios;
 import Enums.TipoDeBebida;
 import Enums.TipoDePlato;
 import Excepciones.MenuException;
-import JSONUtiles.JSONUtiles;
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.Scanner;
 
 public class MenuAdmin {
@@ -52,7 +45,7 @@ public class MenuAdmin {
                     break;
                 case 5:
                     System.out.println("\n------ USUARIOS ------");
-                    System.out.println(usuarios.mostrarUsuarios());
+                    System.out.println(administrador.mostrarUsuarios(usuarios));
                     break;
                 case 6:
                     System.out.println("\n--- Cambio de contraseña ---");

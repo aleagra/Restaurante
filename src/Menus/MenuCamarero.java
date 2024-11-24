@@ -1,21 +1,11 @@
 package Menus;
-
 import Clases.Gestion.Cuenta;
-import Clases.Gestion.Mesa;
 import Clases.Gestion.Pedido;
 import Clases.Usuarios.Camarero;
 import Clases.Usuarios.Cliente;
-import ClasesGestoras.Carta;
-import ClasesGestoras.Mesas;
 import ClasesGestoras.Pedidos;
 import ClasesGestoras.Usuarios;
-import Enums.EstadoMesa;
 import Enums.MetodoPago;
-import JSONUtiles.JSONUtiles;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.Scanner;
 
 public class MenuCamarero {
@@ -56,10 +46,8 @@ public class MenuCamarero {
                         System.out.print("Ingrese el número de orden: ");
                         int numOrden = scanner.nextInt();
                         scanner.nextLine();
-
                         MetodoPago metodoPago = camarero.consultarFormaDePago();
-
-                       Cuenta factura = camarero.generarFactura(id, numOrden, pedidos, metodoPago);
+                        Cuenta factura = camarero.generarFactura(id, numOrden, pedidos, metodoPago);
                         if (factura == null) {
                             System.out.println("❌ No hay ningun pedido asociado a ese cliente.");
                         }else {

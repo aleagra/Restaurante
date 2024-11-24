@@ -1,18 +1,14 @@
 package Clases.Usuarios;
-
-
+import Clases.Gestion.Reserva;
 import ClasesGestoras.Carta;
 import ClasesGestoras.Pedidos;
 import ClasesGestoras.Reservas;
-import Excepciones.ContraseniaException;
 import Interfaces.IGestorPedidos;
 import Interfaces.IGestorReserva;
 import Interfaces.IJson;
 import Interfaces.IMostrarCarta;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import javax.xml.catalog.Catalog;
 
 public class Cliente extends Usuario implements IGestorPedidos, IJson,IGestorReserva, IMostrarCarta {
     private String telefono;
@@ -26,6 +22,13 @@ public class Cliente extends Usuario implements IGestorPedidos, IJson,IGestorRes
     public Cliente(){
     }
 
+    public void crearReserva(Reserva reserva,Reservas reservas){
+       try {
+           reservas.agregarReserva(reserva);
+       } catch (JSONException e) {
+           throw new RuntimeException(e);
+       }
+    }
     @Override
     public String toString() {
         return "CLIENTE: " + super.toString() +

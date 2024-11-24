@@ -1,31 +1,18 @@
 package Clases.Usuarios;
-
 import Clases.Gestion.*;
 import ClasesGestoras.Carta;
 import ClasesGestoras.Mesas;
 import ClasesGestoras.Pedidos;
-import Enums.EstadoMesa;
 import Enums.EstadoPedido;
 import Enums.MetodoPago;
-import Excepciones.ContraseniaException;
 import Excepciones.PedidoExcepcion;
-import Excepciones.UsuarioNoEncontradoException;
-import Interfaces.IJson;
 import Interfaces.IMostrarMesas;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.List;
 import java.util.Scanner;
 
 public class Camarero extends Usuario implements IMostrarMesas {
 
     public Camarero(String nombre, String apellido, String email, String contrasenia) {
         super(nombre, apellido, email, contrasenia);
-    }
-
-    public Camarero(){
-
     }
 
     public MetodoPago consultarFormaDePago() {
@@ -140,8 +127,6 @@ public class Camarero extends Usuario implements IMostrarMesas {
     public String mostrarMesas(String json){
         return Mesas.mostrarMesasDisponibles(json);
     }
-
-
 
     @Override
     public String toString() {

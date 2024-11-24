@@ -1,17 +1,14 @@
 package Clases.Usuarios;
-
 import Clases.Gestion.Bebida;
 import Clases.Gestion.Mesa;
 import Clases.Gestion.Plato;
 import ClasesGestoras.Carta;
 import ClasesGestoras.Mesas;
 import ClasesGestoras.Reservas;
-import Excepciones.ContraseniaException;
+import ClasesGestoras.Usuarios;
 import Interfaces.IGestorReserva;
 import Interfaces.IMostrarCarta;
 import Interfaces.IMostrarMesas;
-import JSONUtiles.JSONUtiles;
-import org.json.JSONArray;
 import org.json.JSONException;
 
 public class Administrador extends Usuario implements IGestorReserva, IMostrarCarta, IMostrarMesas {
@@ -44,6 +41,9 @@ public class Administrador extends Usuario implements IGestorReserva, IMostrarCa
             throw new IllegalArgumentException("⚠️ Opción no válida para gestionar la carta");
     }
 }
+    public String mostrarUsuarios(Usuarios usuarios){
+        return usuarios.mostrarUsuarios();
+    }
     @Override
     public String toString() {
         return "ADMINISTRADOR: " +
@@ -67,4 +67,5 @@ public class Administrador extends Usuario implements IGestorReserva, IMostrarCa
     public String mostrarMesas(String json) {
         return Mesas.mostrarTodasLasMesas(json);
     }
+
 }

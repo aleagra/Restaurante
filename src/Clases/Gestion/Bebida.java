@@ -1,10 +1,8 @@
 package Clases.Gestion;
-
 import Enums.TipoDeBebida;
 import Interfaces.IJson;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 
 public class Bebida implements IJson {
     public int numero;

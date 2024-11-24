@@ -1,9 +1,7 @@
 package Menus;
-
 import Clases.Usuarios.Cocinero;
 import ClasesGestoras.Pedidos;
 import Enums.EstadoPedido;
-
 import java.util.Scanner;
 
 public class MenuCocinero {

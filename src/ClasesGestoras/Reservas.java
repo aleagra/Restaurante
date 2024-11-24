@@ -1,12 +1,10 @@
 package ClasesGestoras;
-
 import Clases.Gestion.Reserva;
 import Excepciones.ReservasException;
 import JSONUtiles.JSONUtiles;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,32 +16,6 @@ public class Reservas {
     public Reservas() {
         this.reservas = new ArrayList<>();
         this.nroReserva = contador++;
-    }
-
-
-    public  JSONArray toJson() throws JSONException {
-        JSONArray reservasJson = new JSONArray();
-        try {
-            for (Reserva m : reservas) {
-                reservasJson.put(m.toJson());
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return reservasJson;
-    }
-
-    public void fromJson(JSONObject json) throws JSONException {
-        try {
-            JSONArray reservasArray = json.getJSONArray("reservas");
-            for(int i = 0; i < reservasArray.length(); i++){
-                Reserva rer = new Reserva();
-                rer.fromJson(reservasArray.getJSONObject(i));
-                reservas.add(rer);
-            }
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
     }
 
     public static String mostrarReservasPorCliente(String email) {

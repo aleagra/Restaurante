@@ -1,6 +1,5 @@
 package Clases.Usuarios;
 import Excepciones.ContraseniaException;
-
 import java.util.Objects;
 
 public class Usuario{

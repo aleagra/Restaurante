@@ -1,10 +1,7 @@
 package Clases.Gestion;
-
 import Clases.Usuarios.Cliente;
 import Enums.MetodoPago;
-import Interfaces.IJson;
-import org.json.JSONException;
-import org.json.JSONObject;
+
 
 public class Cuenta {
     private static int contador = 1;

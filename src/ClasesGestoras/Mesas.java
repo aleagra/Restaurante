@@ -1,5 +1,4 @@
 package ClasesGestoras;
-
 import Clases.Gestion.Mesa;
 import Enums.EstadoMesa;
 import Excepciones.MesasException;
@@ -8,7 +7,6 @@ import JSONUtiles.JSONUtiles;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,10 +15,6 @@ public class Mesas implements IJson {
 
     public Mesas() {
         mesas = new ArrayList<>();
-    }
-
-    public ArrayList<Mesa> getMesas() {
-        return mesas;
     }
 
     public List<Mesa> cargarMesas() {
@@ -46,7 +40,6 @@ public class Mesas implements IJson {
         if (mesa == null) {
             throw new MesasException("⚠️ La mesa no puede ser nula.");
         }
-
         List<Mesa> mesas = cargarMesas();
 
         int nuevoId = mesas.stream()
@@ -61,9 +54,7 @@ public class Mesas implements IJson {
         for (Mesa m : mesas) {
             jsonArray.put(m.toJson());
         }
-
         JSONUtiles.grabarUnJson(jsonArray, "mesas.json");
-
         return "Mesa agregada con éxito. ID asignado: " + nuevoId;
     }
 

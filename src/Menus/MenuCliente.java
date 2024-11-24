@@ -1,23 +1,15 @@
 package Menus;
-
-import Clases.Gestion.Bebida;
 import Clases.Gestion.Mesa;
-import Clases.Gestion.Plato;
 import Clases.Gestion.Reserva;
 import Clases.Usuarios.Cliente;
-import ClasesGestoras.Carta;
 import ClasesGestoras.Mesas;
 import ClasesGestoras.Pedidos;
 import ClasesGestoras.Reservas;
-import JSONUtiles.JSONUtiles;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import java.util.Scanner;
 
 public class MenuCliente {
 
-    public void mostrarMenu(Scanner scanner, Mesas mesas, Cliente cliente, Reservas reservas, Pedidos pedidos, JSONArray jsonReservas) throws JSONException {
+    public void mostrarMenu(Scanner scanner, Mesas mesas, Cliente cliente, Reservas reservas, Pedidos pedidos) {
         int opcion;
 
         do {
@@ -43,7 +35,8 @@ public class MenuCliente {
                     Mesa mesa = mesas.asignarMesa(personas);
                     if (mesa != null) {
                         Reserva reserva = new Reserva(mesa, cliente);
-                        reservas.agregarReserva(reserva);
+                        cliente.crearReserva(reserva,reservas);
+                        System.out.println("✅ La reserva fue creada con exito.");
                     } else {
                         System.out.println("❌ No hay mesas disponibles para esa cantidad de personas.");
                     }

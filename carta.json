@@ -27,6 +27,13 @@
             "categoria": "PRINCIPAL",
             "id": 4,
             "nombre": "Sopa de tomate"
+        },
+        {
+            "descripcion": "a",
+            "precio": 1,
+            "categoria": "ENTRANTE",
+            "id": 0,
+            "nombre": "a"
         }
     ],
     "bebidas": [

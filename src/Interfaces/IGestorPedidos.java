@@ -1,5 +1,4 @@
 package Interfaces;
-
 import ClasesGestoras.Pedidos;
 
 public interface IGestorPedidos {
