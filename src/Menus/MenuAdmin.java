@@ -116,6 +116,7 @@ public class MenuAdmin {
                                 break;
                             default:
                                 System.out.println("⚠️ Categoría inválida. Selección por defecto: 'Principal'.");
+                                pl.setCategoria(TipoDePlato.PRINCIPAL);
                                 break;
                         }
                         administrador.gestionarMenu(1,mesas, mesa,0, c, pl, null, null);
@@ -144,6 +145,7 @@ public class MenuAdmin {
                                 break;
                             default:
                                 System.out.println("⚠️ Tipo inválido. Selección por defecto: 'Sin alcohol'.");
+                                beb.setTipo(TipoDeBebida.SIN_ALCOHOL);
                                 break;
                         }
                         administrador.gestionarMenu(2,mesas, mesa,0, c, null, beb, null);
