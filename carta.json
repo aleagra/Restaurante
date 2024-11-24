@@ -9,7 +9,7 @@
         {
             "descripcion": "Carne de res con guarnición de papas",
             "precio": 15,
-            "categoria": "ENTRANTE",
+            "categoria": "PRINCIPAL",
             "nombre": "Bife de chorizo"
         },
         {
@@ -19,22 +19,22 @@
             "nombre": "Tarta de manzana"
         },
         {
-            "descripcion": "a",
-            "precio": 1,
-            "categoria": "ENTRANTE",
-            "nombre": "a"
+            "descripcion": "Deliciosos ravioles rellenos de jamón y queso, envueltos en una suave pasta que se funde al paladar",
+            "precio": 8,
+            "categoria": "PRINCIPAL",
+            "nombre": "Ravioles de Jamon y Queso"
         },
         {
-            "descripcion": "alsdksda",
-            "precio": 50000,
+            "descripcion": "Delicioso flan acompañando del mejor dulce de leche",
+            "precio": 7,
             "categoria": "POSTRE",
-            "nombre": "aleeee"
+            "nombre": "Flan con Dulce de Leche"
         },
         {
-            "descripcion": "estudiante de la UTN",
-            "precio": 1,
+            "descripcion": "Crispantes papas fritas, doradas a la perfección, con un exterior crujiente y un interior suave y esponjoso",
+            "precio": 4,
             "categoria": "ENTRANTE",
-            "nombre": "Alejandro Agra"
+            "nombre": "Papas Fritas"
         }
     ],
     "bebidas": [
@@ -44,14 +44,14 @@
             "nombre": "Coca-Cola"
         },
         {
-            "precio": 450,
+            "precio": 15,
             "tipo": "CON_ALCOHOL",
-            "nombre": "avril"
+            "nombre": "Cuba Libre"
         },
         {
-            "precio": 10000,
+            "precio": 7,
             "tipo": "SIN_ALCOHOL",
-            "nombre": "Avril Traverso"
+            "nombre": "Agua"
         }
     ]
 }
