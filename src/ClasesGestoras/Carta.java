@@ -150,7 +150,7 @@ public class Carta {
                 for (int i = 0; i < comidasArray.length(); i++) {
                     JSONObject comidaJson = comidasArray.getJSONObject(i);
 
-                    if (comidaJson.getString("nombre").equals(nombreComida)) {
+                    if (comidaJson.getString("nombre").trim().equalsIgnoreCase(nombreComida)) {
                         Plato comida = new Plato();
                         comida.fromJson(comidaJson);
                         return comida;
@@ -177,7 +177,7 @@ public class Carta {
                 for (int i = 0; i < bebidasArray.length(); i++) {
                     JSONObject bebidaJson = bebidasArray.getJSONObject(i);
 
-                    if (bebidaJson.getString("nombre").equals(nombreBebida)) {
+                    if (bebidaJson.getString("nombre").trim().equalsIgnoreCase(nombreBebida)) {
                         Bebida bebida = new Bebida();
                         bebida.fromJson(bebidaJson);
                         return bebida;

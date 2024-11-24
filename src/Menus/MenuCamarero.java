@@ -32,10 +32,12 @@ public class MenuCamarero {
                         System.out.print("\nConsulte el ID del cliente: ");
                         int id = scanner.nextInt();
                         scanner.nextLine();
-                        System.out.println("\n--- Registrando pedido ---");
                         Cliente usuario = usuarios.buscarPorId(id);
-                        Pedido pedido = camarero.generarPedido(usuario);
-                        System.out.println(pedidos.agregarPedido(pedido));
+                        if(usuario != null){
+                            System.out.println("\n--- Registrando pedido ---");
+                            Pedido pedido = camarero.generarPedido(usuario);
+                            System.out.println(pedidos.agregarPedido(pedido));
+                        }
                         break;
 
                     case 2:

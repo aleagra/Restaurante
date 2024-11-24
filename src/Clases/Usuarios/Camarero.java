@@ -84,12 +84,12 @@ public class Camarero extends Usuario implements IMostrarMesas {
             System.out.println("2. Agregar una bebida");
             System.out.println("0. Finalizar pedido");
             opcion = scanner.nextInt();
+            scanner.nextLine();
 
             switch (opcion) {
                 case 1: {
                     System.out.println("Ingrese el nombre del plato:");
-                    String nombre = scanner.next();
-                    scanner.nextLine();
+                    String nombre = scanner.nextLine().trim();
                     Plato plato = Carta.buscarComidaPorNombre("carta.json",nombre);
                     if (plato != null) {
                         pedido.addPlato(plato);
@@ -101,8 +101,7 @@ public class Camarero extends Usuario implements IMostrarMesas {
                 }
                 case 2: {
                     System.out.println("Ingrese el nombre de la bebida:");
-                    String nombre = scanner.next();
-                    scanner.nextLine();
+                    String nombre = scanner.nextLine().trim();
                     Bebida bebida = Carta.buscarBebidaPorNombre("carta.json",nombre);
                     if (bebida != null) {
                         pedido.addBebida(bebida);

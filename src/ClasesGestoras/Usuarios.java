@@ -101,17 +101,23 @@ public class Usuarios {
         return resultado.toString();
     }
 
-    public Cliente buscarPorId(int id){
-       Cliente clienteAux = new Cliente();
-        for (Usuario cliente:listaUsuarios){
-            if (cliente.getId() == id && cliente.getClass().getSimpleName().equalsIgnoreCase("cliente")){
-                clienteAux = (Cliente) cliente;
+    public Cliente buscarPorId(int id) {
+        try {
+            Cliente clienteAux = null;
+            for (Usuario cliente : listaUsuarios) {
+                if (cliente.getId() == id && cliente.getClass().getSimpleName().equalsIgnoreCase("cliente")) {
+                    clienteAux = (Cliente) cliente;
+                    break;
+                }
             }
+            if (clienteAux == null) {
+                throw new RuntimeException("⚠️ No se encuentra el id: " + id + " o el usuario no es un cliente.");
+            }
+            return clienteAux;
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+            return null;
         }
-        if (clienteAux == null){
-            throw new RuntimeException("⚠️ No se encuentra el id");
-        }
-        return clienteAux;
     }
 
     public Usuario buscarPorEmail(String email){

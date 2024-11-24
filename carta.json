@@ -19,22 +19,22 @@
             "nombre": "Tarta de manzana"
         },
         {
-            "descripcion": "Sopa caliente con tomates frescos y hierbas",
-            "precio": 6,
-            "categoria": "PRINCIPAL",
-            "nombre": "Sopa de tomate"
-        },
-        {
             "descripcion": "a",
             "precio": 1,
             "categoria": "ENTRANTE",
             "nombre": "a"
         },
         {
-            "descripcion": "rewg",
-            "precio": 450,
+            "descripcion": "alsdksda",
+            "precio": 50000,
+            "categoria": "POSTRE",
+            "nombre": "aleeee"
+        },
+        {
+            "descripcion": "Sopa caliente con hierbas",
+            "precio": 5000,
             "categoria": "ENTRANTE",
-            "nombre": "ale"
+            "nombre": "Sopa de tomate"
         }
     ],
     "bebidas": [
