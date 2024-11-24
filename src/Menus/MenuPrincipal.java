@@ -36,8 +36,8 @@ public class MenuPrincipal {
                 new Camarero("Pedro", "Fernández", "b", "b"),
                 new Administrador("Lucía", "Gómez", "a", "a"),
                 new Cocinero("Marcos", "Rivas", "m", "m"),
-                new Cocinero("Elena", "Suárez", "elena.suarez@mail.com", "chef001"),
-                new Cliente("Jorge", "Díaz", "jorge.diaz@mail.com", "client123", "Av. Libertad 123", "1122334455"),
+                new Cocinero("Elena", "Suárez", "c", "c"),
+                new Cliente("Jorge", "Díaz", "w", "w", "Av. Libertad 123", "1122334455"),
                 new Cliente("Claudia", "Vega", "claudia.vega@mail.com", "client456", "Calle Primavera 456", "2233445566"),
                 new Cliente("Andrés", "Soto", "andres.soto@mail.com", "", "Pasaje Azul 789", "3344556677"),
                 new Cliente("Valeria", "Campos", "valeria.campos@mail.com", "client001", "Bulevar Verde 321", "4455667788")

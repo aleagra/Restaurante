@@ -200,6 +200,39 @@ public class Carta {
         }
     }
 
+    public static String mostrarCartaDesdeJson(String rutaArchivoJson) {
+        StringBuilder resultado = new StringBuilder();
+
+        try {
+            JSONObject cartaJson = new JSONObject(JSONUtiles.leerUnJson(rutaArchivoJson));
+            Carta carta = new Carta();
+            carta.fromJson(cartaJson);
+
+            resultado.append("\n---- CARTA ----\n");
+            resultado.append("🍽️ COMIDAS:\n");
+            for (Plato comida : carta.getComidas()) {
+                resultado.append("Nombre: ").append(comida.getNombre())
+                        .append(" | Precio: ").append(comida.getPrecio())
+                        .append(" | Descripción: ").append(comida.getDescripcion())
+                        .append(" | Categoría: ").append(comida.getCategoria()).append("\n");
+            }
+
+            resultado.append("\n🥤 BEBIDAS:\n");
+            for (Bebida bebida : carta.getBebidas()) {
+                resultado.append("Nombre: ").append(bebida.getNombre())
+                        .append(" | Precio: ").append(bebida.getPrecio())
+                        .append(" | Tipo de bebida: ").append(bebida.getTipo()).append("\n");
+            }
+            resultado.append("-----------------\n");
+
+        } catch (JSONException e) {
+            resultado.append("⚠️ No se ha podido leer el archivo de la carta.\n");
+            e.printStackTrace();
+        }
+
+        return resultado.toString();
+    }
+
     public JSONObject toJson() throws JSONException {
         JSONObject json = new JSONObject();
         try {

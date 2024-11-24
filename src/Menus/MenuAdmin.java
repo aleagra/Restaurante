@@ -42,13 +42,13 @@ public class MenuAdmin {
                     gestionMenu(administrador, sc, c, mesas, mesa);
                     break;
                 case 2:
-                    mostrarTodasLasReservas("reservas.json");
+                    System.out.println(administrador.obtenerReservas());
                     break;
-                case 3: 
-                    MenuCliente.mostrarCartaDesdeJson("carta.json");
+                case 3:
+                    System.out.println(administrador.mostrarCarta("carta.json"));
                     break;
                 case 4:
-                    mostrarTodasLasMesas("mesas.json");
+                    System.out.println(administrador.mostrarMesas("mesas.json"));
                     break;
                 case 5:
                     System.out.println("\n------ USUARIOS ------");
@@ -183,63 +183,7 @@ public class MenuAdmin {
         } while (opcion != 0);
     }
 
-    public static void mostrarTodasLasMesas(String rutaArchivoJson) {
-        try {
-            JSONArray arregloMesas = new JSONArray(JSONUtiles.leerUnJson(rutaArchivoJson));
 
-            if (arregloMesas.length() > 0) {
-                for (int i = 0; i < arregloMesas.length(); i++) {
-                    JSONObject jsonObject = arregloMesas.getJSONObject(i);
 
-                    Mesa mesa = new Mesa();
-                    mesa.fromJson(jsonObject);
-
-                    mostrarDetallesMesa(mesa);
-                }
-            } else {
-                System.out.println("⚠️ No se encontraron mesas en el archivo.");
-            }
-        } catch (JSONException e) {
-            System.out.println("⚠️ No se ha podido leer el archivo.");
-            e.printStackTrace();
-        }
-    }
-
-    private static void mostrarDetallesMesa(Mesa mesa) {
-        System.out.println("NUMERO: " + mesa.getNumero() +
-                " | CAPACIDAD: " + mesa.getCapacidad() +
-                " | ESTADO: " + mesa.getEstadoMesa());
-    }
-
-    public static void mostrarTodasLasReservas(String rutaArchivoJson) {
-        try {
-            JSONArray arregloReservas = new JSONArray(JSONUtiles.leerUnJson(rutaArchivoJson));
-
-            if (arregloReservas.length() > 0) {
-                System.out.println("\n--- Reservas ---");
-
-                for (int i = 0; i < arregloReservas.length(); i++) {
-                    JSONObject jsonObject = arregloReservas.getJSONObject(i);
-
-                    Reserva reserva = new Reserva();
-                    reserva.fromJson(jsonObject);
-
-                    mostrarDetallesReserva(reserva);
-                }
-            } else {
-                System.out.println("⚠️ No se encontraron reservas en el archivo.");
-            }
-        } catch (JSONException e) {
-            System.out.println("⚠️ No se ha podido leer el archivo.");
-            e.printStackTrace();
-        }
-    }
-
-    private static void mostrarDetallesReserva(Reserva reserva) {
-        System.out.println("Fecha: " + reserva.getFecha() +
-                " | Mesa Número: " + reserva.getMesa().getNumero() +
-                " | Capacidad: " + reserva.getMesa().getCapacidad() +
-                " | Cliente: " + reserva.getCliente().getNombre() + " " + reserva.getCliente().getApellido());
-    }
 
 }

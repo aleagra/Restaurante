@@ -11,13 +11,14 @@ import Excepciones.ContraseniaException;
 import Excepciones.PedidoExcepcion;
 import Excepciones.UsuarioNoEncontradoException;
 import Interfaces.IJson;
+import Interfaces.IMostrarMesas;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class Camarero extends Usuario {
+public class Camarero extends Usuario implements IMostrarMesas {
 
     public Camarero(String nombre, String apellido, String email, String contrasenia) {
         super(nombre, apellido, email, contrasenia);
@@ -135,6 +136,12 @@ public class Camarero extends Usuario {
 
         return pedido;
     }
+    @Override
+    public String mostrarMesas(String json){
+        return Mesas.mostrarMesasDisponibles(json);
+    }
+
+
 
     @Override
     public String toString() {

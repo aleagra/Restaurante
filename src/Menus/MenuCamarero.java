@@ -46,7 +46,7 @@ public class MenuCamarero {
                         break;
 
                     case 2:
-                        mostrarMesasDisponibles("mesas.json");
+                        System.out.println(camarero.mostrarMesas("mesas.json"));
                         break;
                     case 3:
                         System.out.print("\nConsulte el ID del cliente: ");
@@ -83,37 +83,8 @@ public class MenuCamarero {
         } while (opcion != 0);
     }
 
-    public static void mostrarMesasDisponibles(String rutaArchivoJson) {
-        try {
-            JSONArray arregloMesas = new JSONArray(JSONUtiles.leerUnJson(rutaArchivoJson));
 
-            if (arregloMesas.length() > 0) {
-                System.out.println("\n--- Mesas Disponibles ---");
 
-                for (int i = 0; i < arregloMesas.length(); i++) {
-                    JSONObject jsonObject = arregloMesas.getJSONObject(i);
-
-                    Mesa mesa = new Mesa();
-                    mesa.fromJson(jsonObject);
-
-                    if (mesa.getEstadoMesa().equals(EstadoMesa.LIBRE)) {
-                        mostrarDetallesMesa(mesa);
-                    }
-                }
-            } else {
-                System.out.println("⚠️ No se encontraron mesas en el archivo.");
-            }
-        } catch (JSONException e) {
-            System.out.println("⚠️ No se ha podido leer el archivo.");
-            e.printStackTrace();
-        }
-    }
-
-    private static void mostrarDetallesMesa(Mesa mesa) {
-        System.out.println("NUMERO: " + mesa.getNumero() +
-                " | CAPACIDAD: " + mesa.getCapacidad() +
-                " | ESTADO: " + mesa.getEstadoMesa());
-    }
 }
 
 

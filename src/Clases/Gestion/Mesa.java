@@ -5,7 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.Objects;
 
-public class Mesa implements IJson<Mesa> {
+public class Mesa implements IJson{
     private static int contador=1;
     public int numero;
     public int capacidad;

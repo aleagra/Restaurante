@@ -1,10 +1,53 @@
-[{
-    "comidas": [{
-        "descripcion": "a",
-        "precio": 2,
-        "categoria": "ENTRANTE",
-        "id": 0,
-        "nombre": "a"
-    }],
-    "bebidas": []
-}]
+[
+    {
+        "fecha": "2024-11-24",
+        "cliente": {
+            "Nombre": "Jorge",
+            "Contrasenia": "client123",
+            "Email": "w",
+            "Telefono": "Av. Libertad 123",
+            "Apellido": "Díaz",
+            "Direccion": "1122334455",
+            "Id": 5
+        },
+        "mesa": {
+            "numero": 6,
+            "estadoMesa": "OCUPADA",
+            "capacidad": 4
+        }
+    },
+    {
+        "fecha": "2024-11-24",
+        "cliente": {
+            "Nombre": "Jorge",
+            "Contrasenia": "client123",
+            "Email": "w",
+            "Telefono": "Av. Libertad 123",
+            "Apellido": "Díaz",
+            "Direccion": "1122334455",
+            "Id": 5
+        },
+        "mesa": {
+            "numero": 9,
+            "estadoMesa": "OCUPADA",
+            "capacidad": 6
+        }
+    },
+    {
+        "fecha": "2024-11-24",
+        "cliente": {
+            "Nombre": "Claudia",
+            "Contrasenia": "client456",
+            "Email": "claudia.vega@mail.com",
+            "Telefono": "Calle Primavera 456",
+            "Apellido": "Vega",
+            "Direccion": "2233445566",
+            "Id": 6
+        },
+        "mesa": {
+            "numero": 16,
+            "estadoMesa": "OCUPADA",
+            "capacidad": 8
+        }
+    }
+]

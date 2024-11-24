@@ -1,16 +1,20 @@
 package Clases.Usuarios;
 
 
+import ClasesGestoras.Carta;
 import ClasesGestoras.Pedidos;
 import ClasesGestoras.Reservas;
 import Excepciones.ContraseniaException;
 import Interfaces.IGestorPedidos;
 import Interfaces.IGestorReserva;
 import Interfaces.IJson;
+import Interfaces.IMostrarCarta;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Cliente extends Usuario implements IGestorReserva, IGestorPedidos, IJson<Cliente>{
+import javax.xml.catalog.Catalog;
+
+public class Cliente extends Usuario implements IGestorPedidos, IJson,IGestorReserva, IMostrarCarta {
     private String telefono;
     private String direccion;
 
@@ -30,8 +34,8 @@ public class Cliente extends Usuario implements IGestorReserva, IGestorPedidos, 
     }
 
     @Override
-    public String obtenerReservas(Reservas res) {
-        return res.mostrarReservasPorCliente(email);
+    public String obtenerReservas() {
+        return Reservas.mostrarReservasPorCliente(this.email);
     }
 
     @Override
@@ -73,5 +77,8 @@ public class Cliente extends Usuario implements IGestorReserva, IGestorPedidos, 
         }
     }
 
-
+    @Override
+    public String mostrarCarta(String json) {
+        return Carta.mostrarCartaDesdeJson(json);
+    }
 }

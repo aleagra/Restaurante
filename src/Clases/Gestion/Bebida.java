@@ -6,7 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class Bebida implements IJson<Bebida> {
+public class Bebida implements IJson {
     public int numero;
     private String nombre;
     private double precio;

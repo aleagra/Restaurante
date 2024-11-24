@@ -122,6 +122,70 @@ public class Mesas implements IJson {
         return mesa;
     }
 
+    public static String mostrarTodasLasMesas(String rutaArchivoJson) {
+        StringBuilder resultado = new StringBuilder();
+
+        try {
+            JSONArray arregloMesas = new JSONArray(JSONUtiles.leerUnJson(rutaArchivoJson));
+
+            if (arregloMesas.length() > 0) {
+                for (int i = 0; i < arregloMesas.length(); i++) {
+                    JSONObject jsonObject = arregloMesas.getJSONObject(i);
+
+                    Mesa mesa = new Mesa();
+                    mesa.fromJson(jsonObject);
+
+                    resultado.append(detallesMesa(mesa)).append("\n");
+                }
+            } else {
+                resultado.append("⚠️ No se encontraron mesas en el archivo.\n");
+            }
+        } catch (JSONException e) {
+            resultado.append("⚠️ No se ha podido leer el archivo.\n");
+            e.printStackTrace();
+        }
+
+        return resultado.toString();
+    }
+
+    private static String detallesMesa(Mesa mesa) {
+        StringBuilder detalles = new StringBuilder();
+        detalles.append("NUMERO: ").append(mesa.getNumero())
+                .append(" | CAPACIDAD: ").append(mesa.getCapacidad())
+                .append(" | ESTADO: ").append(mesa.getEstadoMesa());
+        return detalles.toString();
+    }
+
+    public static String mostrarMesasDisponibles(String rutaArchivoJson) {
+        StringBuilder resultado = new StringBuilder();
+
+        try {
+            JSONArray arregloMesas = new JSONArray(JSONUtiles.leerUnJson(rutaArchivoJson));
+
+            if (arregloMesas.length() > 0) {
+                resultado.append("\n--- Mesas Disponibles ---\n");
+
+                for (int i = 0; i < arregloMesas.length(); i++) {
+                    JSONObject jsonObject = arregloMesas.getJSONObject(i);
+
+                    Mesa mesa = new Mesa();
+                    mesa.fromJson(jsonObject);
+
+                    if (mesa.getEstadoMesa().equals(EstadoMesa.LIBRE)) {
+                        resultado.append(detallesMesa(mesa)).append("\n");
+                    }
+                }
+            } else {
+                resultado.append("⚠️ No se encontraron mesas en el archivo.\n");
+            }
+        } catch (JSONException e) {
+            resultado.append("⚠️ No se ha podido leer el archivo.\n");
+            e.printStackTrace();
+        }
+
+        return resultado.toString();
+    }
+
     @Override
     public JSONObject toJson() throws JSONException {
         JSONObject obj = new JSONObject();

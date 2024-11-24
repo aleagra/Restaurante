@@ -8,11 +8,13 @@ import ClasesGestoras.Mesas;
 import ClasesGestoras.Reservas;
 import Excepciones.ContraseniaException;
 import Interfaces.IGestorReserva;
+import Interfaces.IMostrarCarta;
+import Interfaces.IMostrarMesas;
 import JSONUtiles.JSONUtiles;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-public class Administrador extends Usuario implements IGestorReserva {
+public class Administrador extends Usuario implements IGestorReserva, IMostrarCarta, IMostrarMesas {
 
     public Administrador(String nombre, String apellido, String email, String contrasenia) {
         super(nombre, apellido, email, contrasenia);
@@ -52,10 +54,17 @@ public class Administrador extends Usuario implements IGestorReserva {
     }
 
     @Override
-    public String obtenerReservas(Reservas res) { // CAMBIAR A JSON
-        return res.verReservas();
+    public String obtenerReservas() {
+        return Reservas.mostrarReservas();
     }
 
+    @Override
+    public String mostrarCarta(String json) {
+        return Carta.mostrarCartaDesdeJson(json);
+    }
 
-
+    @Override
+    public String mostrarMesas(String json) {
+        return Mesas.mostrarTodasLasMesas(json);
+    }
 }

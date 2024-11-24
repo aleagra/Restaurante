@@ -46,14 +46,41 @@ public class Reservas {
         }
     }
 
-    public String mostrarReservasPorCliente(String email){
-        StringBuilder lista = new StringBuilder();
-        for(Reserva reserva : reservas){
-            if(reserva.getCliente().getEmail().equals(email)){
-                lista.append(reserva).append("\n");
+    public static String mostrarReservasPorCliente(String email) {
+        StringBuilder resultado = new StringBuilder();
+
+        try {
+            JSONArray arregloReservas = new JSONArray(JSONUtiles.leerUnJson("reservas.json"));
+
+            if (arregloReservas.length() > 0) {
+                resultado.append("\n--- TUS RESERVAS ---\n");
+
+                boolean reservasEncontradas = false;
+
+                for (int i = 0; i < arregloReservas.length(); i++) {
+                    JSONObject jsonObject = arregloReservas.getJSONObject(i);
+
+                    Reserva reserva = new Reserva();
+                    reserva.fromJson(jsonObject);
+
+                    if (reserva.getCliente().getEmail().equalsIgnoreCase(email)) {
+                        resultado.append(detallesReserva(reserva)).append("\n");
+                        reservasEncontradas = true;
+                    }
+                }
+
+                if (!reservasEncontradas) {
+                    resultado.append("⚠️ No se encontraron reservas para el cliente especificado.\n");
+                }
+            } else {
+                resultado.append("⚠️ No se encontraron reservas en el archivo.\n");
             }
+        } catch (JSONException e) {
+            resultado.append("⚠️ No se ha podido leer el archivo.\n");
+            e.printStackTrace();
         }
-        return lista.toString();
+
+        return resultado.toString();
     }
 
     public List<Reserva> cargarReservas() {
@@ -89,11 +116,42 @@ public class Reservas {
         JSONUtiles.grabarUnJson(jsonArray,"reservas.json");
     }
 
-    public String verReservas(){ // METODO TO JSON
-        StringBuilder builder = new StringBuilder();
-        for(Reserva reserva: reservas){
-            builder.append(reserva.toString()).append("\n");
+    public static String mostrarReservas() {
+        StringBuilder resultado = new StringBuilder();
+
+        try {
+            JSONArray arregloReservas = new JSONArray(JSONUtiles.leerUnJson("reservas.json"));
+
+            if (arregloReservas.length() > 0) {
+                resultado.append("\n--- Reservas ---\n");
+
+                for (int i = 0; i < arregloReservas.length(); i++) {
+                    JSONObject jsonObject = arregloReservas.getJSONObject(i);
+
+                    Reserva reserva = new Reserva();
+                    reserva.fromJson(jsonObject);
+
+                    resultado.append(detallesReserva(reserva)).append("\n");
+                }
+            } else {
+                resultado.append("⚠️ No se encontraron reservas en el archivo.\n");
+            }
+        } catch (JSONException e) {
+            resultado.append("⚠️ No se ha podido leer el archivo.\n");
+            e.printStackTrace();
         }
-        return builder.toString();
+
+        return resultado.toString();
     }
+
+    private static String detallesReserva(Reserva reserva) {
+        StringBuilder detalles = new StringBuilder();
+        detalles.append("Fecha: ").append(reserva.getFecha())
+                .append(" | Mesa Número: ").append(reserva.getMesa().getNumero())
+                .append(" | Capacidad: ").append(reserva.getMesa().getCapacidad())
+                .append(" | Cliente: ").append(reserva.getCliente().getNombre())
+                .append(" ").append(reserva.getCliente().getApellido());
+        return detalles.toString();
+    }
+
 }

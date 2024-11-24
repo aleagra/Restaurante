@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class MenuCocinero {
 
-    public void mostrarMenuCocinero(Pedidos pedidos, Scanner sc, Cocinero cocinera) {
+    public void mostrarMenuCocinero(Pedidos pedidos, Scanner sc, Cocinero cocinero) {
         int opcion;
         do {
             System.out.println("\n========== MENU COCINERO ==========");
@@ -23,14 +23,14 @@ public class MenuCocinero {
             switch (opcion) {
                 case 1:
                     System.out.println("\n--- Mostrando pedidos ---");
-                    System.out.println(cocinera.obtenerPedidos(pedidos));
+                    System.out.println(cocinero.obtenerPedidos(pedidos));
                     break;
 
                 case 2:
                     System.out.println("\n--- Actualizando estado del pedido ---");
                     System.out.print("Ingrese el número del pedido: ");
                     int nroPedido = sc.nextInt();
-                    int pedido = cocinera.actualizarEstadoPedido(pedidos, nroPedido, EstadoPedido.LISTO);
+                    int pedido = cocinero.actualizarEstadoPedido(pedidos, nroPedido, EstadoPedido.LISTO);
                     if(pedido != -1){
                         System.out.println("✅El pedido " + nroPedido + " fue actualizado correctamente.");
                     }
@@ -42,7 +42,7 @@ public class MenuCocinero {
                     String contraActual = sc.nextLine();
                     System.out.print("Ingrese la nueva contraseña: ");
                     String contraNueva = sc.nextLine();
-                    System.out.println(cocinera.cambiarContrasenia(contraActual, contraNueva));
+                    System.out.println(cocinero.cambiarContrasenia(contraActual, contraNueva));
                     break;
 
                 default:
