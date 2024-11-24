@@ -16,6 +16,7 @@ public class Usuarios {
     public Set<Usuario> getListaUsuarios() {
         return listaUsuarios;
     }
+
     public void registrarUsuarioHarcodeado(Usuario usuario) throws EmailDuplicadoException {
         if (!listaUsuarios.add(usuario)) {
             throw new EmailDuplicadoException("El usuario con este email ya está registrado.");

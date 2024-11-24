@@ -1,5 +1,5 @@
 package Enums;
 
 public enum EstadoPedido {
-    PENDIENTE, EN_PREPARACION, LISTO
+    EN_PREPARACION, LISTO
 }

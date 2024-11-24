@@ -59,23 +59,30 @@ public class Mesas implements IJson {
     }
 
 
-    public String deleteMesa(int numeroMesa) throws JSONException {
-        List<Mesa> mesas = cargarMesas();
+    public String deleteMesa(int numeroMesa) {
+        try {
+            List<Mesa> mesas = cargarMesas();
 
-        boolean eliminado = mesas.removeIf(m -> m.getNumero() == numeroMesa);
+            boolean eliminado = mesas.removeIf(m -> m.getNumero() == numeroMesa);
 
-        if (!eliminado) {
-            throw new MesasException("⚠️ No se encontró una mesa con el número: " + numeroMesa);
+            if (!eliminado) {
+                throw new MesasException("⚠️ No se encontró una mesa con el número: " + numeroMesa);
+            }
+
+            JSONArray jsonArray = new JSONArray();
+            for (Mesa m : mesas) {
+                jsonArray.put(m.toJson());
+            }
+
+            JSONUtiles.grabarUnJson(jsonArray, "mesas.json");
+
+            return "✅ Mesa con número " + numeroMesa + " eliminada con éxito.";
+
+        } catch (MesasException e) {
+            return e.getMessage();
+        } catch (JSONException e) {
+            return "⚠️ Error al procesar los datos de las mesas.";
         }
-
-        JSONArray jsonArray = new JSONArray();
-        for (Mesa m : mesas) {
-            jsonArray.put(m.toJson());
-        }
-
-        JSONUtiles.grabarUnJson(jsonArray, "mesas.json");
-
-        return "✅ Mesa con número " + numeroMesa + " eliminada con éxito.";
     }
 
     public Mesa asignarMesa(int capacidad) throws MesasException {
@@ -178,7 +185,7 @@ public class Mesas implements IJson {
     }
 
     @Override
-    public JSONObject toJson() throws JSONException {
+    public JSONObject toJson() {
         JSONObject obj = new JSONObject();
         try {
             JSONArray mesasJson = new JSONArray();
@@ -193,7 +200,7 @@ public class Mesas implements IJson {
     }
 
     @Override
-    public void fromJson(JSONObject json) throws JSONException {
+    public void fromJson(JSONObject json){
         try {
             JSONArray mesasArray = json.getJSONArray("mesas");
             mesas.clear();
