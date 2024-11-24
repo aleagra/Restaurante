@@ -52,7 +52,7 @@ public class MenuCocinero {
                         break;
                 }
             }catch(InputMismatchException e){
-                System.out.println("⚠️ Entrada inválida. Por favor, ingrese un número.");
+                System.out.println("⚠️ Entrada inválida. Por favor, vuelva a iniciar sesión.");
                 sc.nextLine();
             }
         } while (opcion != 0);

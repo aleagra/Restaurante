@@ -63,7 +63,7 @@ public class MenuAdmin {
                         break;
                 }
             }catch(InputMismatchException e){
-                System.out.println("⚠️ Entrada inválida. Por favor, ingrese un número.");
+                System.out.println("⚠️ Entrada inválida. Por favor, vuelva a iniciar sesión.");
                 sc.nextLine();
             }
         } while (opcion != 0);
@@ -182,7 +182,7 @@ public class MenuAdmin {
                         System.out.println("\n🔙 Volviendo al menú principal...");
                 }
             }catch(InputMismatchException e){
-                System.out.println("⚠️ Entrada inválida. Por favor, ingrese un número.");
+                System.out.println("⚠️ Entrada inválida. Por favor, vuelva a iniciar sesión.");
                 sc.nextLine();
             }
         } while (opcion != 0);

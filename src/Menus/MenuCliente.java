@@ -65,7 +65,7 @@ public class MenuCliente {
                         System.out.println("\n👋 Sesión cerrada. ¡Gracias por visitarnos!");
                 }
             }catch(InputMismatchException e){
-                System.out.println("⚠️ Entrada inválida. Por favor, ingrese un número.");
+                System.out.println("⚠️ Entrada inválida. Por favor, vuelva a iniciar sesión.");
                 scanner.nextLine();
             }
         } while (opcion != 0);
