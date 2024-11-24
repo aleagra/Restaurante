@@ -49,5 +49,22 @@
             "estadoMesa": "OCUPADA",
             "capacidad": 8
         }
+    },
+    {
+        "fecha": "2024-11-24",
+        "cliente": {
+            "Nombre": "Jorge",
+            "Contrasenia": "w",
+            "Email": "w",
+            "Telefono": "Av. Libertad 123",
+            "Apellido": "Díaz",
+            "Direccion": "1122334455",
+            "Id": 5
+        },
+        "mesa": {
+            "numero": 12,
+            "estadoMesa": "OCUPADA",
+            "capacidad": 4
+        }
     }
 ]

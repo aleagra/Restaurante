@@ -17,7 +17,7 @@ public class Cocinero extends Usuario implements IGestorPedidos{
                     return p.actualizarEstadoPedido(estado);
                 }
             }
-            throw new PedidoException("No se encontró ningún pedido con ese número.");
+            throw new PedidoException("⚠️ No se encontró ningún pedido con ese número.");
         } catch (PedidoException e) {
             System.out.println(e.getMessage());
             return -1;

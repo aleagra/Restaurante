@@ -46,7 +46,7 @@
     },
     {
         "numero": 12,
-        "estadoMesa": "LIBRE",
+        "estadoMesa": "OCUPADA",
         "capacidad": 4
     },
     {
@@ -100,13 +100,13 @@
         "capacidad": 30
     },
     {
-        "numero": 23,
-        "estadoMesa": "LIBRE",
-        "capacidad": 23
-    },
-    {
         "numero": 24,
         "estadoMesa": "LIBRE",
         "capacidad": 8
+    },
+    {
+        "numero": 25,
+        "estadoMesa": "LIBRE",
+        "capacidad": 12
     }
 ]

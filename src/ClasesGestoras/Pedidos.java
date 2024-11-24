@@ -36,6 +36,9 @@ public class Pedidos {
         for(Pedido p : pedidos){
             sb.append(p).append("\n");
         }
+        if(sb.isEmpty()){
+            sb.append("⚠️ No hay pedidos.");
+        }
         return sb.toString();
     }
     public String mostrarPedidosPorCliente(String email){
@@ -50,12 +53,19 @@ public class Pedidos {
         }
         return lista.toString();
     }
-    public String eliminarPedido(Pedido pedido) throws PedidoException{
-        String msj = "✅ Pedido eliminado exitosamente.";
-        if(pedido != null){
-            pedidos.remove(pedido);
-            return msj;
+
+    public String eliminarPedido(Pedido pedido) {
+        try {
+            if (pedido != null) {
+                pedidos.remove(pedido);
+                return "✅ Pedido eliminado exitosamente.";
+            }
+            throw new PedidoException("⚠️ El pedido no pudo ser eliminado porque es nulo.");
+        } catch (PedidoException e) {
+            return "⚠️ Error: No se pudo eliminar el pedido.";
+        } catch (Exception e) {
+            return "⚠️ Hubo un problema inesperado al intentar eliminar el pedido.";
         }
-        throw new PedidoException("⚠️ El pedido no pudo ser eliminado");
     }
+
 }

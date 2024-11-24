@@ -54,7 +54,7 @@ public class MenuCamarero {
                         MetodoPago metodoPago = camarero.consultarFormaDePago();
                         Cuenta factura = camarero.generarFactura(id, numOrden, pedidos, metodoPago);
                         if (factura == null) {
-                            System.out.println("❌ No hay ningun pedido asociado a ese cliente.");
+                            System.out.println("❌ No hay ningun pedido asociado a ese cliente o el pedido no está listo.");
                         }else {
                             camarero.eliminarPedidoCompletado(id, numOrden, pedidos);
                             System.out.println(factura);

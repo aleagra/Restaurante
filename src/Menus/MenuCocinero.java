@@ -24,7 +24,7 @@ public class MenuCocinero {
 
                 switch (opcion) {
                     case 1:
-                        System.out.println("\n--- Mostrando pedidos ---");
+                        System.out.println("\n--- PEDIDOS ---");
                         System.out.println(cocinero.obtenerPedidos(pedidos));
                         break;
 
@@ -52,7 +52,7 @@ public class MenuCocinero {
                         break;
                 }
             }catch(InputMismatchException e){
-                System.out.println("⚠️ Entrada inválida. Por favor, vuelva a iniciar sesión.");
+                System.out.println("⚠️ Entrada inválida. Por favor, vuelva a intentarlo.");
                 sc.nextLine();
             }
         } while (opcion != 0);

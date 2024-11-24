@@ -1,6 +1,7 @@
 package ClasesGestoras;
 import Clases.Gestion.Mesa;
 import Enums.EstadoMesa;
+import Excepciones.MesasCapacidadException;
 import Excepciones.MesasException;
 import Interfaces.IJson;
 import JSONUtiles.JSONUtiles;
@@ -36,28 +37,38 @@ public class Mesas implements IJson {
         return mesas;
     }
 
-    public String addMesa(Mesa mesa) throws JSONException {
-        if (mesa == null) {
-            throw new MesasException("⚠️ La mesa no puede ser nula.");
+    public String addMesa(Mesa mesa) {
+        try {
+            if (mesa == null) {
+                throw new MesasException("⚠️ La mesa no puede ser nula.");
+            } else if (mesa.getCapacidad() < 1 || mesa.getCapacidad() > 15) {
+                throw new MesasCapacidadException("⚠️ No hay mesas con esa capacidad.");
+            }
+
+            List<Mesa> mesas = cargarMesas();
+
+            int nuevoId = mesas.stream()
+                    .mapToInt(Mesa::getNumero)
+                    .max()
+                    .orElse(0) + 1;
+            mesa.setNumero(nuevoId);
+
+            mesas.add(mesa);
+
+            JSONArray jsonArray = new JSONArray();
+            for (Mesa m : mesas) {
+                jsonArray.put(m.toJson());
+            }
+            JSONUtiles.grabarUnJson(jsonArray, "mesas.json");
+            return "Mesa agregada con éxito. ID asignado: " + nuevoId;
+
+        } catch (MesasException | MesasCapacidadException e) {
+            return "Error al agregar la mesa: " + e.getMessage();
+
+        } catch (JSONException e) {
+            return "Error al procesar los datos de la mesa.";
         }
-        List<Mesa> mesas = cargarMesas();
-
-        int nuevoId = mesas.stream()
-                .mapToInt(Mesa::getNumero)
-                .max()
-                .orElse(0) + 1;
-        mesa.setNumero(nuevoId);
-
-        mesas.add(mesa);
-
-        JSONArray jsonArray = new JSONArray();
-        for (Mesa m : mesas) {
-            jsonArray.put(m.toJson());
-        }
-        JSONUtiles.grabarUnJson(jsonArray, "mesas.json");
-        return "Mesa agregada con éxito. ID asignado: " + nuevoId;
     }
-
 
     public String deleteMesa(int numeroMesa) {
         try {
@@ -85,7 +96,7 @@ public class Mesas implements IJson {
         }
     }
 
-    public Mesa asignarMesa(int capacidad) throws MesasException {
+    public Mesa asignarMesa(int capacidad) {
         Mesa mesa = null;
 
         try {
@@ -106,19 +117,19 @@ public class Mesas implements IJson {
                 }
             }
 
-            if (mesa == null) {
-                throw new MesasException("⚠️ No hay mesas con esa capacidad disponible");
+            if (mesa != null) {
+                JSONUtiles.grabarUnJson(arregloMesas, "mesas.json");
             }
 
-            JSONUtiles.grabarUnJson(arregloMesas, "mesas.json");
-
         } catch (JSONException e) {
-            e.printStackTrace();
-            throw new MesasException("⚠️ Error al procesar el archivo de mesas.");
+            System.out.println("⚠️ Error al procesar el archivo de mesas: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("⚠️ Ocurrió un error inesperado al asignar la mesa: " + e.getMessage());
         }
 
         return mesa;
     }
+
 
     public static String mostrarTodasLasMesas(String rutaArchivoJson) {
         StringBuilder resultado = new StringBuilder();
@@ -126,6 +137,7 @@ public class Mesas implements IJson {
         try {
             JSONArray arregloMesas = new JSONArray(JSONUtiles.leerUnJson(rutaArchivoJson));
 
+            resultado.append("\n----🪑 MESAS 🪑----\n");
             if (arregloMesas.length() > 0) {
                 for (int i = 0; i < arregloMesas.length(); i++) {
                     JSONObject jsonObject = arregloMesas.getJSONObject(i);

@@ -47,7 +47,7 @@ public class MenuAdmin {
                         System.out.println(administrador.mostrarMesas("mesas.json"));
                         break;
                     case 5:
-                        System.out.println("\n------ USUARIOS ------");
+                        System.out.println("\n-----👤 USUARIOS 👤-----");
                         System.out.println(administrador.mostrarUsuarios(usuarios));
                         break;
                     case 6:
@@ -182,7 +182,7 @@ public class MenuAdmin {
                         System.out.println("\n🔙 Volviendo al menú principal...");
                 }
             }catch(InputMismatchException e){
-                System.out.println("⚠️ Entrada inválida. Por favor, vuelva a iniciar sesión.");
+                System.out.println("⚠️ Entrada inválida. Por favor, vuelva a intentarlo.");
                 sc.nextLine();
             }
         } while (opcion != 0);

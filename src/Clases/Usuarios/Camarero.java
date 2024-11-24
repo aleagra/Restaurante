@@ -57,7 +57,7 @@ public class Camarero extends Usuario implements IMostrarMesas {
     public Cuenta generarFactura(int idCliente, int numPedido, Pedidos pedidos, MetodoPago metodoPago) {
         Pedido pedidoEncontrado = buscarPedido(idCliente, numPedido, pedidos);
 
-        if (pedidoEncontrado.getCliente() == null) {
+        if (pedidoEncontrado.getCliente() == null || !pedidoEncontrado.getEstado().equals(EstadoPedido.LISTO)) {
            return null;
         }
         Cuenta cuenta = new Cuenta();

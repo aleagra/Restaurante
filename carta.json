@@ -31,10 +31,10 @@
             "nombre": "aleeee"
         },
         {
-            "descripcion": "Sopa caliente con hierbas",
-            "precio": 5000,
+            "descripcion": "estudiante de la UTN",
+            "precio": 1,
             "categoria": "ENTRANTE",
-            "nombre": "Sopa de tomate"
+            "nombre": "Alejandro Agra"
         }
     ],
     "bebidas": [
@@ -44,14 +44,14 @@
             "nombre": "Coca-Cola"
         },
         {
-            "precio": 10,
-            "tipo": "CON_ALCOHOL",
-            "nombre": "Vino Tinto"
-        },
-        {
             "precio": 450,
             "tipo": "CON_ALCOHOL",
             "nombre": "avril"
+        },
+        {
+            "precio": 10000,
+            "tipo": "SIN_ALCOHOL",
+            "nombre": "Avril Traverso"
         }
     ]
 }

@@ -25,7 +25,7 @@ public class Reservas {
             JSONArray arregloReservas = new JSONArray(JSONUtiles.leerUnJson("reservas.json"));
 
             if (arregloReservas.length() > 0) {
-                resultado.append("\n--- TUS RESERVAS ---\n");
+                resultado.append("\n----📅 TUS RESERVAS 📅----\n");
 
                 boolean reservasEncontradas = false;
 
@@ -95,7 +95,7 @@ public class Reservas {
             JSONArray arregloReservas = new JSONArray(JSONUtiles.leerUnJson("reservas.json"));
 
             if (arregloReservas.length() > 0) {
-                resultado.append("\n--- Reservas ---\n");
+                resultado.append("\n----📅 RESERVAS 📅----\n");
 
                 for (int i = 0; i < arregloReservas.length(); i++) {
                     JSONObject jsonObject = arregloReservas.getJSONObject(i);
