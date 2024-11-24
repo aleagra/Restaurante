@@ -123,6 +123,5 @@ public class Main {
                 System.out.println("⚠️ Entrada inválida. Por favor, ingrese un número.");
             }
         } while (opcion != 0);
-
     }
 }

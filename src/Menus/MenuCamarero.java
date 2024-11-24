@@ -6,23 +6,26 @@ import Clases.Usuarios.Cliente;
 import ClasesGestoras.Pedidos;
 import ClasesGestoras.Usuarios;
 import Enums.MetodoPago;
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MenuCamarero {
 
     public void mostrarMenu(Scanner scanner,Camarero camarero, Pedidos pedidos, Usuarios usuarios) {
-        int opcion;
+        int opcion = 0;
 
         do {
-            System.out.println("\n========== MENU CAMARERO ==========");
-            System.out.println("1. Registrar pedido");
-            System.out.println("2. Ver mesas disponibles");
-            System.out.println("3. Generar factura");
-            System.out.println("4.Cambiar contraseña");
-            System.out.println("0. Salir");
-            System.out.print("Seleccione una opción: ");
-            opcion = scanner.nextInt();
-            scanner.nextLine();
+            try{
+                System.out.println("\n========== MENU CAMARERO ==========");
+                System.out.println("1. Registrar pedido");
+                System.out.println("2. Ver mesas disponibles");
+                System.out.println("3. Generar factura");
+                System.out.println("4.Cambiar contraseña");
+                System.out.println("0. Salir");
+                System.out.print("Seleccione una opción: ");
+                opcion = scanner.nextInt();
+                scanner.nextLine();
 
                 switch (opcion) {
                     case 1:
@@ -67,6 +70,10 @@ public class MenuCamarero {
                     default:
                         System.out.println("\n👋 Sesión cerrada. ¡Gracias por visitarnos!");
                 }
+            }catch (InputMismatchException e){
+                System.out.println("⚠️ Entrada inválida. Por favor, ingrese un número.");
+                scanner.nextLine();
+            }
 
         } while (opcion != 0);
     }
