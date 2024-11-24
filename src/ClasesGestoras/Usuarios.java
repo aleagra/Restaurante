@@ -2,22 +2,21 @@ package ClasesGestoras;
 import Clases.Usuarios.*;
 import Excepciones.AutenticacionException;
 import Excepciones.EmailDuplicadoException;
-
 import java.util.HashSet;
 import java.util.Set;
 
-public class Usuarios {
-    Set<Usuario> listaUsuarios;
+public class Usuarios<T extends Usuario> {
+    private Set<T> listaUsuarios;
 
     public Usuarios()  {
         this.listaUsuarios = new HashSet<>();
     }
 
-    public Set<Usuario> getListaUsuarios() {
+    public Set<T> getListaUsuarios() {
         return listaUsuarios;
     }
 
-    public void registrarUsuarioHarcodeado(Usuario usuario) throws EmailDuplicadoException {
+    public void registrarUsuarioHarcodeado(T usuario) throws EmailDuplicadoException {
         if (!listaUsuarios.add(usuario)) {
             throw new EmailDuplicadoException("El usuario con este email ya está registrado.");
         }
@@ -33,31 +32,31 @@ public class Usuarios {
                                    int opcion) {
         String msj = "Usuario creado con exito!";
         try {
-            for (Usuario usuario : listaUsuarios) {
+            for (T usuario : listaUsuarios) {
                 if (usuario.getEmail().equals(email)) {
                     throw new IllegalArgumentException("⚠️ El email ya está registrado: " + email);
                 }
             }
 
-            Usuario nuevoUsuario = null;
+            T nuevoUsuario = null;
 
             switch (opcion) {
                 case 1:
-                    nuevoUsuario = new Administrador(nombre, apellido, email, contrasena);
+                    nuevoUsuario = (T) new Administrador(nombre, apellido, email, contrasena);
                     break;
 
                 case 2:
-                    nuevoUsuario = new Cocinero(nombre, apellido, email, contrasena);
+                    nuevoUsuario = (T) new Cocinero(nombre, apellido, email, contrasena);
                     break;
 
                 case 3:
                     if (direccion == null || telefono == null) {
                         throw new IllegalArgumentException("⚠️ Para crear un cliente, se requiere dirección y teléfono.");
                     }
-                    nuevoUsuario = new Cliente(nombre, apellido, email, contrasena, direccion, telefono);
+                    nuevoUsuario = (T) new Cliente(nombre, apellido, email, contrasena, direccion, telefono);
                     break;
                 case 4:
-                    nuevoUsuario = new Camarero(nombre, apellido, email, contrasena);
+                    nuevoUsuario = (T) new Camarero(nombre, apellido, email, contrasena);
                     break;
                 default:
                     throw new IllegalArgumentException("⚠️ Tipo de usuario no válido: ");
@@ -74,8 +73,8 @@ public class Usuarios {
     public String loguearUsuario(String email, String contrasenia) throws AutenticacionException {
         String msj = "";
         try {
-            for (Usuario usuario : listaUsuarios) {
-                if (usuario.getEmail().equals(email) && usuario.getContrasenia().equals(contrasenia)) {
+            for (T usuario : listaUsuarios) {
+                if (usuario.getEmail().equalsIgnoreCase(email) && usuario.getContrasenia().equalsIgnoreCase(contrasenia)) {
                     msj = usuario.getClass().getSimpleName();
                     return msj;
                 }
@@ -94,7 +93,7 @@ public class Usuarios {
         }
 
         StringBuilder resultado = new StringBuilder();
-        for (Usuario usuario : listaUsuarios) {
+        for (T usuario : listaUsuarios) {
             resultado.append(usuario.toString()).append("\n");
         }
 

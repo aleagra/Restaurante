@@ -1,18 +1,20 @@
 package ClasesGestoras;
 
+import Clases.Usuarios.Usuario;
+
 public class Restaurante {
     Carta carta;
     Mesas mesas;
     Pedidos pedidos;
     Reservas reservas;
-    Usuarios usuarios;
+    Usuarios<Usuario> usuarios;
 
     public Restaurante() {
         this.carta = new Carta();
         this.mesas = new Mesas();
         this.pedidos = new Pedidos();
         this.reservas = new Reservas();
-        this.usuarios = new Usuarios();
+        this.usuarios = new Usuarios<>();
     }
 
     public Carta getCarta() {
@@ -31,10 +33,7 @@ public class Restaurante {
         return reservas;
     }
 
-    public Usuarios getUsuarios() {
+    public Usuarios<Usuario> getUsuarios() {
         return usuarios;
     }
-
-
-
 }
