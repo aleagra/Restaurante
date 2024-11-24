@@ -4,50 +4,54 @@
             "descripcion": "Lechuga, crutones, queso parmesano y aderezo César",
             "precio": 8.5,
             "categoria": "ENTRANTE",
-            "id": 1,
             "nombre": "Ensalada César"
         },
         {
             "descripcion": "Carne de res con guarnición de papas",
             "precio": 15,
             "categoria": "ENTRANTE",
-            "id": 2,
             "nombre": "Bife de chorizo"
         },
         {
             "descripcion": "Postre clásico con base de manzana caramelizada",
             "precio": 5,
             "categoria": "POSTRE",
-            "id": 3,
             "nombre": "Tarta de manzana"
         },
         {
             "descripcion": "Sopa caliente con tomates frescos y hierbas",
             "precio": 6,
             "categoria": "PRINCIPAL",
-            "id": 4,
             "nombre": "Sopa de tomate"
         },
         {
             "descripcion": "a",
             "precio": 1,
             "categoria": "ENTRANTE",
-            "id": 0,
             "nombre": "a"
+        },
+        {
+            "descripcion": "rewg",
+            "precio": 450,
+            "categoria": "ENTRANTE",
+            "nombre": "ale"
         }
     ],
     "bebidas": [
         {
             "precio": 3,
             "tipo": "SIN_ALCOHOL",
-            "numero": 2,
             "nombre": "Coca-Cola"
         },
         {
             "precio": 10,
             "tipo": "CON_ALCOHOL",
-            "numero": 3,
             "nombre": "Vino Tinto"
+        },
+        {
+            "precio": 450,
+            "tipo": "CON_ALCOHOL",
+            "nombre": "avril"
         }
     ]
 }

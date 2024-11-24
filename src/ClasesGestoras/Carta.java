@@ -140,7 +140,7 @@ public class Carta {
         return "⚠️ La bebida no pudo ser eliminada. No existe en la carta.";
     }
 
-    public static Plato buscarComidaPorIdEnCarta(String rutaArchivoJson, int idComida) {
+    public static Plato buscarComidaPorNombre(String rutaArchivoJson, String nombreComida) {
         try {
             JSONObject arregloCarta = new JSONObject(JSONUtiles.leerUnJson(rutaArchivoJson));
 
@@ -150,7 +150,7 @@ public class Carta {
                 for (int i = 0; i < comidasArray.length(); i++) {
                     JSONObject comidaJson = comidasArray.getJSONObject(i);
 
-                    if (comidaJson.getInt("id") == idComida) {
+                    if (comidaJson.getString("nombre").equals(nombreComida)) {
                         Plato comida = new Plato();
                         comida.fromJson(comidaJson);
                         return comida;
@@ -161,13 +161,13 @@ public class Carta {
 
         } catch (JSONException e) {
             e.printStackTrace();
-            System.out.println("⚠️ Error al procesar el JSON al buscar la comida con ID " + idComida);
+            System.out.println("⚠️ Error al procesar el JSON al buscar la comida con nombre: " + nombreComida);
             return null;
         }
     }
 
 
-    public static Bebida buscarBebidaPorIdEnCarta(String rutaArchivoJson, int idBebida) {
+    public static Bebida buscarBebidaPorNombre(String rutaArchivoJson, String nombreBebida) {
         try {
             JSONObject arregloCarta = new JSONObject(JSONUtiles.leerUnJson(rutaArchivoJson));
 
@@ -177,7 +177,7 @@ public class Carta {
                 for (int i = 0; i < bebidasArray.length(); i++) {
                     JSONObject bebidaJson = bebidasArray.getJSONObject(i);
 
-                    if (bebidaJson.getInt("numero") == idBebida) {
+                    if (bebidaJson.getString("nombre").equals(nombreBebida)) {
                         Bebida bebida = new Bebida();
                         bebida.fromJson(bebidaJson);
                         return bebida;
@@ -189,7 +189,7 @@ public class Carta {
 
         } catch (JSONException e) {
             e.printStackTrace();
-            System.out.println("⚠️ Error al procesar el JSON al buscar la bebida con ID " + idBebida);
+            System.out.println("⚠️ Error al procesar el JSON al buscar la bebida con nombre: " + nombreBebida);
             return null;
         }
     }

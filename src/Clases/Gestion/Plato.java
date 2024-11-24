@@ -5,16 +5,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Plato implements IJson {
-    public int numero;
     private String nombre;
     private String descripcion;
     private double precio;
     private TipoDePlato categoria;
 
-    private static int contador=1;
 
     public Plato(String nombre, String descripcion, double precio, TipoDePlato categoria) {
-        this.numero = contador++;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
@@ -22,10 +19,6 @@ public class Plato implements IJson {
     }
 
     public Plato() {
-    }
-
-    public int getNumero() {
-        return numero;
     }
 
     public String getNombre() {
@@ -72,7 +65,6 @@ public class Plato implements IJson {
     public JSONObject toJson() throws JSONException {
         JSONObject json = new JSONObject();
         try{
-            json.put("id",numero);
             json.put("nombre",nombre);
             json.put("descripcion",descripcion);
             json.put("precio",precio);
@@ -86,7 +78,6 @@ public class Plato implements IJson {
     @Override
     public void fromJson(JSONObject json) throws JSONException {
         try {
-            numero = json.getInt("id");
             nombre = json.getString("nombre");
             descripcion = json.getString("descripcion");
             precio = json.getDouble("precio");
@@ -95,5 +86,4 @@ public class Plato implements IJson {
             e.printStackTrace();
         }
     }
-
 }

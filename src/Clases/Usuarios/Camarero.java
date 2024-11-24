@@ -87,9 +87,10 @@ public class Camarero extends Usuario implements IMostrarMesas {
 
             switch (opcion) {
                 case 1: {
-                    System.out.println("Ingrese el ID del plato:");
-                    int numero = scanner.nextInt();
-                    Plato plato = Carta.buscarComidaPorIdEnCarta("carta.json",numero);
+                    System.out.println("Ingrese el nombre del plato:");
+                    String nombre = scanner.next();
+                    scanner.nextLine();
+                    Plato plato = Carta.buscarComidaPorNombre("carta.json",nombre);
                     if (plato != null) {
                         pedido.addPlato(plato);
                         System.out.println("✅ Plato agregado al pedido.");
@@ -99,9 +100,10 @@ public class Camarero extends Usuario implements IMostrarMesas {
                     break;
                 }
                 case 2: {
-                    System.out.println("Ingrese el ID de la bebida:");
-                    int numero = scanner.nextInt();
-                    Bebida bebida = Carta.buscarBebidaPorIdEnCarta("carta.json",numero);
+                    System.out.println("Ingrese el nombre de la bebida:");
+                    String nombre = scanner.next();
+                    scanner.nextLine();
+                    Bebida bebida = Carta.buscarBebidaPorNombre("carta.json",nombre);
                     if (bebida != null) {
                         pedido.addBebida(bebida);
                         System.out.println("✅ Bebida agregada al pedido.");

@@ -5,28 +5,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Bebida implements IJson {
-    public int numero;
     private String nombre;
     private double precio;
     private TipoDeBebida tipo;
-    private static int contador=1;
 
     public Bebida(String nombre, double precio, TipoDeBebida tipo) {
-        this.numero=contador++;
         this.nombre = nombre;
         this.precio = precio;
         this.tipo = tipo;
     }
 
     public Bebida() {
-    }
-
-    public int getNumero() {
-        return numero;
-    }
-
-    public void setNumero(int numero) {
-        this.numero = numero;
     }
 
     public String getNombre() {
@@ -63,7 +52,6 @@ public class Bebida implements IJson {
     public JSONObject toJson() throws JSONException {
         JSONObject obj = new JSONObject();
         try {
-            obj.put("numero", numero);
             obj.put("nombre", nombre);
             obj.put("precio", precio);
             obj.put("tipo", tipo);
@@ -76,7 +64,6 @@ public class Bebida implements IJson {
     @Override
     public void fromJson(JSONObject json) throws JSONException {
         try {
-            this.numero = json.getInt("numero");
             this.nombre = json.getString("nombre");
             this.precio = json.getDouble("precio");
             this.tipo = TipoDeBebida.valueOf(json.getString("tipo"));
